@@ -7,6 +7,7 @@ const path = require('path');
 const venom = require('venom-bot');
 const { json } = require('express');
 const { Session } = require('inspector');
+const { info } = require('console');
 
 module.exports = class Sessions {
 
@@ -34,6 +35,20 @@ module.exports = class Sessions {
         }
         return session;
     }//start
+
+    // static async infoSession(sessionName) {
+    //     var session = Sessions.getSession(sessionName);
+    //     var connected = await session.client.isConnected();
+    //     return connected;
+
+    //     // var info = await session.client.then(async client => {
+    //     //     return await client.isConnected();
+    //     // });
+
+    //     // return info;
+
+
+    // } //infoSession
 
     static async addSesssion(sessionName) {
         var newSession = {

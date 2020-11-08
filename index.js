@@ -35,6 +35,13 @@ app.get("/start", async (req, res, next) => {
     }
 });//start
 
+// app.get("/info", async(req, res, next) => {
+//     console.log("starting info session..." + req.query.sessionName);
+//     let session = await Sessions.infoSession(req.query.sessionName);
+
+//     res.status(200).json({ success: true, session: session });  
+// });
+
 app.get("/qrcode", async (req, res, next) => {
     console.log("qrcode..." + req.query.sessionName);
     var session = Sessions.getSession(req.query.sessionName);
