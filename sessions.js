@@ -194,12 +194,27 @@ module.exports = class Sessions {
     } //getQrcode
 
     static async sendText(sessionName, number, text) {
+
+        console.log('sessionName sendText', sessionName);
+
         var session = Sessions.getSession(sessionName);
+
+        console.log('session sendText',session);
         if (session) {
             if (session.state == "CONNECTED") {
                 var resultSendText = await session.client.then(async client => {
-                    return await client.sendMessageToId(number + '@c.us', text);
-                });
+                    // return await client.sendMessageToId(number + '@c.us', text);
+
+                    return await client
+                    .sendText(number + '@c.us', text)
+                    .then((result) => {
+                      console.log('Result: ', result); //return object success
+                    })
+                    .catch((erro) => {
+                      console.error('Error when sending: ', erro); //return object error
+                    });
+
+                }).catch(error => console.log('error', error));
                 return { result: "success" }
             } else {
                 return { result: "error", message: session.state };

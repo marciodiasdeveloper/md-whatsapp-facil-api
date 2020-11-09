@@ -3,6 +3,7 @@ const https = require('https');
 const express = require("express");
 const cors = require('cors');
 const Sessions = require("./sessions");
+
 require('dotenv').config();
 
 var app = express();
@@ -41,8 +42,8 @@ app.get("/start", async (req, res, next) => {
 
 app.get("/status", async(req, res, next) => {
     console.log("starting info session..." + req.query.sessionName);
-    var session = Sessions.getSession(req.query.sessionName);
-    // let session = await Sessions.infoSession(req.query.sessionName);
+    var session = await Sessions.getSession(req.query.sessionName);
+
     console.log('session', session);
 
     if (session != false) {
@@ -78,6 +79,9 @@ app.get("/qrcode", async (req, res, next) => {
 });//qrcode
 
 app.post("/sendText", async function sendText(req, res, next) {
+
+    console.log('post /sendText',req.body);
+
     var result = await Sessions.sendText(
         req.body.sessionName,
         req.body.number,
