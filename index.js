@@ -39,12 +39,18 @@ app.get("/start", async (req, res, next) => {
     }
 });//start
 
-// app.get("/info", async(req, res, next) => {
-//     console.log("starting info session..." + req.query.sessionName);
-//     let session = await Sessions.infoSession(req.query.sessionName);
+app.get("/status", async(req, res, next) => {
+    console.log("starting info session..." + req.query.sessionName);
+    var session = Sessions.getSession(req.query.sessionName);
+    // let session = await Sessions.infoSession(req.query.sessionName);
+    console.log('session', session);
 
-//     res.status(200).json({ success: true, session: session });  
-// });
+    if (session != false) {
+        res.status(200).json({ state: session.state });  
+    } else {
+        res.status(200).json({ result: "error", message: "NOTFOUND" });
+    }
+});
 
 app.get("/qrcode", async (req, res, next) => {
     console.log("qrcode..." + req.query.sessionName);
