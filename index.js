@@ -24,6 +24,10 @@ if (process.env.HTTPS == 1) { //with ssl
     });
 }//http
 
+app.get("/", async(req,res,next) => {
+    res.status(200).json({ message: 'Hello WhatsApp API'});
+});
+
 app.get("/start", async (req, res, next) => {
     console.log("starting..." + req.query.sessionName);
     var session = await Sessions.start(req.query.sessionName);
