@@ -10,6 +10,9 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
+require('dotenv').config();
+
+
 if (process.env.HTTPS == 1) {
 
     const serverInfo = {
