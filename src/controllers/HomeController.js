@@ -1,7 +1,7 @@
 const Sessions = require("../service/Sessions");
 
 module.exports = {
-    async create(request, response, next) {
+    async index(request, response, next) {
  
     }
 };
