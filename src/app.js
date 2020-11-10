@@ -1,8 +1,9 @@
 const express = require('express');
-const fs = require('fs');
-const https = require('https');
 const cors = require('cors');
 const routes = require('./routes');
+
+// const fs = require('fs');
+// const https = require('https');
 
 const app = express();
 
