@@ -1,9 +1,9 @@
-const Sessions = require("../service/Sessions");
+const SessionService = require("../service/SessionService");
 
 module.exports = {
     async create(request, response, next) {
         console.log("starting info session..." + req.query.sessionName);
-        var session = await Sessions.getSession(req.query.sessionName);
+        var session = await SessionService.getSession(req.query.sessionName);
     
         console.log('session', session);
     
