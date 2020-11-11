@@ -10,8 +10,8 @@ process.stdin.resume();//so the program will not close instantly
 async function exitHandler(options, exitCode) {
     if (options.cleanup) {
         console.log('cleanup');
-        await Sessions.getSessions().forEach(async session => {
-            await Sessions.closeSession(session.sessionName);
+        await SessionService.getSessions().forEach(async session => {
+            await SessionService.closeSession(session.sessionName);
         });
     }
     if (exitCode || exitCode === 0) {
