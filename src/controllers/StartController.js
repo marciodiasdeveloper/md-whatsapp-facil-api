@@ -1,11 +1,10 @@
 const SessionService = require("../service/SessionService");
-// const WebhookService = require("../service/WebhookService");
+const WebhookService = require("../service/WebhookService");
 
 
 module.exports = {
     async create(request, response, next) {
         console.log("starting session:" + request.query.sessionName);
-        
         let session = await SessionService.start(request.query.sessionName);
     
         console.log('CHECK: -> StartController create session:', session);
