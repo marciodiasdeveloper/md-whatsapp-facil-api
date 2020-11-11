@@ -12,9 +12,9 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 `sudo apt install git nodejs yarn`
 - para instalar git, nodejs e yarn
 
-`git clone https://github.com/billbarsch/myzap.git`
+`git clone https://github.com/marciodiasdeveloper/md-whatsapp-facil-api.git`
 
-`cd myzap`
+`cd md-whatsapp-facil-api`
 
 `npm install`
 
@@ -28,7 +28,7 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 
 `npm install pm2 -g`
 
-`pm2 start index.js`
+`pm2 start src/server.js`
 
 `pm2 startup`
 
@@ -36,21 +36,21 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 
 ### Start new whatsapp session
 
-`http://localhost:3333/start?sessionName=session1`
+`http://localhost:3334/start?sessionName=session1`
 
 ### Get QRCode (quickly!!)
 
-`http://localhost:3333/qrcode?sessionName=session1&image=true`
+`http://localhost:3334/qrcode?sessionName=session1&image=true`
 - png
 
-`http://localhost:3333/qrcode?sessionName=session1`
+`http://localhost:3334/qrcode?sessionName=session1`
 - json (base64)
 
 ### Send message (POST method)
 
 ```javascript
 (async () => {
-  const response = await fetch('http://localhost:3333/sendText', {
+  const response = await fetch('http://localhost:3334/sendText', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -74,7 +74,7 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 
 ```javascript
 (async () => {
-    const response = await fetch('http://localhost:3333/sendFile', {
+    const response = await fetch('http://localhost:3334/sendFile', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -98,7 +98,7 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 
 ### Close whatsapp session
 
-`http://localhost:3333/close?sessionName=session1`
+`http://localhost:3334/close?sessionName=session1`
 
 
 ## To install certbot and create ssl certificate to https domains:
