@@ -2,9 +2,9 @@ const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const venom = require('venom-bot');
-const { json } = require('express');
-const { Session } = require('inspector');
-const { info } = require('console');
+// const { json } = require('express');
+// const { Session } = require('inspector');
+// const { info } = require('console');
 
 module.exports = class Sessions {
 
@@ -14,22 +14,30 @@ module.exports = class Sessions {
         var session = Sessions.getSession(sessionName);
 
         if (session == false) { //create new session
+            
             console.log("session == false");
             session = await Sessions.addSesssion(sessionName);
+
         } else if (["CLOSED"].includes(session.state)) { //restart session
+            
             console.log("session.state == CLOSED");
             session.state = "STARTING";
             session.status = 'notLogged';
             session.client = Sessions.initSession(sessionName);
+
             Sessions.setup(sessionName);
+        
         } else if (["CONFLICT", "UNPAIRED", "UNLAUNCHED"].includes(session.state)) {
+
             console.log("client.useHere()");
             session.client.then(client => {
                 client.useHere();
             });
+
         } else {
             console.log("session.state: " + session.state);
         }
+
         return session;
     }//start
 
@@ -114,6 +122,7 @@ module.exports = class Sessions {
             client.onStateChange(state => {
                 session.state = state;
                 console.log("session.state: " + state);
+                console.log('CHECK: -> session.state:', session);
             });//.then((client) => Sessions.startProcess(client));
             client.onMessage((message) => {
                 if (message.body === 'hi') {

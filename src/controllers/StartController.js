@@ -1,5 +1,5 @@
 const SessionService = require("../service/SessionService");
-const WebhookService = require("../service/WebhookService");
+// const WebhookService = require("../service/WebhookService");
 
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
         let session = await SessionService.start(request.query.sessionName);
     
         console.log('CHECK: -> StartController create session:', session);
-        WebhookService.notifySessionState(session);
+        // WebhookService.notifySessionState(session);
 
         if (["CONNECTED", "QRCODE", "STARTING"].includes(session.state)) {
             response.status(200).json({ result: 'success', message: session.state });
