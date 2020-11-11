@@ -58,6 +58,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3333
+EXPOSE 3334
 
-CMD [ "node", "index.js" ]
+CMD [ "node", "src" "server.js" ]
