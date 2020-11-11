@@ -1,4 +1,4 @@
-const SessionService = require("../service/SessionService");
+const SessionService = require("../services/SessionService");
 // const WebhookService = require("../service/WebhookService");
 
 

@@ -1,5 +1,5 @@
 const app = require('./app');
-const SessionService = require("./service/SessionService");
+const SessionService = require("./services/SessionService");
 
 console.log('http server started on port 3334');
 

@@ -2,6 +2,7 @@ const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const venom = require('venom-bot');
+const WebhookService = require("./WebhookService");
 // const { json } = require('express');
 // const { Session } = require('inspector');
 // const { info } = require('console');
@@ -72,6 +73,7 @@ module.exports = class Sessions {
                 session.status = statusFind;
                 console.log("session.status: " + session.status);
                 console.log('CHECK: -> StartController create session:', session);
+                WebhookService.notifyApiSessionUpdate(session);
             },
             {
                 headless: true,

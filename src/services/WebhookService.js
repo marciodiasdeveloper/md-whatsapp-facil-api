@@ -1,33 +1,20 @@
 const axios = require('axios');
-// const request = require('request');
 
-require('dotenv').config();
+// require('dotenv').config();
+require('dotenv/config');
 
 module.exports = class Sessions {
 
-    static async notifySessionState(session) {
+    static async notifyApiSessionUpdate(session) {
 
-        console.log('WebHookService notifySessionState:'.session);
+        console.log('WebHookService notifySessionState:', session);
+        console.log('process.env.API_WEBHOOK_URL', process.env.API_WEBHOOK_URL);
 
-        // const options = {
-        //     url: process.env.API_WEBHOOK_URL+'/session/status/'+session,
-        //     json: true,
-        //     body: session,
-        //     // headers: {
-        //     //     'Content-Type': 'application/json',
-        //     //     'Accept': 'application/json',
-        //     //     'User-Agent': 'Request',
-        //     //     'X-platform': 'Node'
-        //     // }
-        // };
-        
-        // let result = await request.post(options, (err, res, body) => {
-        //     if (err) {
-        //         return console.log(err);
-        //     }
-        //     console.log(body);
-        // });
-        return true;
+        const response = await axios.post(process.env.API_WEBHOOK_URL+'/session/status', session)  
+        .then(function(response){
+            console.log('salvo com sucesso', response);
+        });
+        return response;
     }
 
 }

@@ -1,4 +1,4 @@
-const SessionService = require("../service/SessionService");
+const SessionService = require("../services/SessionService");
 
 module.exports = {
     async index(request, response, next) {
