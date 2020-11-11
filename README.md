@@ -22,7 +22,7 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 
 ### Start server
 
-`node index.js`
+`node src/server.js`
 
 ### keep processes alive at every server restart
 
