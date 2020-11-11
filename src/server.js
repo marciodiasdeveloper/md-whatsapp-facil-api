@@ -1,7 +1,7 @@
 const app = require('./app');
 const SessionService = require("./service/SessionService");
 
-console.log('http server started on port 3333');
+console.log('http server started on port 3334');
 
 app.listen(3334);
 
