@@ -8,7 +8,7 @@ module.exports = {
         console.log('StatusController: create -> session', session);
     
         if (session != false) {
-            response.status(200).json({ state: session.state });  
+            response.status(200).json({ status: session.status, state: session.state });  
         } else {
             response.status(200).json({ result: "error", message: "NOTFOUND" });
         }

@@ -5,6 +5,9 @@ require('dotenv').config();
 module.exports = class Sessions {
 
     static async notifySessionState(session) {
+
+        console.log('WebHookService notifySessionState:'.session);
+
         const options = {
             url: process.env.API_WEBHOOK_URL+'/session/status/'+session,
             json: true,
