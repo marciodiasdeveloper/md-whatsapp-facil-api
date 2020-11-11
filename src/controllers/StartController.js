@@ -8,7 +8,7 @@ module.exports = {
         
         let session = await SessionService.start(request.query.sessionName);
     
-        console.log('StartController create session:', session);
+        console.log('CHECK: -> StartController create session:', session);
         // WebhookService.notifySessionState(session);
 
         if (["CONNECTED", "QRCODE", "STARTING"].includes(session.state)) {

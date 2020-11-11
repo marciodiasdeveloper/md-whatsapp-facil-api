@@ -8,7 +8,13 @@ module.exports = class Sessions {
         const options = {
             url: process.env.API_WEBHOOK_URL+'/session/status/'+session,
             json: true,
-            body: session
+            body: session,
+            // headers: {
+            //     'Content-Type': 'application/json',
+            //     'Accept': 'application/json',
+            //     'User-Agent': 'Request',
+            //     'X-platform': 'Node'
+            // }
         };
         
         let result = await request.post(options, (err, res, body) => {

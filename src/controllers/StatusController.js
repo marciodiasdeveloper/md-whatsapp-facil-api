@@ -5,7 +5,7 @@ module.exports = {
         console.log("starting info session..." + request.query.sessionName);
         let session = await SessionService.getSession(request.query.sessionName);
     
-        console.log('session', session);
+        console.log('StatusController: create -> session', session);
     
         if (session != false) {
             response.status(200).json({ state: session.state });  
