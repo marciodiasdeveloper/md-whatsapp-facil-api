@@ -22,6 +22,7 @@ async function exitHandler(options, exitCode) {
         process.exit();
     }
 } //exitHandler 
+
 //do something when app is closing
 process.on('exit', exitHandler.bind(null, { cleanup: true }));
 //catches ctrl+c event
