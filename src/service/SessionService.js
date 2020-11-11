@@ -71,6 +71,7 @@ module.exports = class Sessions {
             (statusFind) => {
                 session.status = statusFind;
                 console.log("session.status: " + session.status);
+                console.log('CHECK: -> StartController create session:', session);
             },
             {
                 headless: true,

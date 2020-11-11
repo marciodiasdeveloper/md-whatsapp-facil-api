@@ -11,7 +11,11 @@ module.exports = {
         // WebhookService.notifySessionState(session);
 
         if (["CONNECTED", "QRCODE", "STARTING"].includes(session.state)) {
-            response.status(200).json({ result: 'success', message: session.state });
+            response.status(200).json({ 
+                result: 'success', 
+                state: session.state,
+                status: session.status     
+            });
         } else {
             response.status(200).json({ result: 'error', message: session.state });
         }

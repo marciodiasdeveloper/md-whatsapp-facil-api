@@ -17,5 +17,6 @@ routes.get('/qrcode', QrCodeController.create);
 routes.post('/sendText', SendTextController.create);
 routes.post('/sendFile', SendFileController.create);
 routes.get('/close', CloseController.create);
+routes.get('/sendTest', SendTextController.test);
 
 module.exports = routes;

@@ -1,7 +1,12 @@
-// const WebhookService = require("../service/WebhookService");
+const SessionService = require("../service/SessionService");
 
 module.exports = {
-    async index(request, response, next) {
-        response.json({});
+    async create(request, response, next) {
+        let result = await SessionService.sendText(
+            request.body.sessionName,
+            request.body.number,
+            request.body.text
+        );
+        response.json(result);
     }
 };
