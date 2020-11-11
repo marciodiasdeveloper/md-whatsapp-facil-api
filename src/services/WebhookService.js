@@ -13,7 +13,8 @@ module.exports = class Sessions {
         const response = await axios.post(process.env.API_WEBHOOK_URL+'/session/status', session)  
         .then(function(response){
             console.log('salvo com sucesso', response);
-        });
+        }).catch(e => console.log(e));
+        
         return response;
     }
 
