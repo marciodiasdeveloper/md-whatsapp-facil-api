@@ -5,10 +5,10 @@ const routes = express.Router();
 const HomeController = require('./controllers/HomeController');
 const StartController = require('./controllers/StartController');
 const StatusController = require('./controllers/StatusController');
-const SendTextController = require('./controllers/StatusController');
-const SendFileController = require('./controllers/StatusController');
-const QrCodeController = require('./controllers/StatusController');
-const CloseController = require('./controllers/StatusController');
+const SendTextController = require('./controllers/SendTextController');
+const SendFileController = require('./controllers/SendFileController');
+const QrCodeController = require('./controllers/QrCodeController');
+const CloseController = require('./controllers/CloseController');
 
 routes.get('/', HomeController.index);
 routes.get('/start', StartController.create);
