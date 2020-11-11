@@ -4,7 +4,8 @@ const SessionService = require("../service/SessionService");
 
 module.exports = {
     async create(request, response, next) {
-        console.log("starting..." + request.query.sessionName);
+        console.log("starting session:" + request.query.sessionName);
+        
         let session = await SessionService.start(request.query.sessionName);
     
         console.log('StartController create session:', session);
