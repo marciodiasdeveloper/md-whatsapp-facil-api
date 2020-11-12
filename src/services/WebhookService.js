@@ -10,7 +10,7 @@ module.exports = class Sessions {
 
         console.log('Disparando Webhook para ',url);
         
-        if(process.env.API_WEBHOOK) {
+        if(process.env.API_WEBHOOK === true) {
             const response = await axios.post(url, session)  
             .then(function(response){
                 console.log('Webhook enviado com sucesso!');
