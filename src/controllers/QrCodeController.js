@@ -7,6 +7,7 @@ module.exports = {
         let session = SessionService.getSession(request.query.sessionName);
     
         if (session != false) {
+
             if (session.status != 'isLogged') {
                 if (request.query.image) {
                     session.qrcode = session.qrcode.replace('data:image/png;base64,', '');

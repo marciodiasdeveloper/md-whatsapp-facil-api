@@ -68,11 +68,12 @@ module.exports = class Sessions {
                 session.state = "QRCODE";
                 session.qrcode = base64Qr;
                 console.log("new qrcode updated - session.state: " + session.state);
+                WebhookService.notifyApiSessionUpdate(session);
             },
             (statusFind) => {
+                console.log('statusFind', statusFind);
                 session.status = statusFind;
                 console.log("session.status: " + session.status);
-                console.log('CHECK: -> StartController create session:', session);
                 WebhookService.notifyApiSessionUpdate(session);
             },
             {
@@ -125,7 +126,7 @@ module.exports = class Sessions {
             client.onStateChange(state => {
                 session.state = state;
                 console.log("session.state: " + state);
-                console.log('CHECK: -> session.state:', session);
+                WebhookService.notifyApiSessionUpdate(session);
             });//.then((client) => Sessions.startProcess(client));
             client.onMessage((message) => {
                 if (message.body === 'hi') {
@@ -150,8 +151,10 @@ module.exports = class Sessions {
                         session.client = false;
                         console.log("client.close - session.state: " + session.state);
                     });
+                    WebhookService.notifyApiSessionUpdate(session);
                 return { result: "success", message: "CLOSED" };
             } else {//close
+                WebhookService.notifyApiSessionUpdate(session);
                 return { result: "success", message: session.state };
             }
         } else {
@@ -181,19 +184,29 @@ module.exports = class Sessions {
     static async getQrcode(sessionName) {
         var session = Sessions.getSession(sessionName);
         if (session) {
-            //if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
+            // if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
             if (["UNPAIRED_IDLE"].includes(session.state)) {
                 //restart session
                 await Sessions.closeSession(sessionName);
                 Sessions.start(sessionName);
+                WebhookService.notifyApiSessionUpdate(session);
+
                 return { result: "error", message: session.state };
             } else if (["CLOSED"].includes(session.state)) {
                 Sessions.start(sessionName);
+                WebhookService.notifyApiSessionUpdate(session);
                 return { result: "error", message: session.state };
             } else { //CONNECTED
                 if (session.status != 'isLogged') {
+                    WebhookService.notifyApiSessionUpdate(session);
+
+                    await session.client.then(async client => {
+                        console.log('client.getHostDevice() ->', client.getHostDevice()); 
+                    });
+
                     return { result: "success", message: session.state, qrcode: session.qrcode };
                 } else {
+                    WebhookService.notifyApiSessionUpdate(session);
                     return { result: "success", message: session.state };
                 }
             }
