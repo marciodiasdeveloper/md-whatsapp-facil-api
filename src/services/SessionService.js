@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const venom = require('venom-bot');
 const WebhookService = require("./WebhookService");
+const { Session } = require('inspector');
 // const { json } = require('express');
 // const { Session } = require('inspector');
 // const { info } = require('console');
@@ -181,6 +182,20 @@ module.exports = class Sessions {
         }
     }//getSessions
 
+    static async getHostDevice(sessionName) {
+        var session = Sessions.getSession(sessionName);
+        if (session) {
+            let host_device = await session.client.then(async client => {
+                console.log('client.getHostDevice() ->', client.getHostDevice()); 
+            });
+            
+            return host_device;
+        }
+    
+        return false;
+
+    }
+
     static async getQrcode(sessionName) {
         var session = Sessions.getSession(sessionName);
         if (session) {
@@ -198,12 +213,8 @@ module.exports = class Sessions {
                 return { result: "error", message: session.state };
             } else { //CONNECTED
                 if (session.status != 'isLogged') {
+                    // Session.getHostDevice(session.name);
                     WebhookService.notifyApiSessionUpdate(session);
-
-                    await session.client.then(async client => {
-                        console.log('client.getHostDevice() ->', client.getHostDevice()); 
-                    });
-
                     return { result: "success", message: session.state, qrcode: session.qrcode };
                 } else {
                     WebhookService.notifyApiSessionUpdate(session);
