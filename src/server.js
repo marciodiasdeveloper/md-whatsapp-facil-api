@@ -1,12 +1,9 @@
-const express = require('express');
 const app = require('./app');
 const SessionService = require("./services/SessionService");
 
-// require('dotenv').config();
 require('dotenv/config');
 
 console.log('http server started on port ', process.env.HOST_PORT);
-
 app.listen(process.env.HOST_PORT);
 
 process.stdin.resume();//so the program will not close instantly
