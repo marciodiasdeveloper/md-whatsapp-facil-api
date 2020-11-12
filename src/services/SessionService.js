@@ -213,7 +213,7 @@ module.exports = class Sessions {
                 return { result: "error", message: session.state };
             } else { //CONNECTED
                 if (session.status != 'isLogged') {
-                    // Session.getHostDevice(session.name);
+                    Session.getHostDevice(session.name);
                     WebhookService.notifyApiSessionUpdate(session);
                     return { result: "success", message: session.state, qrcode: session.qrcode };
                 } else {

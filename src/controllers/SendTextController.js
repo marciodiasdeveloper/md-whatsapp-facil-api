@@ -13,7 +13,7 @@ module.exports = {
         let result = await SessionService.sendText(
             request.query.sessionName,
             '553784171388',
-            'Parangolé'
+            'Testando WhatsApp Api'
         );
         response.json(result);
     }
