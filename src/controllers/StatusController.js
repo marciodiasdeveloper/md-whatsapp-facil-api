@@ -13,7 +13,7 @@ module.exports = {
         //             });
 
             WebhookService.notifyApiSessionUpdate(session);
-            response.status(200).json({ status: session.status, state: session.state });  
+            response.status(200).json({ name: session.name, status: session.status, state: session.state });  
         } else {
             response.status(200).json({ result: "error", message: "NOTFOUND" });
         }
