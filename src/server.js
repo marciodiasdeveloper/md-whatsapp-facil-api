@@ -1,9 +1,11 @@
 const app = require('./app');
 const SessionService = require("./services/SessionService");
 
-console.log('http server started on port 3334');
+require('dotenv/config');
 
-app.listen(3334);
+console.log('http server started on port ', process.env.HOST_PORT);
+
+app.listen(process.env.HOST_PORT);
 
 process.stdin.resume();//so the program will not close instantly
 
