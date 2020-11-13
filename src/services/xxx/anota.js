@@ -11,10 +11,10 @@ module.exports = class FraseAleatoria {
             if(err) {
                 return console.log(err);
             }
-            FraseAleatoria.data = rawData.split('\n');
+            FraseAleatoria.data = rawData.toString().split('\n');
         });
 
-        return FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)].trim();
+        return FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)].toString();
     }
 
     static randomInt(low,high) {
