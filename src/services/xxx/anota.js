@@ -19,7 +19,7 @@ module.exports = class FraseAleatoria {
         
         console.log('frase', frase);
 
-        return frase;
+        return String(frase);
     }
 
     static randomInt(low,high) {
