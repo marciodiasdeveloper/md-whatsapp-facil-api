@@ -7,7 +7,7 @@ module.exports = class FraseAleatoria {
 
         FraseAleatoria.data = FraseAleatoria.data || [];
        
-        fs.readFile('./storage/frases.txt', 'utf8', function(err, rawData) {
+        fs.readFile('storage/frases.txt', 'utf8', function(err, rawData) {
             if(err) {
                 return console.log(err);
             }
