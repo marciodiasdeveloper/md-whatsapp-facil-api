@@ -8,16 +8,13 @@ module.exports = class Sessions {
 
         let url = process.env.API_WEBHOOK_URL+'/session/status';
 
-        console.log('Disparando Webhook para ',url);
-        
         if(process.env.API_WEBHOOK === true) {
+            console.log('Disparando Webhook para ',url);
             const response = await axios.post(url, session)  
             .then(function(response){
                 console.log('Webhook enviado com sucesso!');
             }).catch(e => console.log(e));
-
-            console.log(`Disparando Webhook para ${url}, response: ${response}`);
-            
+            console.log(`Disparado Webhook para ${url}, response: ${response}`);
             return response;
         }
     }
