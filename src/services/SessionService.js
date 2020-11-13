@@ -142,11 +142,11 @@ module.exports = class Sessions {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
                     } else if (message.body == '!anota+1') {
-                        let message = FraseAleatoria.responder(message);
-                        client.sendText(message.from, message.toString());
+                        let msg = FraseAleatoria.responder(message.from);
+                        client.sendText(message.from, msg.toString());
                     } else if (message.body == '!fraseXXX') {
-                        let message = FraseAleatoria.responder(message);
-                        client.sendText(message.from, message.toString());
+                        let msg = FraseAleatoria.responder(message.from);
+                        client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {
