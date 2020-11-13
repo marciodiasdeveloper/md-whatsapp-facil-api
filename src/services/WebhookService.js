@@ -15,6 +15,8 @@ module.exports = class Sessions {
             .then(function(response){
                 console.log('Webhook enviado com sucesso!');
             }).catch(e => console.log(e));
+
+            console.log(`Disparando Webhook para ${url}, response: ${response}`);
             
             return response;
         }
