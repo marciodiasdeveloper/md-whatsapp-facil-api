@@ -24,17 +24,17 @@ module.exports = class FraseAleatoria {
     
     static async anota(sessionName) {
 
-        FraseAleatoria.data = FraseAleatoria.data || [];
+        FraseAleatoria.anotacoes = FraseAleatoria.anotacoes || [];
        
         await fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/anotacoes.txt', 'utf8', function(err, rawData) {
         // fs.readFile('/Users/marciodias/dev/stack/saas-marciodias/md-whatsapp-facil-api/src/services/xxx/storage/frases.txt', 'utf8', function(err, rawData) {
             if(err) {
                 return console.log(err);
             }
-            FraseAleatoria.data = rawData.toString().split('\n');
+            FraseAleatoria.anotacoes = rawData.toString().split('\n');
         });
 
-        let frase = FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
+        let frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         
         console.log('frase', frase);
 
