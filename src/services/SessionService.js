@@ -143,10 +143,10 @@ module.exports = class Sessions {
                         client.sendText(message.from, 'Hello\nfriend!');
                     } else if (message.body == '!anota+1') {
 
-                        console.log('message from:', message.from);
+                        console.log('message from:', message);
 
                         let msg = await FraseAleatoria.anota(message.from);
-                        client.sendText(message.from, message.from.sender.pushname+', '+msg.toString());
+                        client.sendText(message.from, message.from+', '+msg.toString());
                     } else if (message.body == '!fraseXXX') {
 
                         console.log('message from:', message.from);
