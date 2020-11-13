@@ -8,7 +8,7 @@ module.exports = class Sessions {
 
         let url = process.env.API_WEBHOOK_URL+'/session/status';
 
-        if(process.env.API_WEBHOOK) {
+        if(session.name && process.env.API_WEBHOOK) {
             console.log('Disparando Webhook para ',url);
             const response = await axios.post(url, session)  
             .then(function(response){
