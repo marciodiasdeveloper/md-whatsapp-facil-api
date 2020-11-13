@@ -15,7 +15,7 @@ module.exports = class FraseAleatoria {
             FraseAleatoria.data = rawData.toString().split('\n');
         });
 
-        let frase = JSON.stringify(FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)]);
+        let frase = FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
         
         console.log('frase', frase);
 
