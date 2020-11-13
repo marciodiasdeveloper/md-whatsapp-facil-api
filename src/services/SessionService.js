@@ -132,6 +132,9 @@ module.exports = class Sessions {
             });//.then((client) => Sessions.startProcess(client));
 
             client.onMessage(async (message) => {
+
+                console.log('received message', message);
+
                 try {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
@@ -144,6 +147,8 @@ module.exports = class Sessions {
                     } else if (message.body == '!chats') {
                       const chats = await client.getAllChats();
                       client.sendText(message.from, `The bot has ${chats.length} chats open.`);
+                    } else if (message.body == '!anota+1') {
+                      client.sendText(message.from, `Seu pedido foi anotado maconheiro.`);
                     } else if (message.body == '!groups') {
                       const groups = await client.getAllGroups();
                       client.sendText(message.from, `The bot has ${groups.length} groups open.`);
