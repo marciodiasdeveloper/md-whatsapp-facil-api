@@ -283,8 +283,6 @@ module.exports = class Sessions {
             WebhookService.notifyApiSessionUpdate(session);
             if (session.state == "CONNECTED") {
                 let resultSendText = await session.client.then(async client => {
-                    // return await client.sendMessageToId(number + '@c.us', text);
-
                     return await client
                     .sendText(number + '@c.us', text)
                     .then((result) => {
@@ -294,8 +292,8 @@ module.exports = class Sessions {
                     .catch((erro) => {
                       console.error('Error when sending: ', erro); //return object error
                     });
-
-                }).catch(error => console.log('error', error));
+                })
+                .catch(error => console.log('error', error));
                 return { result: "success", data: resultSendText };
             } else {
                 return { result: "error", message: session.state };
