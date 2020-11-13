@@ -148,7 +148,7 @@ module.exports = class Sessions {
                       const chats = await client.getAllChats();
                       client.sendText(message.from, `The bot has ${chats.length} chats open.`);
                     } else if (message.body == '!anota+1') {
-                      client.sendText(message.from, `Seu pedido foi anotado maconheiro.`);
+                      client.sendText(message.from, `Seu pedido foi anotado maconheiro, vou avisar o @Perrou vulgo bolo fofo!`);
                     } else if (message.body == '!groups') {
                       const groups = await client.getAllGroups();
                       client.sendText(message.from, `The bot has ${groups.length} groups open.`);
