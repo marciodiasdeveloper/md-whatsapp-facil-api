@@ -149,6 +149,7 @@ module.exports = class Sessions {
                         text += `*!fraseXXX* => Ação para visualizar uma frase aleatória. \n`;
                         text += `*!anota+1* => Registrar as anotações diárias \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
+                        text += `*!dicadochef* => by Dudu Jaber? \n`;
 
                         client.sendText(message.from, text);
 
@@ -160,6 +161,11 @@ module.exports = class Sessions {
                     } else if (message.body == '!fraseXXX') {
                         console.log('message from:', message.from);
                         let msg = await FraseAleatoria.responder(message.from);
+                        client.sendText(message.from, msg.toString());
+                    } else if (message.body == '!dicadochef') {
+                        console.log('message from:', message);
+                        let msg = await FraseAleatoria.dicadochef(message.from);
+                        // let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!spotify') {
                         let msg = '💥 Estou preparando uma lista de playlists do Spotify para dividir com vocês!';
