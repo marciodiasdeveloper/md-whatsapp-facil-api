@@ -142,13 +142,13 @@ module.exports = class Sessions {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
                     } else if (message.body == '!anota+1') {
+                        
                         let text = FraseAleatoria.responder(message);
                         client.sendText(message.from, text);
+
                     } else if (message.body == '!ping') {
-                      // Send a new message to the same chat
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {
-                      // Send a new message as a reply to the current one
                       client.reply(message.from, 'pong', message.id.toString());
                     } else if (message.body == '!chats') {
                       const chats = await client.getAllChats();
