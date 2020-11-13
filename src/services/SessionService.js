@@ -334,9 +334,11 @@ module.exports = class Sessions {
     static async getAllGroups(sessionName) {
         let session = Sessions.getSession(sessionName);
         if (session) {
-            let resultSendFile = await session.client.then(async (client) => {
+            let groups = await session.client.then(async (client) => {
                 return await client.getAllGroups();
-            });//client.then(
+            });
+
+            return groups;
         } else {
             return { result: "error", message: "NOTFOUND" };
         }
