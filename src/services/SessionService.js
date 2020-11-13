@@ -200,6 +200,7 @@ module.exports = class Sessions {
     static async closeSession(sessionName) {
         let session = Sessions.getSession(sessionName);
         if (session) { //só adiciona se não existir
+            WebhookService.notifyApiSessionUpdate(session);
             if (session.state != "CLOSED") {
                 if (session.client)
                     await session.client.then(async client => {
@@ -210,6 +211,7 @@ module.exports = class Sessions {
                         }
                         session.state = "CLOSED";
                         session.client = false;
+                        WebhookService.notifyApiSessionUpdate(session);
                         console.log("client.close - session.state: " + session.state);
                     });
                     WebhookService.notifyApiSessionUpdate(session);
@@ -279,6 +281,7 @@ module.exports = class Sessions {
 
         console.log('session sendText',session);
         if (session) {
+            WebhookService.notifyApiSessionUpdate(session);
             if (session.state == "CONNECTED") {
                 let resultSendText = await session.client.then(async client => {
                     // return await client.sendMessageToId(number + '@c.us', text);
@@ -286,6 +289,7 @@ module.exports = class Sessions {
                     return await client
                     .sendText(number + '@c.us', text)
                     .then((result) => {
+                      WebhookService.notifyApiSessionUpdate(session);
                       console.log('Result: ', result); //return object success
                     })
                     .catch((erro) => {
@@ -305,6 +309,7 @@ module.exports = class Sessions {
     static async sendFile(sessionName, number, base64Data, fileName, caption) {
         let session = Sessions.getSession(sessionName);
         if (session) {
+            WebhookService.notifyApiSessionUpdate(session);
             if (session.state == "CONNECTED") {
                 let resultSendFile = await session.client.then(async (client) => {
                     let folderName = fs.mkdtempSync(path.join(os.tmpdir(), session.name + '-'));
