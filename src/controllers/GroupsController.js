@@ -10,7 +10,7 @@ module.exports = {
 
             let groups = await SessionService.getAllGroups(request.query.sessionName);
 
-            console.log('getAllGroups', $groups);
+            console.log('getAllGroups', groups);
 
             response.status(200).json({ result: "success", data: groups });  
 
