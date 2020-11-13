@@ -5,16 +5,16 @@ module.exports = class FraseAleatoria {
 
     static async responder(sessionName) {
 
-        let data = [];
+        FraseAleatoria.data = FraseAleatoria.data || [];
        
         fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/frases.txt', 'utf8', function(err, rawData) {
             if(err) {
                 return console.log(err);
             }
-            data = rawData.split('\n');
+            FraseAleatoria.data = rawData.split('\n');
         });
 
-        return data[FraseAleatoria.randomInt(0, data.length)];
+        return FraseAleatoria.data[FraseAleatoria.randomInt(0, data.length)];
     }
 
     static randomInt(low,high) {
