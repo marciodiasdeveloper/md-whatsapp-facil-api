@@ -5,6 +5,9 @@ const venom = require('venom-bot');
 const { Session } = require('inspector');
 
 const WebhookService = require("./WebhookService");
+
+const FraseAleatoria = require ("./xxx/anota");
+
 // const { Session } = require('inspector');
 // const { info } = require('console');
 
@@ -138,6 +141,9 @@ module.exports = class Sessions {
                 try {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
+                    } else if (message.body == '!anota+1') {
+                        let text = FraseAleatoria.responder(message);
+                        client.sendText(message.from, text);
                     } else if (message.body == '!ping') {
                       // Send a new message to the same chat
                       client.sendText(message.from, 'pong');
@@ -147,8 +153,6 @@ module.exports = class Sessions {
                     } else if (message.body == '!chats') {
                       const chats = await client.getAllChats();
                       client.sendText(message.from, `The bot has ${chats.length} chats open.`);
-                    } else if (message.body == '!anota+1') {
-                      client.sendText(message.from, `Seu pedido foi anotado, vou avisar o @Perrou vulgo bolo fofo!`);
                     } else if (message.body == '!groups') {
                       const groups = await client.getAllGroups();
                       client.sendText(message.from, `The bot has ${groups.length} groups open.`);
