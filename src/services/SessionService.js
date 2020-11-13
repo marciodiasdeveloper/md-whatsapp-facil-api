@@ -154,6 +154,10 @@ module.exports = class Sessions {
 
                         let msg = await FraseAleatoria.responder(message.from);
                         client.sendText(message.from, msg.toString());
+
+                    } else if (message.body == '!spotify') {
+                        let msg = 'Estou preparando uma lista de playlists do Spotify para dividir com vocês!';
+                        client.sendText(message.from, msg);
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {
