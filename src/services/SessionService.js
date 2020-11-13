@@ -132,10 +132,66 @@ module.exports = class Sessions {
                 WebhookService.notifyApiSessionUpdate(session);
             });//.then((client) => Sessions.startProcess(client));
 
-            client.onMessage((message) => {
-                if (message.body === 'hi') {
-                    client.sendText(message.from, 'Hello\nfriend!');
+            client.onMessage(async (message) => {
+                try {
+                    if (message.body === 'hi') {
+                        client.sendText(message.from, 'Hello\nfriend!');
+                    } else if (message.body == '!ping') {
+                      // Send a new message to the same chat
+                      client.sendText(message.from, 'pong');
+                    } else if (message.body == '!ping reply') {
+                      // Send a new message as a reply to the current one
+                      client.reply(message.from, 'pong', message.id.toString());
+                    } else if (message.body == '!chats') {
+                      const chats = await client.getAllChats();
+                      client.sendText(message.from, `The bot has ${chats.length} chats open.`);
+                    } else if (message.body == '!info') {
+                      let info = await client.getHostDevice();
+                      let message = `_*Connection info*_\n\n`;
+                      message += `*User name:* ${info.pushname}\n`;
+                      message += `*Number:* ${info.wid.user}\n`;
+                      message += `*Battery:* ${info.battery}\n`;
+                      message += `*Plugged:* ${info.plugged}\n`;
+                      message += `*Device Manufacturer:* ${info.phone.device_manufacturer}\n`;
+                      message += `*WhatsApp version:* ${info.phone.wa_version}\n`;
+                      client.sendText(message.from, message);
+                    } else if (message.body.startsWith('!sendto ')) {
+                      // Direct send a new message to specific id
+                      let number = message.body.split(' ')[1];
+                      let messageIndex = message.body.indexOf(number) + number.length;
+                      let message = message.body.slice(messageIndex, message.body.length);
+                      number = number.includes('@c.us') ? number : `${number}@c.us`;
+                      client.sendText(number, message);
+                    } else if (message.body.startsWith('!pin ')) {
+                      let option = message.body.split(' ')[1];
+                      if (option == 'true') {
+                        await client.pinChat(message.from, true);
+                      } else {
+                        await client.pinChat(message.from, false);
+                      }
+                    } else if (message.body.startsWith('!typing ')) {
+                      const option = message.body.split(' ')[1];
+                      if (option == 'true') {
+                        // Start typing...
+                        await client.startTyping(message.from);
+                      } else {
+                        // Stop typing
+                        await client.stopTyping(message.from);
+                      }
+                    } else if (message.body.startsWith('!ChatState ')) {
+                      const option = message.body.split(' ')[1];
+                      if (option == '1') {
+                        await client.setChatState(message.from, '0');
+                      } else if (option == '2') {
+                        await client.setChatState(message.from, '1');
+                      } else {
+                        await client.setChatState(message.from, '2');
+                      }
+                    }
+                } catch (e) {
+                    console.log(e);
                 }
+    
             });
 
         });
@@ -186,20 +242,6 @@ module.exports = class Sessions {
         }
     }//getSessions
 
-    static async getHostDevice(sessionName) {
-        let session = Sessions.getSession(sessionName);
-        if (session) {
-            let host_device = await session.client.then(async client => {
-                console.log('client.getHostDevice() ->', client.getHostDevice()); 
-            });
-            
-            return host_device;
-        }
-    
-        return false;
-
-    }
-
     static async getQrcode(sessionName) {
         let session = Sessions.getSession(sessionName);
         if (session) {
@@ -217,7 +259,6 @@ module.exports = class Sessions {
                 return { result: "error", message: session.state };
             } else { //CONNECTED
                 if (session.status != 'isLogged') {
-                    Session.getHostDevice(session.name);
                     WebhookService.notifyApiSessionUpdate(session);
                     return { result: "success", message: session.state, qrcode: session.qrcode };
                 } else {
