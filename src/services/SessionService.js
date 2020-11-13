@@ -143,8 +143,7 @@ module.exports = class Sessions {
                         client.sendText(message.from, 'Hello\nfriend!');
                     } else if (message.body == '!anota+1') {
                         
-                        let text = FraseAleatoria.responder(message);
-                        client.sendText(message.from, text);
+                        client.sendText(message.from, FraseAleatoria.responder(message));
 
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
