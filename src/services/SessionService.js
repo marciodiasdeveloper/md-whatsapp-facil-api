@@ -136,7 +136,7 @@ module.exports = class Sessions {
 
             client.onMessage(async (message) => {
 
-                console.log('received message', message);
+                console.log('received message');
 
                 try {
                     if (message.body === 'hi') {
