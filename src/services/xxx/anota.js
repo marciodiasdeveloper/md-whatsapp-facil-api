@@ -17,10 +17,10 @@ module.exports = class FraseAleatoria {
 
         let frase = FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
         
-        if(!frase) {
+        if(frase === undefined) {
             frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         }
-        
+
         console.log('frase', frase);
 
         return String(frase).trim();
@@ -40,7 +40,7 @@ module.exports = class FraseAleatoria {
 
         let frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         
-        if(!frase) {
+        if(frase === undefined) {
             frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         }
 
@@ -63,7 +63,7 @@ module.exports = class FraseAleatoria {
 
         let frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         
-        if(!frase) {
+        if(frase === undefined) {
             frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         }
         console.log('frase', frase);
