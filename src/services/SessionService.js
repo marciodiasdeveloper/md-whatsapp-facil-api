@@ -144,6 +144,9 @@ module.exports = class Sessions {
                     } else if (message.body == '!chats') {
                       const chats = await client.getAllChats();
                       client.sendText(message.from, `The bot has ${chats.length} chats open.`);
+                    } else if (message.body == '!groups') {
+                      const groups = await client.getAllGroups();
+                      client.sendText(message.from, `The bot has ${groups.length} groups open.`);
                     } else if (message.body == '!info') {
                       let info = await client.getHostDevice();
                       let message = `_*Connection info*_\n\n`;
