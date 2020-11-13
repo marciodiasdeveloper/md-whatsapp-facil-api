@@ -142,9 +142,15 @@ module.exports = class Sessions {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
                     } else if (message.body == '!anota+1') {
+
+                        console.log('message from:', message.from);
+
                         let msg = await FraseAleatoria.anota(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!fraseXXX') {
+
+                        console.log('message from:', message.from);
+
                         let msg = await FraseAleatoria.responder(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ping') {
