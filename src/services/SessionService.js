@@ -2,8 +2,9 @@ const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const venom = require('venom-bot');
-const WebhookService = require("./WebhookService");
 const { Session } = require('inspector');
+
+const WebhookService = require("./WebhookService");
 // const { json } = require('express');
 // const { Session } = require('inspector');
 // const { info } = require('console');
@@ -13,7 +14,7 @@ module.exports = class Sessions {
     static async start(sessionName) {
         Sessions.sessions = Sessions.sessions || []; //start array
 
-        var session = Sessions.getSession(sessionName);
+        let session = Sessions.getSession(sessionName);
 
         if (session == false) { //create new session
             
@@ -44,7 +45,7 @@ module.exports = class Sessions {
     }//start
 
     static async addSesssion(sessionName) {
-        var newSession = {
+        let newSession = {
             name: sessionName,
             qrcode: false,
             client: false,
@@ -62,7 +63,7 @@ module.exports = class Sessions {
     }//addSession
 
     static async initSession(sessionName) {
-        var session = Sessions.getSession(sessionName);
+        let session = Sessions.getSession(sessionName);
         const client = await venom.create(
             sessionName,
             (base64Qr) => {
@@ -122,23 +123,26 @@ module.exports = class Sessions {
     }//initSession
 
     static async setup(sessionName) {
-        var session = Sessions.getSession(sessionName);
+        let session = Sessions.getSession(sessionName);
         await session.client.then(client => {
+
             client.onStateChange(state => {
                 session.state = state;
                 console.log("session.state: " + state);
                 WebhookService.notifyApiSessionUpdate(session);
             });//.then((client) => Sessions.startProcess(client));
+
             client.onMessage((message) => {
                 if (message.body === 'hi') {
                     client.sendText(message.from, 'Hello\nfriend!');
                 }
             });
+
         });
     }//setup
 
     static async closeSession(sessionName) {
-        var session = Sessions.getSession(sessionName);
+        let session = Sessions.getSession(sessionName);
         if (session) { //só adiciona se não existir
             if (session.state != "CLOSED") {
                 if (session.client)
@@ -164,7 +168,7 @@ module.exports = class Sessions {
     }//close
 
     static getSession(sessionName) {
-        var foundSession = false;
+        let foundSession = false;
         if (Sessions.sessions)
             Sessions.sessions.forEach(session => {
                 if (sessionName == session.name) {
@@ -183,7 +187,7 @@ module.exports = class Sessions {
     }//getSessions
 
     static async getHostDevice(sessionName) {
-        var session = Sessions.getSession(sessionName);
+        let session = Sessions.getSession(sessionName);
         if (session) {
             let host_device = await session.client.then(async client => {
                 console.log('client.getHostDevice() ->', client.getHostDevice()); 
@@ -197,7 +201,7 @@ module.exports = class Sessions {
     }
 
     static async getQrcode(sessionName) {
-        var session = Sessions.getSession(sessionName);
+        let session = Sessions.getSession(sessionName);
         if (session) {
             // if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
             if (["UNPAIRED_IDLE"].includes(session.state)) {
@@ -230,12 +234,12 @@ module.exports = class Sessions {
 
         console.log('sessionName sendText', sessionName);
 
-        var session = Sessions.getSession(sessionName);
+        let session = Sessions.getSession(sessionName);
 
         console.log('session sendText',session);
         if (session) {
             if (session.state == "CONNECTED") {
-                var resultSendText = await session.client.then(async client => {
+                let resultSendText = await session.client.then(async client => {
                     // return await client.sendMessageToId(number + '@c.us', text);
 
                     return await client
@@ -258,12 +262,12 @@ module.exports = class Sessions {
     }//message
 
     static async sendFile(sessionName, number, base64Data, fileName, caption) {
-        var session = Sessions.getSession(sessionName);
+        let session = Sessions.getSession(sessionName);
         if (session) {
             if (session.state == "CONNECTED") {
-                var resultSendFile = await session.client.then(async (client) => {
-                    var folderName = fs.mkdtempSync(path.join(os.tmpdir(), session.name + '-'));
-                    var filePath = path.join(folderName, fileName);
+                let resultSendFile = await session.client.then(async (client) => {
+                    let folderName = fs.mkdtempSync(path.join(os.tmpdir(), session.name + '-'));
+                    let filePath = path.join(folderName, fileName);
                     fs.writeFileSync(filePath, base64Data, 'base64');
                     console.log(filePath);
                     return await client.sendFile(number + '@c.us', filePath, fileName, caption);
