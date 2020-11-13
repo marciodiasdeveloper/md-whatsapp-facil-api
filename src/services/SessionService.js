@@ -127,8 +127,8 @@ module.exports = class Sessions {
 
             client.onStateChange(state => {
                 session.state = state;
-                console.log("session.state: " + state);
                 WebhookService.notifyApiSessionUpdate(session);
+                console.log("session.state: " + state);
             });//.then((client) => Sessions.startProcess(client));
 
             client.onMessage(async (message) => {
@@ -194,6 +194,10 @@ module.exports = class Sessions {
                     console.log(e);
                 }
     
+            });
+
+            client.onAck(ack => {
+                console.log("ack: " + ack);
             });
 
         });

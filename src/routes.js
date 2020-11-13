@@ -9,6 +9,7 @@ const SendTextController = require('./controllers/SendTextController');
 const SendFileController = require('./controllers/SendFileController');
 const QrCodeController = require('./controllers/QrCodeController');
 const CloseController = require('./controllers/CloseController');
+const GroupsController = require('./controllers/GroupsController');
 
 routes.get('/', HomeController.index);
 routes.get('/start', StartController.create);
@@ -18,5 +19,6 @@ routes.post('/sendText', SendTextController.create);
 routes.post('/sendFile', SendFileController.create);
 routes.get('/close', CloseController.create);
 routes.get('/sendTest', SendTextController.test);
+routes.get('/groups', GroupsController.index);
 
 module.exports = routes;
