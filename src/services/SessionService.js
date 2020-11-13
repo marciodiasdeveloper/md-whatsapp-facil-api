@@ -146,7 +146,7 @@ module.exports = class Sessions {
                         console.log('message from:', message);
 
                         let msg = await FraseAleatoria.anota(message.from);
-                        client.sendText(message.from, message.from+', '+msg.toString());
+                        client.sendText(message.from, message.sender.pushname+', '+msg.toString());
                     } else if (message.body == '!fraseXXX') {
 
                         console.log('message from:', message.from);
