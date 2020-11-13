@@ -146,7 +146,7 @@ module.exports = class Sessions {
                         console.log('message from:', message);
 
                         let msg = await FraseAleatoria.anota(message.from);
-                        let phone_from = String(message.from).replace('@c.us', '');
+                        let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, '@'+phone_from+' => '+message.sender.pushname+', '+msg.toString(), [phone_from]);
                     } else if (message.body == '!fraseXXX') {
 
