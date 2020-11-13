@@ -15,11 +15,11 @@ module.exports = class FraseAleatoria {
             FraseAleatoria.data = rawData.toString().split('\n');
         });
 
-        let frase = FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
+        let frase = await FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
         
         console.log('frase', frase);
 
-        return String(frase).trim();
+        return await String(frase).trim();
     }
 
     static randomInt(low,high) {
