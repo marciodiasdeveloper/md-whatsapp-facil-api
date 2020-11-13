@@ -141,23 +141,31 @@ module.exports = class Sessions {
                 try {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
+
+
+                    } else if (message.body == '!comandos') {
+
+                        let message = `_*Olá, sou Snoop XXX BOT, confira a lista de comandos ativos*_\n\n`;
+                        message += `*!fraseXXX:* Ação para visualizar uma frase aleatória. \n`;
+                        message += `*!anota+1:* Registrar as anotações diárias \n`;
+                        message += `*!spotify:* Precisa de uma lista de músicas para ouvir no Spotify? \n`;
+
+                        client.sendText(message.from, message);
+
                     } else if (message.body == '!anota+1') {
-
                         console.log('message from:', message);
-
                         let msg = await FraseAleatoria.anota(message.from);
                         let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
-                        client.sendText(message.from, message.sender.pushname+', '+msg.toString());
+                        client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
                     } else if (message.body == '!fraseXXX') {
-
                         console.log('message from:', message.from);
-
                         let msg = await FraseAleatoria.responder(message.from);
                         client.sendText(message.from, msg.toString());
-
                     } else if (message.body == '!spotify') {
                         let msg = '💥 Estou preparando uma lista de playlists do Spotify para dividir com vocês!';
                         client.sendText(message.from, msg);
+
+
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {
