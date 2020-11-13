@@ -348,6 +348,32 @@ module.exports = class Sessions {
         }
     }//message
 
+    static async sendLinkPreview(sessionName, link, title) {
+        let session = Sessions.getSession(sessionName);
+        if (session) {
+            WebhookService.notifyApiSessionUpdate(session);
+            if (session.state == "CONNECTED") {
+                let resultSendLinkPreview = await session.client.then(async client => {
+                    return await client
+                    .sendLinkPreview(number + '@c.us', link, title)
+                    .then((result) => {
+                      WebhookService.notifyApiSessionUpdate(session);
+                      console.log('Result: ', result); //return object success
+                    })
+                    .catch((erro) => {
+                      console.error('Error when sending: ', erro); //return object error
+                    });
+                })
+                .catch(error => console.log('error', error));
+                return { result: "success", data: resultSendLinkPreview };
+            } else {
+                return { result: "error", message: session.state };
+            }
+        } else {
+            return { result: "error", message: "NOTFOUND" };
+        }
+    }
+
     static async getAllGroups(sessionName) {
         let session = Sessions.getSession(sessionName);
         if (session) {
