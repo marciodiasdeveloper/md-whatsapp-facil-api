@@ -145,12 +145,12 @@ module.exports = class Sessions {
 
                     } else if (message.body == '!comandos') {
 
-                        let message = `_*Olá, sou Snoop XXX BOT, confira a lista de comandos ativos*_\n\n`;
-                        message += `*!fraseXXX:* Ação para visualizar uma frase aleatória. \n`;
-                        message += `*!anota+1:* Registrar as anotações diárias \n`;
-                        message += `*!spotify:* Precisa de uma lista de músicas para ouvir no Spotify? \n`;
+                        let text = `_*Olá, sou Snoop XXX BOT, confira a lista de comandos ativos*_\n\n`;
+                        text += `*!fraseXXX:* Ação para visualizar uma frase aleatória. \n`;
+                        text += `*!anota+1:* Registrar as anotações diárias \n`;
+                        text += `*!spotify:* Precisa de uma lista de músicas para ouvir no Spotify? \n`;
 
-                        client.sendText(message.from, message);
+                        client.sendText(message.from, text);
 
                     } else if (message.body == '!anota+1') {
                         console.log('message from:', message);
