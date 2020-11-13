@@ -14,7 +14,7 @@ module.exports = class FraseAleatoria {
             FraseAleatoria.data = rawData.split('\n');
         });
 
-        return FraseAleatoria.data[FraseAleatoria.randomInt(0, data.length)];
+        return FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
     }
 
     static randomInt(low,high) {
