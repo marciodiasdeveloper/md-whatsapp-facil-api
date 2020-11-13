@@ -13,8 +13,8 @@ module.exports = class Sessions {
             const response = await axios.post(url, session)  
             .then(function(response){
                 console.log('Webhook enviado com sucesso!');
+                console.log(`Disparado Webhook para ${url}, response: ${response}`);
             }).catch(e => console.log(e));
-            console.log(`Disparado Webhook para ${url}, response: ${response}`);
             return response;
         }
     }
