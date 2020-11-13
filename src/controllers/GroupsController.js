@@ -12,8 +12,8 @@ module.exports = {
 
             console.log('getAllGroups', $groups);
 
-            response.status(200).json(groups);  
-            
+            response.status(200).json({ result: "success", data: groups });  
+
         } else {
             response.status(200).json({ result: "error", message: "NOTFOUND" });
         }
