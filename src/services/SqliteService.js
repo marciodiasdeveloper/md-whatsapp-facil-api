@@ -35,7 +35,7 @@ module.exports = class SqliteService {
             
             if(!whatsapp_id) {
               await db.run('insert into votes (name, whatsapp_id, hits) values (?, ?, ?)', [message.sender.id, message.sender.pushname, 0]);
-              whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
+              const whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
             } 
             
             if(whatsapp_id) {
@@ -47,6 +47,25 @@ module.exports = class SqliteService {
           } catch (error) {
             console.log(error);
           }
+    }
+
+
+    static async getRanking(message) {
+
+      const create_table = await SqliteService.createDatabase();
+
+      try {
+        const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
+        
+        const result = await db.get('SELECT * FROM votes ORDER BY hits DESC');
+        
+        await db.close();
+
+        return result;
+      } catch (error) {
+        console.log(error);
+      }
+
     }
 
 }

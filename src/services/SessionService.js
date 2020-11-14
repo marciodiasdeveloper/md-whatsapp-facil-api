@@ -157,8 +157,16 @@ module.exports = class Sessions {
 
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
                         
+                        
                         let text = `_*Olá, sou Snoop XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
+
+                        let votes = SqliteService.getRanking(message);
+
+                        votes.forEach(function(vote, i) {
+                            console.log('[forEach]', nome, i);
+                            text += `${vote.hits} - ${vote.name} \n`;
+                        });
 
                         client.sendText(message.from, text);
 
