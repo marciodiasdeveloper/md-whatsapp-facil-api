@@ -31,16 +31,14 @@ module.exports = class SqliteService {
             const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
             
             // const rows = await db.all('select * from votes WHERE whatsapp_id = ${message.sends.id}');
-            const whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
+            let votes = await db.get('SELECT * FROM votes WHERE votes = ?', [message.sender.id]);
             
-            if(!whatsapp_id) {
+            if(!votes) {
               await db.run('insert into votes (name, whatsapp_id, hits) values (?, ?, ?)', [message.sender.pushname, message.sender.id, 0]);
-              const whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
+              whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
             } 
             
-            if(whatsapp_id) {
-              const result = await db.run('UPDATE votes SET hits = ? WHERE whatsapp_id = ?', whatsapp_id.hits++, whatsapp_id.whatsapp_id);
-            }
+            const result = await db.run('UPDATE votes SET hits = ? WHERE whatsapp_id = ?', votes.hits++, votes.whatsapp_id);
             await db.close();
 
             return result;
