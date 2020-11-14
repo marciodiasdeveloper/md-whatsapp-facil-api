@@ -34,7 +34,7 @@ module.exports = class SqliteService {
             const whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
             
             if(!whatsapp_id) {
-              await db.run('insert into votes (name, whatsapp_id, hits) values (?, ?, ?)', [message.sender.id, message.sender.pushname, 0]);
+              await db.run('insert into votes (name, whatsapp_id, hits) values (?, ?, ?)', [message.sender.pushname, message.sender.id, 0]);
               const whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
             } 
             
