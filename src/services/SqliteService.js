@@ -10,7 +10,7 @@ module.exports = class SqliteService {
         try {
             const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
         
-            await db.run(`create table if not exists votes (id integer primary key, name text, whatsapp_id text, hits integer)`);
+            await db.run(`create table if not exists votes (id integer primary key autoincrement, name text, whatsapp_id text, hits integer)`);
         
             // await db.run('insert into people (name) values (?)', ['Gabriel']);
         
