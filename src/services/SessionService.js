@@ -146,8 +146,9 @@ module.exports = class Sessions {
                     } else if (message.body == '!comandos' && message.groupMetadata.id === '553784171388-1520966397@g.us') {
 
                         let text = `_*Olá, sou Snoop XXX BOT, confira a lista de comandos ativos*_\n\n`;
+                        text += `*!anota+1* => Registrar as anotações diárias. \n`;
+                        text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
                         text += `*!fraseXXX* => Ação para visualizar uma frase aleatória. \n`;
-                        text += `*!anota+1* => Registrar as anotações diárias \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
 
@@ -158,6 +159,8 @@ module.exports = class Sessions {
                         let text = `_*Olá, sou Snoop XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
 
+                        client.sendText(message.from, text);
+                        
                     } else if (message.body == '!anota+1' && message.groupMetadata.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
                         let msg = await FraseAleatoria.anota(message.from);
