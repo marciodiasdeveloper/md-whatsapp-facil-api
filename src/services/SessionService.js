@@ -163,10 +163,15 @@ module.exports = class Sessions {
 
                         let votes = SqliteService.getRanking(message);
 
-                        votes.forEach(function(vote, i) {
-                            console.log('[forEach]', nome, i);
-                            text += `${vote.hits} - ${vote.name} \n`;
-                        });
+                        if(votes) {
+                            votes.forEach(function(vote, i) {
+                                console.log('[forEach]', nome, i);
+                                text += `${vote.hits} - ${vote.name} \n`;
+                            });
+                        } else {
+                            text += `Sem resultados. \n`;
+                        }
+
 
                         client.sendText(message.from, text);
 
