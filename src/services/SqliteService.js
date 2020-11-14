@@ -3,7 +3,7 @@ const sqlite = require('sqlite');
 
 require('dotenv/config');
 
-module.exports = class Sqlite {
+module.exports = class SqliteService {
 
     static async createDatabase() {
 
@@ -24,6 +24,8 @@ module.exports = class Sqlite {
     }
 
     static async registerVote(message) {
+
+        const create_table = await SqliteService.createDatabase();
 
         try {
             const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });

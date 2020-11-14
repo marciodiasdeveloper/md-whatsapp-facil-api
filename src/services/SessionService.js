@@ -164,7 +164,6 @@ module.exports = class Sessions {
 
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
                         
-                        SqliteService.createDatabase();
                         SqliteService.registerVote(message);
                         
                         console.log('message from:', message);
