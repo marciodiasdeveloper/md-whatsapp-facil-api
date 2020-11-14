@@ -37,6 +37,9 @@ module.exports = class SqliteService {
               await db.run('insert into votes (name, whatsapp_id, hits) values (?, ?, ?)', [message.sender.pushname, message.sender.id, 0]);
               whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
             } 
+
+            console.log('vote hits old:', votes.hits);
+            console.log('vote hits new:', votes.hits++);
             
             const result = await db.run('UPDATE votes SET hits = ? WHERE whatsapp_id = ?', votes.hits++, votes.whatsapp_id);
             await db.close();
