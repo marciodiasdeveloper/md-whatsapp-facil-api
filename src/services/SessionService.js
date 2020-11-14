@@ -166,8 +166,8 @@ module.exports = class Sessions {
                         console.log('votes', votes);
 
                         if(votes) {
-                            votes.forEach(function(vote) {
-                                text += `${vote.hits} - ${vote.name} \n`;
+                            votes.forEach(function(vote, i) {
+                                text += `${i} - ${vote.name} (${vote.hits} registros)\n`;
                             });
                         } else {
                             text += `Sem resultados. \n`;
