@@ -5,6 +5,7 @@ const venom = require('venom-bot');
 const { Session } = require('inspector');
 
 const WebhookService = require("./WebhookService");
+const SqliteService = require("./SqliteService");
 
 const FraseAleatoria = require ("./xxx/anota");
 
@@ -162,6 +163,10 @@ module.exports = class Sessions {
                         client.sendText(message.from, text);
 
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
+                        
+                        SqliteService.createDatabase();
+                        SqliteService.registerVote(message);
+                        
                         console.log('message from:', message);
                         let msg = await FraseAleatoria.anota(message.from);
                         let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
