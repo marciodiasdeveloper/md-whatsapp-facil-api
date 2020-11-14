@@ -155,8 +155,7 @@ module.exports = class Sessions {
 
                         client.sendText(message.from, text);
 
-                    }  else if (message.body == '!ranking') {
-                    // }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
+                    }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
                         
                         
                         let text = `_*Olá, sou Snoop XXX BOT, confira a o ranking de anotações*_\n\n`;
@@ -177,8 +176,7 @@ module.exports = class Sessions {
 
                         client.sendText(message.from, text);
 
-                    } else if (message.body == '!anota+1') {
-                    // } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
                         
                         await SqliteService.registerVote(message);
                         
