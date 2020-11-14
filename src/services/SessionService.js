@@ -161,7 +161,7 @@ module.exports = class Sessions {
                         let text = `_*Olá, sou Snoop XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
 
-                        let votes = SqliteService.getRanking(message);
+                        let votes = await SqliteService.getRanking(message);
 
                         console.log('votes', votes);
 
@@ -178,7 +178,7 @@ module.exports = class Sessions {
 
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
                         
-                        SqliteService.registerVote(message);
+                        await SqliteService.registerVote(message);
                         
                         console.log('message from:', message);
                         let msg = await FraseAleatoria.anota(message.from);
