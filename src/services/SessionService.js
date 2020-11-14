@@ -146,7 +146,7 @@ module.exports = class Sessions {
 
                     } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
 
-                        let text = `_*Olá, sou Snoop XXX BOT, confira a lista de comandos ativos*_\n\n`;
+                        let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
                         text += `*!anota+1* => Registrar as anotações diárias. \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
                         text += `*!fraseXXX* => Ação para visualizar uma frase aleatória. \n`;
@@ -158,7 +158,7 @@ module.exports = class Sessions {
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
                         
                         
-                        let text = `_*Olá, sou Snoop XXX BOT, confira a o ranking de anotações*_\n\n`;
+                        let text = `_*Olá, sou XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
 
                         let votes = await SqliteService.getRanking(message);
