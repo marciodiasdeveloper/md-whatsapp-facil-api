@@ -33,7 +33,7 @@ module.exports = class SqliteService {
             console.log('vote hits old:', votes.hits);
             console.log('vote hits new:', (votes.hits+1));
             
-            const result = await db.run('UPDATE votes SET hits = ? WHERE whatsapp_id = ?', votes.hits++, votes.whatsapp_id);
+            const result = await db.run('UPDATE votes SET hits = ? WHERE whatsapp_id = ?', (votes.hits+1), votes.whatsapp_id);
             await db.close();
 
             return result;
