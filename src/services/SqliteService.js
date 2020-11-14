@@ -8,7 +8,7 @@ module.exports = class SqliteService {
     static async createDatabase() {
         try {
             const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
-            await db.run(`create table if not exists votes (id integer primary key autoincrement, name text, whatsapp_id text, hits integer)`);        
+            await db.run(`create table if not exists votes (name text, whatsapp_id text, hits integer)`);        
             await db.close();
           } catch (error) {
             console.log(error);
