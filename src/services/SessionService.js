@@ -136,7 +136,7 @@ module.exports = class Sessions {
 
             client.onMessage(async (message) => {
 
-                console.log('received message');
+                console.log('received message', message);
 
                 try {
                     if (message.body === 'hi') {
@@ -153,6 +153,8 @@ module.exports = class Sessions {
 
                         client.sendText(message.from, text);
 
+                    }  else if (message.body == '!ranking') {
+                        
                     } else if (message.body == '!anota+1') {
                         console.log('message from:', message);
                         let msg = await FraseAleatoria.anota(message.from);
