@@ -143,7 +143,7 @@ module.exports = class Sessions {
                         client.sendText(message.from, 'Hello\nfriend!');
 
 
-                    } else if (message.body == '!comandos' && message.groupMetadata.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
 
                         let text = `_*Olá, sou Snoop XXX BOT, confira a lista de comandos ativos*_\n\n`;
                         text += `*!anota+1* => Registrar as anotações diárias. \n`;
@@ -154,28 +154,28 @@ module.exports = class Sessions {
 
                         client.sendText(message.from, text);
 
-                    }  else if (message.body == '!ranking' && message.groupMetadata.id === '553784171388-1520966397@g.us') {
+                    }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
                         
                         let text = `_*Olá, sou Snoop XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
 
                         client.sendText(message.from, text);
-                        
-                    } else if (message.body == '!anota+1' && message.groupMetadata.id === '553784171388-1520966397@g.us') {
+
+                    } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
                         let msg = await FraseAleatoria.anota(message.from);
                         let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
-                    } else if (message.body == '!fraseXXX' && message.groupMetadata.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!fraseXXX' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message.from);
                         let msg = await FraseAleatoria.responder(message.from);
                         client.sendText(message.from, msg.toString());
-                    } else if (message.body == '!dicadochef' && message.groupMetadata.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!dicadochef' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
                         let msg = await FraseAleatoria.dicadochef(message.from);
                         // let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, msg.toString());
-                    } else if (message.body == '!spotify' && message.groupMetadata.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!spotify' && message.chat.id === '553784171388-1520966397@g.us') {
                         let msg = '💥 Estou preparando uma lista de playlists do Spotify para dividir com vocês!';
                         client.sendText(message.from, msg);
 
