@@ -57,7 +57,7 @@ module.exports = class SqliteService {
       try {
         const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
         
-        const result = await db.get('SELECT * FROM votes ORDER BY hits DESC');
+        const result = await db.all('SELECT * FROM votes ORDER BY hits DESC');
         
         await db.close();
 
