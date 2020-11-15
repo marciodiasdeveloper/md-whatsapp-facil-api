@@ -167,7 +167,7 @@ module.exports = class Sessions {
 
                         if(votes) {
                             votes.forEach(function(vote, i) {
-                                text += `${i++} - ${vote.name} (${vote.hits} registros)\n`;
+                                text += `${i} - ${vote.name} (${vote.hits} registros)\n`;
                             });
                         } else {
                             text += `Sem resultados. \n`;
