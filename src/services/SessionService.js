@@ -206,49 +206,50 @@ module.exports = class Sessions {
                     } else if (message.body == '!groups') {
                       const groups = await client.getAllGroups();
                       client.sendText(message.from, `The bot has ${groups.length} groups open.`);
-                    } else if (message.body == '!info') {
-                      let info = await client.getHostDevice();
-                      let message = `_*Connection info*_\n\n`;
-                      message += `*User name:* ${info.pushname}\n`;
-                      message += `*Number:* ${info.wid.user}\n`;
-                      message += `*Battery:* ${info.battery}\n`;
-                      message += `*Plugged:* ${info.plugged}\n`;
-                      message += `*Device Manufacturer:* ${info.phone.device_manufacturer}\n`;
-                      message += `*WhatsApp version:* ${info.phone.wa_version}\n`;
-                      client.sendText(message.from, message);
-                    } else if (message.body.startsWith('!sendto ')) {
-                      // Direct send a new message to specific id
-                      let number = message.body.split(' ')[1];
-                      let messageIndex = message.body.indexOf(number) + number.length;
-                      let message = message.body.slice(messageIndex, message.body.length);
-                      number = number.includes('@c.us') ? number : `${number}@c.us`;
-                      client.sendText(number, message);
-                    } else if (message.body.startsWith('!pin ')) {
-                      let option = message.body.split(' ')[1];
-                      if (option == 'true') {
-                        await client.pinChat(message.from, true);
-                      } else {
-                        await client.pinChat(message.from, false);
-                      }
-                    } else if (message.body.startsWith('!typing ')) {
-                      const option = message.body.split(' ')[1];
-                      if (option == 'true') {
-                        // Start typing...
-                        await client.startTyping(message.from);
-                      } else {
-                        // Stop typing
-                        await client.stopTyping(message.from);
-                      }
-                    } else if (message.body.startsWith('!ChatState ')) {
-                      const option = message.body.split(' ')[1];
-                      if (option == '1') {
-                        await client.setChatState(message.from, '0');
-                      } else if (option == '2') {
-                        await client.setChatState(message.from, '1');
-                      } else {
-                        await client.setChatState(message.from, '2');
-                      }
                     }
+                    // } else if (message.body == '!info') {
+                    //   let info = await client.getHostDevice();
+                    //   let message = `_*Connection info*_\n\n`;
+                    //   message += `*User name:* ${info.pushname}\n`;
+                    //   message += `*Number:* ${info.wid.user}\n`;
+                    //   message += `*Battery:* ${info.battery}\n`;
+                    //   message += `*Plugged:* ${info.plugged}\n`;
+                    //   message += `*Device Manufacturer:* ${info.phone.device_manufacturer}\n`;
+                    //   message += `*WhatsApp version:* ${info.phone.wa_version}\n`;
+                    //   client.sendText(message.from, message);
+                    // } else if (message.body.startsWith('!sendto ')) {
+                    //   // Direct send a new message to specific id
+                    //   let number = message.body.split(' ')[1];
+                    //   let messageIndex = message.body.indexOf(number) + number.length;
+                    //   let message = message.body.slice(messageIndex, message.body.length);
+                    //   number = number.includes('@c.us') ? number : `${number}@c.us`;
+                    //   client.sendText(number, message);
+                    // } else if (message.body.startsWith('!pin ')) {
+                    //   let option = message.body.split(' ')[1];
+                    //   if (option == 'true') {
+                    //     await client.pinChat(message.from, true);
+                    //   } else {
+                    //     await client.pinChat(message.from, false);
+                    //   }
+                    // } else if (message.body.startsWith('!typing ')) {
+                    //   const option = message.body.split(' ')[1];
+                    //   if (option == 'true') {
+                    //     // Start typing...
+                    //     await client.startTyping(message.from);
+                    //   } else {
+                    //     // Stop typing
+                    //     await client.stopTyping(message.from);
+                    //   }
+                    // } else if (message.body.startsWith('!ChatState ')) {
+                    //   const option = message.body.split(' ')[1];
+                    //   if (option == '1') {
+                    //     await client.setChatState(message.from, '0');
+                    //   } else if (option == '2') {
+                    //     await client.setChatState(message.from, '1');
+                    //   } else {
+                    //     await client.setChatState(message.from, '2');
+                    //   }
+                    // }
                 } catch (e) {
                     console.log(e);
                 }
