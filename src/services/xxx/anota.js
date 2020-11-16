@@ -17,7 +17,7 @@ module.exports = class FraseAleatoria {
 
         let frase = FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
         
-        if(!frase) {
+        if(!frase || !frase === undefined) {
             frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         }
 
@@ -40,7 +40,7 @@ module.exports = class FraseAleatoria {
 
         let frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         
-        if(!frase) {
+        if(!frase || !frase === undefined) {
             frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         }
 
@@ -63,7 +63,7 @@ module.exports = class FraseAleatoria {
 
         let frase = FraseAleatoria.dicasdochef[FraseAleatoria.randomInt(0, FraseAleatoria.dicasdochef.length)];
         
-        if(!frase) {
+        if(!frase || !frase === undefined) {
             frase = FraseAleatoria.dicasdochef[FraseAleatoria.randomInt(0, FraseAleatoria.dicasdochef.length)];
         }
         console.log('frase', frase);
