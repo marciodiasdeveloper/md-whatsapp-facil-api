@@ -142,8 +142,6 @@ module.exports = class Sessions {
                 try {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
-
-
                     } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
 
                         let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
