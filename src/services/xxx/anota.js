@@ -17,7 +17,7 @@ module.exports = class FraseAleatoria {
         let frase = FraseAleatoria.data[FraseAleatoria.randomInt(1, FraseAleatoria.data.length)];
         
         while(frase===undefined) {
-            frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(1, FraseAleatoria.anotacoes.length)];
+            frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
         }
 
         console.log('frase', frase);
