@@ -339,6 +339,7 @@ module.exports = class Sessions {
         }
     } //getQrcode
 
+
     static async sendText(sessionName, number, text) {
         let session = Sessions.getSession(sessionName);
         if (session) {
@@ -346,9 +347,12 @@ module.exports = class Sessions {
             if (session.state == "CONNECTED") {
                 let resultSendText = await session.client.then(async client => {
 
-                    let phone_validation = await client.getNumberProfile('55'+number+'@c.us');
+                    let phone_number = '55'+number+'@c.us';
+
+                    let phone_validation = await client.getNumberProfile(phone_number);
                     
                     if(phone_validation && phone_validation.numberExists) {
+
                         return await client
                         .sendText(phone_validation.id._serialized, text)
                         .then((result) => {
@@ -358,9 +362,11 @@ module.exports = class Sessions {
                         .catch((erro) => {
                             console.error('Error when sending: ', erro); //return object error
                         });
+
                     } else {
+
                         return await client
-                        .sendText('55'+number + '@c.us', text)
+                        .sendText(phone_number, text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
@@ -368,11 +374,13 @@ module.exports = class Sessions {
                         .catch((erro) => {
                             console.error('Error when sending: ', erro); //return object error
                         });
+
                     }
-  
                 })
                 .catch(error => console.log('error', error));
+
                 return { result: "success", data: resultSendText };
+                
             } else {
                 return { result: "error", message: session.state };
             }

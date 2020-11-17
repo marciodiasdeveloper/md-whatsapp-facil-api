@@ -18,13 +18,14 @@ routes.get('/', HomeController.index);
 routes.get('/start', StartController.create);
 routes.get('/status', StatusController.create);
 routes.get('/qrcode', QrCodeController.create);
-routes.post('/sendText', celebrate({
-    [Segments.BODY]: Joi.object().keys({
-      sessionName: Joi.string().required(),
-      number: Joi.string().required(),
-      text: Joi.string().required(),
-    })
-}), SendTextController.create);
+// routes.post('/sendText', celebrate({
+//     [Segments.BODY]: Joi.object().keys({
+//       sessionName: Joi.string().required(),
+//       number: Joi.string().required(),
+//       text: Joi.string().required(),
+//     })
+// }), SendTextController.create);
+routes.post('/sendText', SendTextController.create);
 routes.post('/sendFile', SendFileController.create);
 routes.get('/close', CloseController.create);
 routes.get('/sendTest', SendTextController.test);
