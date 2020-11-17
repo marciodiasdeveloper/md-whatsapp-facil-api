@@ -18,7 +18,7 @@ module.exports = class SqliteService {
 
     static async registerVote(message) {
 
-        console.log('register vote date',formatRelative(new Date()));
+        console.log('register vote date',formatRelative(new Date(), new Date()));
 
         const create_table = await SqliteService.createDatabase();
 
