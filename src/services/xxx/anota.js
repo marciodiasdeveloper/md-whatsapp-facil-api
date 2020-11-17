@@ -8,17 +8,38 @@ module.exports = class FraseAleatoria {
         FraseAleatoria.data = FraseAleatoria.data || [];
        
         await fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/frases.txt', 'utf8', function(err, rawData) {
-        // fs.readFile('/Users/marciodias/dev/stack/saas-marciodias/md-whatsapp-facil-api/src/services/xxx/storage/frases.txt', 'utf8', function(err, rawData) {
             if(err) {
                 return console.log(err);
             }
             FraseAleatoria.data = rawData.toString().split('\n');
         });
 
-        let frase = FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
+        let frase = FraseAleatoria.data[FraseAleatoria.randomInt(1, FraseAleatoria.data.length)];
         
-        if(!frase || !frase === undefined) {
-            frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
+        while(frase===undefined) {
+            frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(1, FraseAleatoria.data.length)];
+        }
+
+        console.log('frase', frase);
+
+        return String(frase).trim();
+    }
+
+    static async ddt(message_from) {
+
+        FraseAleatoria.ddt = FraseAleatoria.ddt || [];
+       
+        await fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/ddt.txt', 'utf8', function(err, rawData) {
+            if(err) {
+                return console.log(err);
+            }
+            FraseAleatoria.ddt = rawData.toString().split('\n');
+        });
+
+        let frase = FraseAleatoria.ddt[FraseAleatoria.randomInt(1, FraseAleatoria.ddt.length)];
+        
+        while(frase===undefined) {
+            frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(1, FraseAleatoria.ddt.length)];
         }
 
         console.log('frase', frase);

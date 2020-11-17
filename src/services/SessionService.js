@@ -150,6 +150,7 @@ module.exports = class Sessions {
                         text += `*!fraseXXX* => Ação para visualizar uma frase aleatória. \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
+                        text += `*!ddt* => Frases Dias de Truta \n`;
 
                         client.sendText(message.from, text);
 
@@ -185,6 +186,10 @@ module.exports = class Sessions {
                     } else if (message.body == '!fraseXXX' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message.from);
                         let msg = await FraseAleatoria.responder(message.from);
+                        client.sendText(message.from, msg.toString());
+                    } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
+                        console.log('message from:', message.from);
+                        let msg = await FraseAleatoria.ddt(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!dicadochef' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
@@ -340,7 +345,7 @@ module.exports = class Sessions {
     } //getQrcode
 
 
-    static async sendText(sessionName, number, text) {
+    static async sendText(sessionName, phone, text) {
 
         let session = Sessions.getSession(sessionName);
 
@@ -348,36 +353,47 @@ module.exports = class Sessions {
             WebhookService.notifyApiSessionUpdate(session);
             if (session.state == "CONNECTED") {
                 let resultSendText = await session.client.then(async client => {
-                    let phone_number = '55'+number+'@c.us';
 
-                    console.log('phone_number entrada:', phone_number);
+                    console.log('phone_number entrada:', phone);
 
-                    let phone_validation = await Sessions.checkPhone(sessionName, number);
+                    let phone_validation = await Sessions.checkPhone(sessionName, phone);
+
+                    console.log('phone_validation', phone_validation);
                     
                     if(phone_validation && phone_validation.data.numberExists) {
 
-                        console.log('phone_validation', phone_validation);
-                        console.log('phone_validation serialized', phone_validation.id._serialized);
+                        console.log('phone_validation serialized', phone_validation.data.id._serialized);
+                        return await client
+                        .sendText(phone_validation.data.id._serialized, text)
+                        .then((result) => {
+                            WebhookService.notifyApiSessionUpdate(session);
+                            console.log('Result: ', result); //return object success
+                            return result;
+                        })
+                        .catch((erro) => {
+                            console.error('Error when sending: ', erro); //return object error
+                            return erro;
+                        });
 
-                        return await client
-                        .sendText(phone_validation.data.id.user+phone_validation.data.id.server, text)
-                        .then((result) => {
-                            WebhookService.notifyApiSessionUpdate(session);
-                            console.log('Result: ', result); //return object success
-                        })
-                        .catch((erro) => {
-                            console.error('Error when sending: ', erro); //return object error
-                        });
+                        return send_message;
+
                     } else {
-                        return await client
-                        .sendText(phone_number, text)
+
+                        console.log('phone sendText else', '55'+phone+'@c.us');
+
+                        let send_message = await client
+                        .sendText('55'+phone+'@c.us', text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
+                            return result;
                         })
                         .catch((erro) => {
                             console.error('Error when sending: ', erro); //return object error
+                            return erro;
                         });
+
+                        return send_message;
                     }
                 })
                 .catch(error => console.log('error', error));
