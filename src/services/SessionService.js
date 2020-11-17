@@ -351,7 +351,7 @@ module.exports = class Sessions {
             if (session.state == "CONNECTED") {
                 let resultSendText = await session.client.then(async client => {
 
-                    let phone_validation = await client.getNumberProfile('55'+phone+'@c.us');
+                    let phone_validation = await client.getNumberProfile('55'+number+'@c.us');
                     
                     if(phone_validation && phone_validation.numberExists) {
                         return await client
