@@ -354,13 +354,13 @@ module.exports = class Sessions {
 
                     let phone_validation = await Sessions.checkPhone(sessionName, number);
                     
-                    if(phone_validation && phone_validation.numberExists) {
+                    if(phone_validation && phone_validation.data.numberExists) {
 
                         console.log('phone_validation', phone_validation);
                         console.log('phone_validation serialized', phone_validation.id._serialized);
 
                         return await client
-                        .sendText(phone_validation.id.user+phone_validation.id.server, text)
+                        .sendText(phone_validation.data.id.user+phone_validation.data.id.server, text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
