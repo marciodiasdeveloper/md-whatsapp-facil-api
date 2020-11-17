@@ -1,5 +1,5 @@
 const express = require('express');
-// const { celebrate, Segments, Joi } = require('celebrate');
+const { celebrate, Segments, Joi } = require('celebrate');
 
 const HomeController = require('./controllers/HomeController');
 const StartController = require('./controllers/StartController');
@@ -19,7 +19,7 @@ routes.get('/', HomeController.index);
 routes.get('/start', StartController.create);
 routes.get('/status', StatusController.create);
 routes.get('/qrcode', QrCodeController.create);
-routes.get('/ping', SendTextController.create);
+routes.get('/ping', PingController.create);
 routes.post('/sendText', SendTextController.create);
 routes.post('/sendFile', SendFileController.create);
 routes.get('/close', CloseController.create);
@@ -28,6 +28,12 @@ routes.get('/frases', FraseAleatoriaController.index);
 routes.get('/checkPhone', CheckPhoneController.index);
 
 // Test validations
+
+// routes.get('/status', celebrate({
+//   [Segments.QUERY]: {
+//       sessionName: Joi.string().required()
+//     }
+// }), StatusController.create);
 
 // routes.get('/start', [Segments.QUERY]: {
 //   sessionName: Joi.string().token().required()
