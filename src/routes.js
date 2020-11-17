@@ -10,6 +10,7 @@ const QrCodeController = require('./controllers/QrCodeController');
 const CloseController = require('./controllers/CloseController');
 const GroupsController = require('./controllers/GroupsController');
 const FraseAleatoriaController = require('./controllers/FraseAleatoriaController');
+const CheckPhoneController = require('./controllers/CheckPhoneController');
 
 const routes = express.Router();
 
@@ -29,5 +30,6 @@ routes.get('/close', CloseController.create);
 routes.get('/sendTest', SendTextController.test);
 routes.get('/groups', GroupsController.index);
 routes.get('/frases', FraseAleatoriaController.index);
+routes.get('/checkPhone', CheckPhoneController.index);
 
 module.exports = routes;

@@ -429,4 +429,25 @@ module.exports = class Sessions {
             return { result: "error", message: "NOTFOUND" };
         }
     }
+
+    static async checkPhone(sessionName, phone) {
+        let session = Sessions.getSession(sessionName);
+        if (session) {
+            let phone_validator = await session.client.then(async (client) => {
+                return await client.getNumberProfile(phone);
+            });
+
+            console.log('phone_validator', phone_validator);
+
+            if(phone_validator && phone_validator.numberExists) {
+                return true;
+            } else {
+                return false;
+            }
+
+            return groups;
+        } else {
+            return { result: "error", message: "NOTFOUND" };
+        }
+    }
 }
