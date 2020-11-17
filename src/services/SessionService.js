@@ -446,18 +446,14 @@ module.exports = class Sessions {
         if (session) {
             let phone_validator = await session.client.then(async (client) => {
                 let verify = await client.getNumberProfile('55'+phone+'@c.us');
-                console.log('verify', verify);
+                console.log('verify phone', verify);
                 return verify;
             });
-
-            console.log('phone_validator', phone_validator);
-
             if(phone_validator && phone_validator.numberExists) {
                 return true;
             } else {
                 return false;
             }
-
             return groups;
         } else {
             return { result: "error", message: "NOTFOUND" };
