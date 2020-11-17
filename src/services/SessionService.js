@@ -349,7 +349,7 @@ module.exports = class Sessions {
             if (session.state == "CONNECTED") {
                 let resultSendText = await session.client.then(async client => {
 
-                    console.log('phone_number entrada:', phone_number);
+                    console.log('phone_number entrada:', phone);
 
                     let phone_validation = await Sessions.checkPhone(sessionName, phone);
                     
@@ -371,7 +371,7 @@ module.exports = class Sessions {
                         });
 
                         return { result: "success", data: send_message };
-                        
+
                     } else {
                         let send_message = await client
                         .sendText('55'+phone+'@c.us', text)
