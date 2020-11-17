@@ -360,7 +360,7 @@ module.exports = class Sessions {
                         console.log('phone_validation serialized', phone_validation.id._serialized);
 
                         return await client
-                        .sendText(phone_validation.id._serialized, text)
+                        .sendText(phone_validation.id.user+phone_validation.id.server, text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
