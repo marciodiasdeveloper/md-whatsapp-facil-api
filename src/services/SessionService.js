@@ -358,25 +358,34 @@ module.exports = class Sessions {
                         console.log('phone_validation', phone_validation);
                         console.log('phone_validation serialized', phone_validation.id._serialized);
 
-                        return await client
+                        let send_message = await client
                         .sendText(phone_validation.id.user + phone_validation.id.server, text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
+                            return result;
                         })
                         .catch((erro) => {
                             console.error('Error when sending: ', erro); //return object error
+                            return erro;
                         });
+
+                        return { result: "success", data: send_message };
+                        
                     } else {
-                        return await client
+                        let send_message = await client
                         .sendText('55'+phone+'@c.us', text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
+                            return result;
                         })
                         .catch((erro) => {
                             console.error('Error when sending: ', erro); //return object error
+                            return erro;
                         });
+
+                        return { result: "success", data: send_message };
                     }
                 })
                 .catch(error => console.log('error', error));
