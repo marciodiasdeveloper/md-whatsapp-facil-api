@@ -350,7 +350,7 @@ module.exports = class Sessions {
                     
                     if(phone_validation && phone_validation.numberExists) {
                         return await client
-                        .sendText(phone.id._serialized, text)
+                        .sendText(phone_validation.id._serialized, text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
