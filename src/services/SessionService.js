@@ -353,9 +353,10 @@ module.exports = class Sessions {
 
                     let phone_validation = await Sessions.checkPhone(sessionName, phone);
                     
+                    console.log('phone_validation', phone_validation);
+                    
                     if(phone_validation && phone_validation.numberExists) {
 
-                        console.log('phone_validation', phone_validation);
                         console.log('phone_validation serialized', phone_validation.id._serialized);
 
                         let send_message = await client
