@@ -350,15 +350,31 @@ module.exports = class Sessions {
             WebhookService.notifyApiSessionUpdate(session);
             if (session.state == "CONNECTED") {
                 let resultSendText = await session.client.then(async client => {
-                    return await client
-                    .sendText(number + '@c.us', text)
-                    .then((result) => {
-                      WebhookService.notifyApiSessionUpdate(session);
-                      console.log('Result: ', result); //return object success
-                    })
-                    .catch((erro) => {
-                      console.error('Error when sending: ', erro); //return object error
-                    });
+
+                    let phone_validation = await client.getNumberProfile('55'+phone+'@c.us');
+                    
+                    if(phone_validation && phone_validation.numberExists) {
+                        return await client
+                        .sendText(phone.id._serialized, text)
+                        .then((result) => {
+                            WebhookService.notifyApiSessionUpdate(session);
+                            console.log('Result: ', result); //return object success
+                        })
+                        .catch((erro) => {
+                            console.error('Error when sending: ', erro); //return object error
+                        });
+                    } else {
+                        return await client
+                        .sendText(number + '@c.us', text)
+                        .then((result) => {
+                            WebhookService.notifyApiSessionUpdate(session);
+                            console.log('Result: ', result); //return object success
+                        })
+                        .catch((erro) => {
+                            console.error('Error when sending: ', erro); //return object error
+                        });
+                    }
+  
                 })
                 .catch(error => console.log('error', error));
                 return { result: "success", data: resultSendText };
