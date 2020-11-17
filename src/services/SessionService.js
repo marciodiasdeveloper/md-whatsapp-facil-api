@@ -350,20 +350,21 @@ module.exports = class Sessions {
                 let resultSendText = await session.client.then(async client => {
                     let phone_number = '55'+number+'@c.us';
 
-                    // let phone_validation = await Session.checkPhone(sessionName, number);
-                    // let phone_validation = await client.getNumberProfile(phone_number);
+                    console.log('phone_number entrada:', phone_number);
+
+                    let phone_validation = await Session.checkPhone(sessionName, number);
                     
-                    // if(phone_validation && phone_validation.numberExists) {
-                    //     return await client
-                    //     .sendText(phone_validation.id._serialized, text)
-                    //     .then((result) => {
-                    //         WebhookService.notifyApiSessionUpdate(session);
-                    //         console.log('Result: ', result); //return object success
-                    //     })
-                    //     .catch((erro) => {
-                    //         console.error('Error when sending: ', erro); //return object error
-                    //     });
-                    // } else {
+                    if(phone_validation && phone_validation.numberExists) {
+                        return await client
+                        .sendText(phone_validation.id._serialized, text)
+                        .then((result) => {
+                            WebhookService.notifyApiSessionUpdate(session);
+                            console.log('Result: ', result); //return object success
+                        })
+                        .catch((erro) => {
+                            console.error('Error when sending: ', erro); //return object error
+                        });
+                    } else {
                         return await client
                         .sendText(phone_number, text)
                         .then((result) => {
@@ -373,7 +374,7 @@ module.exports = class Sessions {
                         .catch((erro) => {
                             console.error('Error when sending: ', erro); //return object error
                         });
-                    // }
+                    }
                 })
                 .catch(error => console.log('error', error));
                 return { result: "success", data: resultSendText };
