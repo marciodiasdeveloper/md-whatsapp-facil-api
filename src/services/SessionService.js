@@ -352,7 +352,7 @@ module.exports = class Sessions {
 
                     console.log('phone_number entrada:', phone_number);
 
-                    let phone_validation = await Session.checkPhone(sessionName, number);
+                    let phone_validation = await Sessions.checkPhone(sessionName, number);
                     
                     if(phone_validation && phone_validation.numberExists) {
                         return await client
