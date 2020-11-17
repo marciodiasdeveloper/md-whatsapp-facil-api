@@ -150,6 +150,7 @@ module.exports = class Sessions {
                         text += `*!fraseXXX* => Ação para visualizar uma frase aleatória. \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
+                        text += `*!ddt* => Frases Dias de Truta \n`;
 
                         client.sendText(message.from, text);
 
@@ -185,6 +186,10 @@ module.exports = class Sessions {
                     } else if (message.body == '!fraseXXX' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message.from);
                         let msg = await FraseAleatoria.responder(message.from);
+                        client.sendText(message.from, msg.toString());
+                    } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
+                        console.log('message from:', message.from);
+                        let msg = await FraseAleatoria.ddt(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!dicadochef' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
@@ -352,7 +357,7 @@ module.exports = class Sessions {
                     console.log('phone_number entrada:', phone);
 
                     let phone_validation = await Sessions.checkPhone(sessionName, phone);
-                    
+
                     console.log('phone_validation', phone_validation);
                     
                     if(phone_validation && phone_validation.numberExists) {
