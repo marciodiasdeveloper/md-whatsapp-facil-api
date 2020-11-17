@@ -434,7 +434,9 @@ module.exports = class Sessions {
         let session = Sessions.getSession(sessionName);
         if (session) {
             let phone_validator = await session.client.then(async (client) => {
-                return await client.getNumberProfile(phone);
+                let verify = await client.getNumberProfile(phone);
+                console.log('verify', verify);
+                return verify;
             });
 
             console.log('phone_validator', phone_validator);
