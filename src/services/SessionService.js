@@ -376,9 +376,12 @@ module.exports = class Sessions {
                             return erro;
                         });
 
-                        return { result: "success", data: send_message };
+                        return send_message;
 
                     } else {
+
+                        console.log('phone sendText else', '55'+phone+'@c.us');
+
                         let send_message = await client
                         .sendText('55'+phone+'@c.us', text)
                         .then((result) => {
@@ -391,7 +394,7 @@ module.exports = class Sessions {
                             return erro;
                         });
 
-                        return { result: "success", data: send_message };
+                        return send_message;
                     }
                 })
                 .catch(error => console.log('error', error));
