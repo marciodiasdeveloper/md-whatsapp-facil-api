@@ -341,30 +341,29 @@ module.exports = class Sessions {
 
 
     static async sendText(sessionName, number, text) {
+
         let session = Sessions.getSession(sessionName);
+
         if (session) {
             WebhookService.notifyApiSessionUpdate(session);
             if (session.state == "CONNECTED") {
                 let resultSendText = await session.client.then(async client => {
-
                     let phone_number = '55'+number+'@c.us';
 
-                    let phone_validation = await client.getNumberProfile(phone_number);
+                    // let phone_validation = await Session.checkPhone(sessionName, number);
+                    // let phone_validation = await client.getNumberProfile(phone_number);
                     
-                    if(phone_validation && phone_validation.numberExists) {
-
-                        return await client
-                        .sendText(phone_validation.id._serialized, text)
-                        .then((result) => {
-                            WebhookService.notifyApiSessionUpdate(session);
-                            console.log('Result: ', result); //return object success
-                        })
-                        .catch((erro) => {
-                            console.error('Error when sending: ', erro); //return object error
-                        });
-
-                    } else {
-
+                    // if(phone_validation && phone_validation.numberExists) {
+                    //     return await client
+                    //     .sendText(phone_validation.id._serialized, text)
+                    //     .then((result) => {
+                    //         WebhookService.notifyApiSessionUpdate(session);
+                    //         console.log('Result: ', result); //return object success
+                    //     })
+                    //     .catch((erro) => {
+                    //         console.error('Error when sending: ', erro); //return object error
+                    //     });
+                    // } else {
                         return await client
                         .sendText(phone_number, text)
                         .then((result) => {
@@ -374,13 +373,10 @@ module.exports = class Sessions {
                         .catch((erro) => {
                             console.error('Error when sending: ', erro); //return object error
                         });
-
-                    }
+                    // }
                 })
                 .catch(error => console.log('error', error));
-
                 return { result: "success", data: resultSendText };
-                
             } else {
                 return { result: "error", message: session.state };
             }
@@ -458,11 +454,19 @@ module.exports = class Sessions {
                 return verify;
             });
             if(phone_validator && phone_validator.numberExists) {
-                return true;
+                return { result: "success", data: phone_validator };
             } else {
-                return false;
+                return { result: "error", message: "NOTFOUND" };
             }
-            return groups;
+        } else {
+            return { result: "error", message: "NOTFOUND" };
+        }
+    }
+
+    static async ping(sessionName, phone) {
+        let session = Sessions.getSession(sessionName);
+        if (session) {
+
         } else {
             return { result: "error", message: "NOTFOUND" };
         }
