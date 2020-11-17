@@ -360,7 +360,7 @@ module.exports = class Sessions {
                         });
                     } else {
                         return await client
-                        .sendText(number + '@c.us', text)
+                        .sendText('55'+number + '@c.us', text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
