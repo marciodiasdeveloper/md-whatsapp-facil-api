@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3');
 const sqlite = require('sqlite');
-const formatRelative = require('date-fns/formatRelative')
+// const formatRelative = require('date-fns/formatRelative')
 
 require('dotenv/config');
 
@@ -18,7 +18,7 @@ module.exports = class SqliteService {
 
     static async registerVote(message) {
 
-        console.log('register vote date',formatRelative(new Date(), new Date()));
+        // console.log('register vote date',formatRelative(new Date(), new Date()));
 
         const create_table = await SqliteService.createDatabase();
 
