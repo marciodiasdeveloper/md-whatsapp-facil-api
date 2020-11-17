@@ -340,7 +340,7 @@ module.exports = class Sessions {
     } //getQrcode
 
 
-    static async sendText(sessionName, number, text) {
+    static async sendText(sessionName, phone, text) {
 
         let session = Sessions.getSession(sessionName);
 
@@ -348,11 +348,10 @@ module.exports = class Sessions {
             WebhookService.notifyApiSessionUpdate(session);
             if (session.state == "CONNECTED") {
                 let resultSendText = await session.client.then(async client => {
-                    let phone_number = '55'+number+'@c.us';
 
                     console.log('phone_number entrada:', phone_number);
 
-                    let phone_validation = await Sessions.checkPhone(sessionName, number);
+                    let phone_validation = await Sessions.checkPhone(sessionName, phone);
                     
                     if(phone_validation && phone_validation.numberExists) {
 
@@ -360,7 +359,7 @@ module.exports = class Sessions {
                         console.log('phone_validation serialized', phone_validation.id._serialized);
 
                         return await client
-                        .sendText(phone_validation.id.user+phone_validation.id.server, text)
+                        .sendText(phone_validation.id.user + phone_validation.id.server, text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
@@ -370,7 +369,7 @@ module.exports = class Sessions {
                         });
                     } else {
                         return await client
-                        .sendText(phone_number, text)
+                        .sendText('55'+phone+'@c.us', text)
                         .then((result) => {
                             WebhookService.notifyApiSessionUpdate(session);
                             console.log('Result: ', result); //return object success
