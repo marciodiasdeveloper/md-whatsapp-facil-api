@@ -340,12 +340,7 @@ module.exports = class Sessions {
     } //getQrcode
 
     static async sendText(sessionName, number, text) {
-
-        console.log('sessionName sendText', sessionName);
-
         let session = Sessions.getSession(sessionName);
-
-        console.log('session sendText',session);
         if (session) {
             WebhookService.notifyApiSessionUpdate(session);
             if (session.state == "CONNECTED") {
