@@ -31,7 +31,6 @@ module.exports = class FraseAleatoria {
         FraseAleatoria.anotacoes = FraseAleatoria.anotacoes || [];
        
         await fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/anotacoes.txt', 'utf8', function(err, rawData) {
-        // fs.readFile('/Users/marciodias/dev/stack/saas-marciodias/md-whatsapp-facil-api/src/services/xxx/storage/frases.txt', 'utf8', function(err, rawData) {
             if(err) {
                 return console.log(err);
             }
