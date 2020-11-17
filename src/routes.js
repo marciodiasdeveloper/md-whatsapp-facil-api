@@ -1,6 +1,5 @@
 const express = require('express');
-
-const routes = express.Router();
+const { celebrate, Segments, Joi } = require('celebrate');
 
 const HomeController = require('./controllers/HomeController');
 const StartController = require('./controllers/StartController');
@@ -12,11 +11,19 @@ const CloseController = require('./controllers/CloseController');
 const GroupsController = require('./controllers/GroupsController');
 const FraseAleatoriaController = require('./controllers/FraseAleatoriaController');
 
+const routes = express.Router();
+
 routes.get('/', HomeController.index);
 routes.get('/start', StartController.create);
 routes.get('/status', StatusController.create);
 routes.get('/qrcode', QrCodeController.create);
-routes.post('/sendText', SendTextController.create);
+routes.post('/sendText', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      sessionName: Joi.string().required(),
+      number: Joi.string().required(),
+      text: Joi.string().required(),
+    })
+}), SendTextController.create);
 routes.post('/sendFile', SendFileController.create);
 routes.get('/close', CloseController.create);
 routes.get('/sendTest', SendTextController.test);
