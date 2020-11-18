@@ -284,13 +284,28 @@ module.exports = class Sessions {
     }//close
 
     static getSession(sessionName) {
+        
         let foundSession = false;
-        if (Sessions.sessions)
+        
+        if (Sessions.sessions) {
             Sessions.sessions.forEach(session => {
                 if (sessionName == session.name) {
                     foundSession = session;
                 }
             });
+        }
+        
+        if(foundSession.state && foundSession.state === 'CONNECTED') {
+            let device = await Sessions.device(foundSession.name);
+            if(device.result === 'success') {
+                foundSession.device = {
+                    phone: device.data.wid.user,
+                    connected: device.data.wid.connected,
+                    battery: device.data.wid.battery,
+                }
+            }
+        }
+
         return foundSession;
     }//getSession
 
