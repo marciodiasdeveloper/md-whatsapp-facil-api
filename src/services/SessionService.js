@@ -33,7 +33,7 @@ module.exports = class Sessions {
 
             Sessions.setup(sessionName);
         
-        } else if (["CONFLICT", "UNPAIRED", "UNLAUNCHED"].includes(session.state)) {
+        } else if (["CONFLICT", "UNPAIRED", "UNLAUNCHED"].includes(session.state) || ["isLogged"].includes(session.status)) {
 
             console.log("client.useHere()");
             session.client.then(client => {
@@ -133,7 +133,7 @@ module.exports = class Sessions {
                 session.state = state;
                 WebhookService.notifyApiSessionUpdate(session);
                 console.log("session.state: " + state);
-            });//.then((client) => Sessions.startProcess(client));
+            });
 
             client.onMessage(async (message) => {
 
