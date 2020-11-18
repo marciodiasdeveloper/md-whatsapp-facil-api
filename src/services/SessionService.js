@@ -323,6 +323,7 @@ module.exports = class Sessions {
                 //restart session
                 await Sessions.closeSession(sessionName);
                 Sessions.start(sessionName);
+                
                 WebhookService.notifyApiSessionUpdate(session);
 
                 return { result: "error", message: session.state };
