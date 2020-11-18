@@ -283,7 +283,7 @@ module.exports = class Sessions {
         }
     }//close
 
-    static getSession(sessionName) {
+    static async getSession(sessionName) {
         
         let foundSession = false;
         
