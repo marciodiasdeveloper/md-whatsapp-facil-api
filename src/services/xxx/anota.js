@@ -39,7 +39,7 @@ module.exports = class FraseAleatoria {
         let frase = FraseAleatoria.ddt[FraseAleatoria.randomInt(1, FraseAleatoria.ddt.length)];
         
         while(frase===undefined) {
-            frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(1, FraseAleatoria.ddt.length)];
+            frase = FraseAleatoria.ddt[FraseAleatoria.randomInt(1, FraseAleatoria.ddt.length)];
         }
 
         console.log('frase', frase);
