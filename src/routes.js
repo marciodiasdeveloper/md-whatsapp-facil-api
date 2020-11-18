@@ -24,8 +24,9 @@ routes.post('/sendText', SendTextController.create);
 routes.post('/sendFile', SendFileController.create);
 routes.get('/close', CloseController.create);
 routes.get('/groups', GroupsController.index);
-routes.get('/frases', FraseAleatoriaController.index);
 routes.get('/checkPhone', CheckPhoneController.index);
+
+routes.get('/frases', FraseAleatoriaController.index);
 
 // Test validations
 
