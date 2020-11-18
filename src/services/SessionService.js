@@ -467,9 +467,17 @@ module.exports = class Sessions {
         }
     }
 
-    static async ping(sessionName, phone) {
+    static async device(sessionName) {
         let session = Sessions.getSession(sessionName);
         if (session) {
+
+            let device = await session.client.then(async (client) => {
+                let get_device = await client.getHostDevice();
+                console.log('device phone', get_device);
+                return get_device;
+            });
+
+            return { result: "success", data: device };
 
         } else {
             return { result: "error", message: "NOTFOUND" };

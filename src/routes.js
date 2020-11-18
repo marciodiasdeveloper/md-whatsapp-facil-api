@@ -17,6 +17,7 @@ const routes = express.Router();
 routes.get('/', HomeController.index);
 routes.get('/start', StartController.create);
 routes.get('/status', StatusController.create);
+routes.get('/device', DeviceController.create);
 routes.get('/qrcode', QrCodeController.create);
 routes.post('/sendText', SendTextController.create);
 routes.post('/sendFile', SendFileController.create);
