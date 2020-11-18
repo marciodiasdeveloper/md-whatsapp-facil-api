@@ -126,9 +126,9 @@ module.exports = class Sessions {
     }//initSession
 
     static async setup(sessionName) {
+        
         let session = Sessions.getSession(sessionName);
         await session.client.then(client => {
-
             client.onStateChange(state => {
                 session.state = state;
                 WebhookService.notifyApiSessionUpdate(session);
@@ -136,14 +136,11 @@ module.exports = class Sessions {
             });//.then((client) => Sessions.startProcess(client));
 
             client.onMessage(async (message) => {
-
                 console.log('received message');
-
                 try {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
                     } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
-
                         let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
                         text += `*!anota+1* => Registrar as anotações diárias. \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
@@ -151,19 +148,12 @@ module.exports = class Sessions {
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
                         text += `*!ddt* => Frases Dias de Truta \n`;
-
                         client.sendText(message.from, text);
-
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
-                        
-                        
                         let text = `_*Olá, sou XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
-
                         let votes = await SqliteService.getRanking(message);
-
                         console.log('votes', votes);
-
                         if(votes) {
                             votes.forEach(function(vote, i) {
                                 text += `${i} - ${vote.name} (${vote.hits} registros)\n`;
@@ -171,10 +161,7 @@ module.exports = class Sessions {
                         } else {
                             text += `Sem resultados. \n`;
                         }
-
-
                         client.sendText(message.from, text);
-
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
                         
                         await SqliteService.registerVote(message);
