@@ -36,10 +36,10 @@ module.exports = class FraseAleatoria {
             FraseAleatoria.ddt = rawData.toString().split('\n');
         });
 
-        let frase = FraseAleatoria.ddt[FraseAleatoria.randomInt(1, FraseAleatoria.ddt.length)];
+        let frase = FraseAleatoria.ddt[FraseAleatoria.randomInt(0, FraseAleatoria.ddt.length)];
         
-        while(frase===undefined) {
-            frase = FraseAleatoria.ddt[FraseAleatoria.randomInt(1, FraseAleatoria.ddt.length)];
+        if(!frase || !frase === undefined) {
+            frase = FraseAleatoria.ddt[FraseAleatoria.randomInt(0, FraseAleatoria.ddt.length)];
         }
 
         console.log('frase', frase);
