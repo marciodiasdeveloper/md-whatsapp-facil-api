@@ -14,12 +14,8 @@ module.exports = class Spotify {
             Spotify.data = rawData.toString().split('\n');
         });
 
-        let frase = Spotify.data[Spotify.randomInt(0, Spotify.data.length)];
+        let frase = Spotify.data[Spotify.randomInt(1, Spotify.data.length)];
         
-        if(!frase || !frase === undefined) {
-            frase = Spotify.data[Spotify.randomInt(0, Spotify.data.length)];
-        }
-
         console.log('frase', frase);
 
         return String(frase).trim();
