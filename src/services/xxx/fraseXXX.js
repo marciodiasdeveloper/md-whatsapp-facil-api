@@ -16,6 +16,11 @@ module.exports = class FraseAleatoria {
 
         let frase = FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
         
+
+        if(!frase || frase === undefined) {
+            frase = "*XAAMAAAAA* eu não vou responder Whatsapp, estou no boteco!"
+        }
+        
         console.log('frase', frase);
 
         return String(frase).trim();

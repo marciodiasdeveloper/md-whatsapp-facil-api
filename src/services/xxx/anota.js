@@ -18,6 +18,10 @@ module.exports = class Anota {
         
         console.log('frase', frase);
 
+        if(!frase || frase === undefined) {
+            frase = "*XAAMAAAAA* eu não vou responder Whatsapp, estou no boteco!"
+        }
+
         return String(frase).trim();
     }
 

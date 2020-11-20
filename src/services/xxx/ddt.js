@@ -16,11 +16,12 @@ module.exports = class DiasDeTruta {
 
         let frase = DiasDeTruta.ddt[DiasDeTruta.randomInt(0, DiasDeTruta.ddt.length)];
         
-        if(!frase || !frase === undefined) {
-            frase = DiasDeTruta.ddt[DiasDeTruta.randomInt(0, DiasDeTruta.ddt.length)];
+        if(!frase || frase === undefined) {
+            frase = "*XAAMAAAAA* eu não vou responder Whatsapp, estou no boteco!"
         }
 
         console.log('frase', frase);
+
 
         return String(frase).trim();
     }

@@ -16,6 +16,11 @@ module.exports = class Spotify {
 
         let frase = Spotify.data[Spotify.randomInt(0, Spotify.data.length)];
         
+
+        if(!frase || frase === undefined) {
+            frase = "*XAAMAAAAA* já pensou em procurar lista de spotify LGBTYJKFYUS!"
+        }
+
         console.log('frase', frase);
 
         return String(frase).trim();
