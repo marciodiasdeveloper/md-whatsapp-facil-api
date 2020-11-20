@@ -11,6 +11,7 @@ const FraseAleatoria = require ("./xxx/fraseXXX");
 const Dicadochef = require ("./xxx/dicadochef");
 const DiasDeTruta = require ("./xxx/ddt");
 const Anota = require ("./xxx/anota");
+const Spotify = require ("./xxx/spotify");
 
 // const { Session } = require('inspector');
 // const { info } = require('console');
@@ -188,6 +189,8 @@ module.exports = class Sessions {
                         console.log('message from:', message);
                         let msg = await Spotify.responder(message.from);
                         client.sendText(message.from, msg.toString());
+
+
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {

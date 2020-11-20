@@ -5,19 +5,19 @@ module.exports = class Anota {
 
     static async responder(sessionName) {
 
-        FraseAleatoria.anotacoes = FraseAleatoria.anotacoes || [];
+        Anota.anotacoes = Anota.anotacoes || [];
        
         await fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/anotacoes.txt', 'utf8', function(err, rawData) {
             if(err) {
                 return console.log(err);
             }
-            FraseAleatoria.anotacoes = rawData.toString().split('\n');
+            Anota.anotacoes = rawData.toString().split('\n');
         });
 
-        let frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
+        let frase = Anota.anotacoes[Anota.randomInt(0, Anota.anotacoes.length)];
         
         if(!frase || !frase === undefined) {
-            frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
+            frase = Anota.anotacoes[Anota.randomInt(0, Anota.anotacoes.length)];
         }
 
         console.log('frase', frase);
