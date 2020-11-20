@@ -7,7 +7,7 @@ const { Session } = require('inspector');
 const WebhookService = require("./WebhookService");
 const SqliteService = require("./SqliteService");
 
-const FraseAleatoria = require ("./xxx/fraseXXX");
+const Frase = require ("./xxx/frase");
 const Dicadochef = require ("./xxx/dicadochef");
 const DiasDeTruta = require ("./xxx/ddt");
 const Anota = require ("./xxx/anota");
@@ -180,7 +180,7 @@ module.exports = class Sessions {
                     } else if (message.body == '!fraseXXX' && message.chat.id === '553784171388-1520966397@g.us') {
                     // } else if (message.body == '!fraseXXX') {
                         console.log('message from:', message.from);
-                        let msg = await FraseAleatoria.responder(message.from);
+                        let msg = await Frase.responder(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
                     // } else if (message.body == '!ddt') {
