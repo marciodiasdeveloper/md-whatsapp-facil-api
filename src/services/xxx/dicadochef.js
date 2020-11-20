@@ -1,0 +1,32 @@
+const fs = require('fs');
+const path = require('path');
+
+module.exports = class Dicadochef {
+
+    static async responder(sessionName) {
+
+        FraseAleatoria.dicasdochef = FraseAleatoria.dicasdochef || [];
+       
+        await fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/dicasdochef.txt', 'utf8', function(err, rawData) {
+        // fs.readFile('/Users/marciodias/dev/stack/saas-marciodias/md-whatsapp-facil-api/src/services/xxx/storage/frases.txt', 'utf8', function(err, rawData) {
+            if(err) {
+                return console.log(err);
+            }
+            FraseAleatoria.dicasdochef = rawData.toString().split('\n');
+        });
+
+        let frase = FraseAleatoria.dicasdochef[FraseAleatoria.randomInt(0, FraseAleatoria.dicasdochef.length)];
+        
+        if(!frase || !frase === undefined) {
+            frase = FraseAleatoria.dicasdochef[FraseAleatoria.randomInt(0, FraseAleatoria.dicasdochef.length)];
+        }
+        console.log('frase', frase);
+
+        return String(frase).trim();
+    }
+
+    static randomInt(low,high) {
+        return Math.floor(Math.random() * (high - low) + low);
+    }
+
+}

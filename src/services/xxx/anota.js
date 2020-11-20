@@ -1,53 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-module.exports = class FraseAleatoria {
+module.exports = class Anota {
 
     static async responder(sessionName) {
-
-        FraseAleatoria.data = FraseAleatoria.data || [];
-       
-        await fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/frases.txt', 'utf8', function(err, rawData) {
-            if(err) {
-                return console.log(err);
-            }
-            FraseAleatoria.data = rawData.toString().split('\n');
-        });
-
-        let frase = FraseAleatoria.data[FraseAleatoria.randomInt(1, FraseAleatoria.data.length)];
-        
-        while(frase===undefined) {
-            frase = FraseAleatoria.data[FraseAleatoria.randomInt(1, FraseAleatoria.data.length)];
-        }
-
-        console.log('frase', frase);
-
-        return String(frase).trim();
-    }
-
-    static async ddt(message_from) {
-
-        FraseAleatoria.ddt = FraseAleatoria.ddt || [];
-       
-        await fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/ddt.txt', 'utf8', function(err, rawData) {
-            if(err) {
-                return console.log(err);
-            }
-            FraseAleatoria.ddt = rawData.toString().split('\n');
-        });
-
-        let frase = FraseAleatoria.ddt[FraseAleatoria.randomInt(1, FraseAleatoria.ddt.length)];
-        
-        if(!frase || !frase === undefined) {
-            frase = FraseAleatoria.ddt[FraseAleatoria.randomInt(1, FraseAleatoria.ddt.length)];
-        }
-
-        console.log('frase', frase);
-
-        return String(frase).trim();
-    }
-    
-    static async anota(sessionName) {
 
         FraseAleatoria.anotacoes = FraseAleatoria.anotacoes || [];
        
@@ -64,28 +20,6 @@ module.exports = class FraseAleatoria {
             frase = FraseAleatoria.anotacoes[FraseAleatoria.randomInt(0, FraseAleatoria.anotacoes.length)];
         }
 
-        console.log('frase', frase);
-
-        return String(frase).trim();
-    }
-
-    static async dicadochef(sessionName) {
-
-        FraseAleatoria.dicasdochef = FraseAleatoria.dicasdochef || [];
-       
-        await fs.readFile('/var/www/www.api.marciodias.me/md-whatsapp-facil-api/src/services/xxx/storage/dicasdochef.txt', 'utf8', function(err, rawData) {
-        // fs.readFile('/Users/marciodias/dev/stack/saas-marciodias/md-whatsapp-facil-api/src/services/xxx/storage/frases.txt', 'utf8', function(err, rawData) {
-            if(err) {
-                return console.log(err);
-            }
-            FraseAleatoria.dicasdochef = rawData.toString().split('\n');
-        });
-
-        let frase = FraseAleatoria.dicasdochef[FraseAleatoria.randomInt(0, FraseAleatoria.dicasdochef.length)];
-        
-        if(!frase || !frase === undefined) {
-            frase = FraseAleatoria.dicasdochef[FraseAleatoria.randomInt(0, FraseAleatoria.dicasdochef.length)];
-        }
         console.log('frase', frase);
 
         return String(frase).trim();

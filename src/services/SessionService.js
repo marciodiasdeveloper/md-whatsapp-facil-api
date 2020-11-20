@@ -7,7 +7,10 @@ const { Session } = require('inspector');
 const WebhookService = require("./WebhookService");
 const SqliteService = require("./SqliteService");
 
-const FraseAleatoria = require ("./xxx/anota");
+const FraseAleatoria = require ("./xxx/fraseXXX");
+const Dicadochef = require ("./xxx/dicadochef");
+const DiasDeTruta = require ("./xxx/ddt");
+const Anota = require ("./xxx/anota");
 
 // const { Session } = require('inspector');
 // const { info } = require('console');
@@ -163,11 +166,9 @@ module.exports = class Sessions {
                         }
                         client.sendText(message.from, text);
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
-                        
                         await SqliteService.registerVote(message);
-                        
                         console.log('message from:', message);
-                        let msg = await FraseAleatoria.anota(message.from);
+                        let msg = await Anota.responder(message.from);
                         let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
                     } else if (message.body == '!fraseXXX' && message.chat.id === '553784171388-1520966397@g.us') {
@@ -176,18 +177,17 @@ module.exports = class Sessions {
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message.from);
-                        let msg = await FraseAleatoria.ddt(message.from);
+                        let msg = await DiasDeTruta.responder(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!dicadochef' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
-                        let msg = await FraseAleatoria.dicadochef(message.from);
+                        let msg = await Dicadochef.responder(message.from);
                         // let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!spotify' && message.chat.id === '553784171388-1520966397@g.us') {
-                        let msg = '💥 Estou preparando uma lista de playlists do Spotify para dividir com vocês!';
-                        client.sendText(message.from, msg);
-
-
+                        console.log('message from:', message);
+                        let msg = await Spotify.responder(message.from);
+                        client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {
