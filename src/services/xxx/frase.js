@@ -18,7 +18,7 @@ module.exports = class Frase {
         
 
         if(!frase || frase === undefined) {
-            frase = "*XAAMAAAAA* já penso em um FIAT UNO subindo para o litoral com Sandrão Karacol e Perrou?"
+            frase = "*XAAMAAAAA* um FIAT UNO subindo para o litoral com Sandrão Karacol e Perrou?"
         }
         
         console.log('frase', frase);
