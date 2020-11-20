@@ -19,7 +19,7 @@ module.exports = class Anota {
         console.log('frase', frase);
 
         if(!frase || frase === undefined) {
-            frase = "*XAAMAAAAA* eu não vou responder Whatsapp, estou no boteco!"
+            frase = "*XAAMAAAAA* não consigo sair do bar para anotar, vou pedir o @perrou bola murcha!"
         }
 
         return String(frase).trim();

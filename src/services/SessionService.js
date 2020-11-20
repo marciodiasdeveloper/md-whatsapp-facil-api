@@ -146,8 +146,8 @@ module.exports = class Sessions {
                         client.sendText(message.from, 'Hello\nfriend!');
 
 
-                    // } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
-                    } else if (message.body == '!comandos') {
+                    } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!comandos') {
                         let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
                         text += `*!anota+1* => Registrar as anotações diárias. \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
@@ -156,8 +156,8 @@ module.exports = class Sessions {
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
                         text += `*!ddt* => Frases Dias de Truta \n`;
                         client.sendText(message.from, text);
-                    // }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
-                    }  else if (message.body == '!ranking') {
+                    }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // }  else if (message.body == '!ranking') {
                         let text = `_*Olá, sou XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
                         let votes = await SqliteService.getRanking(message);
@@ -170,31 +170,31 @@ module.exports = class Sessions {
                             text += `Sem resultados. \n`;
                         }
                         client.sendText(message.from, text);
-                    // } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
-                    } else if (message.body == '!anota+1') {
+                    } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!anota+1') {
                         await SqliteService.registerVote(message);
                         console.log('message from:', message);
                         let msg = await Anota.responder(message.from);
                         let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
-                    // } else if (message.body == '!fraseXXX' && message.chat.id === '553784171388-1520966397@g.us') {
-                    } else if (message.body == '!fraseXXX') {
+                    } else if (message.body == '!fraseXXX' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!fraseXXX') {
                         console.log('message from:', message.from);
                         let msg = await FraseAleatoria.responder(message.from);
                         client.sendText(message.from, msg.toString());
-                    // } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
-                    } else if (message.body == '!ddt') {
+                    } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!ddt') {
                         console.log('message from:', message.from);
                         let msg = await DiasDeTruta.responder(message.from);
                         client.sendText(message.from, msg.toString());
-                    // } else if (message.body == '!dicadochef' && message.chat.id === '553784171388-1520966397@g.us') {
-                    } else if (message.body == '!dicadochef') {
+                    } else if (message.body == '!dicadochef' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!dicadochef') {
                         console.log('message from:', message);
                         let msg = await Dicadochef.responder(message.from);
                         // let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, msg.toString());
-                    // } else if (message.body == '!spotify' && message.chat.id === '553784171388-1520966397@g.us') {
-                    } else if (message.body == '!spotify') {
+                    } else if (message.body == '!spotify' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!spotify') {
                         console.log('message from:', message);
                         let msg = await Spotify.responder(message.from);
                         client.sendText(message.from, msg.toString());
