@@ -151,7 +151,7 @@ module.exports = class Sessions {
                         let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
                         text += `*!anota+1* => Registrar as anotações diárias. \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
-                        text += `*!fraseXXX* => Ação para visualizar uma frase aleatória. \n`;
+                        text += `*!frase* => Ação para visualizar uma frase aleatória. \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
                         text += `*!ddt* => Frases Dias de Truta \n`;
@@ -177,8 +177,8 @@ module.exports = class Sessions {
                         let msg = await Anota.responder(message.from);
                         let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
-                    } else if (message.body == '!fraseXXX' && message.chat.id === '553784171388-1520966397@g.us') {
-                    // } else if (message.body == '!fraseXXX') {
+                    } else if (message.body == '!frase' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!frase') {
                         console.log('message from:', message.from);
                         let msg = await Frase.responder(message.from);
                         client.sendText(message.from, msg.toString());
