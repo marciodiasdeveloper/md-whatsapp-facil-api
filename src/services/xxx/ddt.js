@@ -14,10 +14,10 @@ module.exports = class DiasDeTruta {
             DiasDeTruta.ddt = rawData.toString().split('\n');
         });
 
-        let frase = DiasDeTruta.ddt[DiasDeTruta.randomInt(1, DiasDeTruta.ddt.length)];
+        let frase = DiasDeTruta.ddt[DiasDeTruta.randomInt(0, DiasDeTruta.ddt.length)];
         
         if(!frase || !frase === undefined) {
-            frase = DiasDeTruta.ddt[DiasDeTruta.randomInt(1, DiasDeTruta.ddt.length)];
+            frase = DiasDeTruta.ddt[DiasDeTruta.randomInt(0, DiasDeTruta.ddt.length)];
         }
 
         console.log('frase', frase);

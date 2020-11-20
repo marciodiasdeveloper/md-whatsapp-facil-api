@@ -14,12 +14,8 @@ module.exports = class FraseAleatoria {
             FraseAleatoria.data = rawData.toString().split('\n');
         });
 
-        let frase = FraseAleatoria.data[FraseAleatoria.randomInt(1, FraseAleatoria.data.length)];
+        let frase = FraseAleatoria.data[FraseAleatoria.randomInt(0, FraseAleatoria.data.length)];
         
-        while(frase===undefined) {
-            frase = FraseAleatoria.data[FraseAleatoria.randomInt(1, FraseAleatoria.data.length)];
-        }
-
         console.log('frase', frase);
 
         return String(frase).trim();

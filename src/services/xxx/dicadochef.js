@@ -17,9 +17,6 @@ module.exports = class Dicadochef {
 
         let frase = Dicadochef.dicasdochef[Dicadochef.randomInt(0, Dicadochef.dicasdochef.length)];
         
-        if(!frase || !frase === undefined) {
-            frase = Dicadochef.dicasdochef[Dicadochef.randomInt(0, Dicadochef.dicasdochef.length)];
-        }
         console.log('frase', frase);
 
         return String(frase).trim();

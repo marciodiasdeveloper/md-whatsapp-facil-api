@@ -16,10 +16,6 @@ module.exports = class Anota {
 
         let frase = Anota.anotacoes[Anota.randomInt(0, Anota.anotacoes.length)];
         
-        if(!frase || !frase === undefined) {
-            frase = Anota.anotacoes[Anota.randomInt(0, Anota.anotacoes.length)];
-        }
-
         console.log('frase', frase);
 
         return String(frase).trim();
