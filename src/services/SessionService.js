@@ -7,7 +7,11 @@ const { Session } = require('inspector');
 const WebhookService = require("./WebhookService");
 const SqliteService = require("./SqliteService");
 
-const FraseAleatoria = require ("./xxx/anota");
+const Frase = require ("./xxx/frase");
+const Dicadochef = require ("./xxx/dicadochef");
+const DiasDeTruta = require ("./xxx/ddt");
+const Anota = require ("./xxx/anota");
+const Spotify = require ("./xxx/spotify");
 
 // const { Session } = require('inspector');
 // const { info } = require('console');
@@ -126,9 +130,9 @@ module.exports = class Sessions {
     }//initSession
 
     static async setup(sessionName) {
+        
         let session = Sessions.getSession(sessionName);
         await session.client.then(client => {
-
             client.onStateChange(state => {
                 session.state = state;
                 WebhookService.notifyApiSessionUpdate(session);
@@ -136,34 +140,28 @@ module.exports = class Sessions {
             });
 
             client.onMessage(async (message) => {
-
                 console.log('received message');
-
                 try {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
-                    } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
 
+
+                    } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!comandos') {
                         let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
                         text += `*!anota+1* => Registrar as anotações diárias. \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
-                        text += `*!fraseXXX* => Ação para visualizar uma frase aleatória. \n`;
+                        text += `*!frase* => Ação para visualizar uma frase aleatória. \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
                         text += `*!ddt* => Frases Dias de Truta \n`;
-
                         client.sendText(message.from, text);
-
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
-                        
-                        
+                    // }  else if (message.body == '!ranking') {
                         let text = `_*Olá, sou XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
-
                         let votes = await SqliteService.getRanking(message);
-
                         console.log('votes', votes);
-
                         if(votes) {
                             votes.forEach(function(vote, i) {
                                 text += `${i} - ${vote.name} (${vote.hits} registros)\n`;
@@ -171,34 +169,35 @@ module.exports = class Sessions {
                         } else {
                             text += `Sem resultados. \n`;
                         }
-
-
                         client.sendText(message.from, text);
-
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
-                        
+                    // } else if (message.body == '!anota+1') {
                         await SqliteService.registerVote(message);
-                        
                         console.log('message from:', message);
-                        let msg = await FraseAleatoria.anota(message.from);
+                        let msg = await Anota.responder(message.from);
                         let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
-                    } else if (message.body == '!fraseXXX' && message.chat.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!frase' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!frase') {
                         console.log('message from:', message.from);
-                        let msg = await FraseAleatoria.responder(message.from);
+                        let msg = await Frase.responder(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!ddt') {
                         console.log('message from:', message.from);
-                        let msg = await FraseAleatoria.ddt(message.from);
+                        let msg = await DiasDeTruta.responder(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!dicadochef' && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body == '!dicadochef') {
                         console.log('message from:', message);
-                        let msg = await FraseAleatoria.dicadochef(message.from);
+                        let msg = await Dicadochef.responder(message.from);
                         // let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!spotify' && message.chat.id === '553784171388-1520966397@g.us') {
-                        let msg = '💥 Estou preparando uma lista de playlists do Spotify para dividir com vocês!';
-                        client.sendText(message.from, msg);
+                    // } else if (message.body == '!spotify') {
+                        console.log('message from:', message);
+                        let msg = await Spotify.responder(message.from);
+                        client.sendText(message.from, msg.toString());
 
 
                     } else if (message.body == '!ping') {
@@ -297,13 +296,28 @@ module.exports = class Sessions {
     }//close
 
     static getSession(sessionName) {
+        
         let foundSession = false;
-        if (Sessions.sessions)
+        
+        if (Sessions.sessions) {
             Sessions.sessions.forEach(session => {
                 if (sessionName == session.name) {
                     foundSession = session;
                 }
             });
+        }
+        
+        // if(foundSession.state && foundSession.state === 'CONNECTED') {
+        //     let device = await Sessions.device(foundSession.name);
+        //     if(device.result === 'success') {
+        //         foundSession.device = {
+        //             phone: device.data.wid.user,
+        //             connected: device.data.wid.connected,
+        //             battery: device.data.wid.battery,
+        //         }
+        //     }
+        // }
+
         return foundSession;
     }//getSession
 
@@ -323,6 +337,7 @@ module.exports = class Sessions {
                 //restart session
                 await Sessions.closeSession(sessionName);
                 Sessions.start(sessionName);
+                
                 WebhookService.notifyApiSessionUpdate(session);
 
                 return { result: "error", message: session.state };
@@ -479,9 +494,17 @@ module.exports = class Sessions {
         }
     }
 
-    static async ping(sessionName, phone) {
+    static async device(sessionName) {
         let session = Sessions.getSession(sessionName);
         if (session) {
+
+            let device = await session.client.then(async (client) => {
+                let get_device = await client.getHostDevice();
+                console.log('device phone', get_device);
+                return get_device;
+            });
+
+            return { result: "success", data: device };
 
         } else {
             return { result: "error", message: "NOTFOUND" };

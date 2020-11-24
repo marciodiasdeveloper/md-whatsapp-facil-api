@@ -5,27 +5,28 @@ const HomeController = require('./controllers/HomeController');
 const StartController = require('./controllers/StartController');
 const StatusController = require('./controllers/StatusController');
 const SendTextController = require('./controllers/SendTextController');
-const PingController = require('./controllers/PingController');
 const SendFileController = require('./controllers/SendFileController');
 const QrCodeController = require('./controllers/QrCodeController');
 const CloseController = require('./controllers/CloseController');
 const GroupsController = require('./controllers/GroupsController');
 const FraseAleatoriaController = require('./controllers/FraseAleatoriaController');
 const CheckPhoneController = require('./controllers/CheckPhoneController');
+const DeviceController = require('./controllers/DeviceController');
 
 const routes = express.Router();
 
 routes.get('/', HomeController.index);
 routes.get('/start', StartController.create);
 routes.get('/status', StatusController.create);
+routes.get('/device', DeviceController.index);
 routes.get('/qrcode', QrCodeController.create);
-routes.get('/ping', PingController.create);
 routes.post('/sendText', SendTextController.create);
 routes.post('/sendFile', SendFileController.create);
 routes.get('/close', CloseController.create);
 routes.get('/groups', GroupsController.index);
-routes.get('/frases', FraseAleatoriaController.index);
 routes.get('/checkPhone', CheckPhoneController.index);
+
+routes.get('/frases', FraseAleatoriaController.index);
 
 // Test validations
 
