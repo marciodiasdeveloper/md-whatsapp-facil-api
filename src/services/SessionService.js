@@ -200,8 +200,7 @@ module.exports = class Sessions {
                         console.log('message from:', message);
                         let msg = await Spotify.responder(message.from);
                         client.sendText(message.from, msg.toString());
-                    } else if (message.body == '!dolarhoje') {
-                    // } else if (message.body == '!dolarhoje' && message.chat.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!dolarhoje' && message.chat.id === '553784171388-1520966397@g.us') {
                                 console.log('message from:', message);
                                 let msg = await DolarHoje.responder(message);
                                 client.sendText(message.from, msg.toString());
