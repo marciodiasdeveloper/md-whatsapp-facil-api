@@ -4,8 +4,13 @@ module.exports = class DolarHoje {
 
     static async responder(message_param) {
 
+        console.log(message_param);
+
         const result = await axios.get('https://economia.awesomeapi.com.br/json/USD')
         .then(function(response){
+
+            console.log('dolar sucesso', response);
+
             return response.data;
           console.log(response.data); // ex.: { user: 'Your User'}
           console.log(response.status); // ex.: 200
