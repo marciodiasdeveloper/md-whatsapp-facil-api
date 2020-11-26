@@ -6,12 +6,7 @@ module.exports = class DolarHoje {
 
         const result = await axios.get('https://economia.awesomeapi.com.br/json/USD')
         .then(function(response){
-
-            console.log('dolar sucesso', response);
-
             return response.data;
-          console.log(response.data); // ex.: { user: 'Your User'}
-          console.log(response.status); // ex.: 200
         })
         .catch(function(error) {
             return error;
