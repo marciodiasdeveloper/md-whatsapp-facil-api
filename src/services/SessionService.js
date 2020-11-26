@@ -12,6 +12,7 @@ const Dicadochef = require ("./xxx/dicadochef");
 const DiasDeTruta = require ("./xxx/ddt");
 const Anota = require ("./xxx/anota");
 const Spotify = require ("./xxx/spotify");
+const DolarHoje = require ("./xxx/dolar");
 
 // const { Session } = require('inspector');
 // const { info } = require('console');
@@ -155,6 +156,7 @@ module.exports = class Sessions {
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
                         text += `*!ddt* => Frases Dias de Truta \n`;
+                        text += `*!dolarhoje* => Cotação do Dolar de hoje \n`;
                         client.sendText(message.from, text);
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
                     // }  else if (message.body == '!ranking') {
@@ -198,8 +200,10 @@ module.exports = class Sessions {
                         console.log('message from:', message);
                         let msg = await Spotify.responder(message.from);
                         client.sendText(message.from, msg.toString());
-
-
+                    } else if (message.body == '!dolarhoje' && message.chat.id === '553784171388-1520966397@g.us') {
+                                console.log('message from:', message);
+                                let msg = await DolarHoje.responder(message.from);
+                                client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {
