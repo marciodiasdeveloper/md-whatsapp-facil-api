@@ -9,6 +9,9 @@ module.exports = class DolarHoje {
             return response.data;
           console.log(response.data); // ex.: { user: 'Your User'}
           console.log(response.status); // ex.: 200
+        })
+        .catch(function(error) {
+            return error;
         });  
 
         let message = 'A cotação de hoje do ' + result[0].name +' high: R$ ' + result[0].high + ' low: R$ ' + result[0].low;
