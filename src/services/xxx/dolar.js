@@ -17,9 +17,9 @@ module.exports = class DolarHoje {
             return error;
         });  
 
-        let message = `*${message_param.sender.pushname} Veja a cotação do ${result[0].name} hoje*_\n\n`;
-        message +=  + `Alto: *R$ ${result[0].high} * \n`;
-        message +=  + `Baixo: *R$ ${result[0].low} *`;
+        let message = `*${message_param.sender.pushname} Veja a cotação do ${result[0].name} hoje* \n\n`;
+        message +=  `Alto: *R$ ${result[0].high} * \n`;
+        message +=  `Baixo: *R$ ${result[0].low} *`;
 
         return message;
     }
