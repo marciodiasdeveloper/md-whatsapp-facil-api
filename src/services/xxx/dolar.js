@@ -11,7 +11,7 @@ module.exports = class DolarHoje {
           console.log(response.status); // ex.: 200
         });  
 
-        let message = 'Cotação do ' + result.name +' high: ' + result.high + ' low: R$ '.result.low;
+        let message = 'Cotação do ' + result[0].name +' high: ' + result[0].high + ' low: R$ ' + result[0].low;
 
         return message;
     }
