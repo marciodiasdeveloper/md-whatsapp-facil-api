@@ -11,8 +11,6 @@ module.exports = class DolarHoje {
           console.log(response.status); // ex.: 200
         });  
 
-        const result_flat = result.flat();
-
         let message = 'Cotação do ' + result.name +' high: ' + result.high + ' low: R$ '.result.low;
 
         return message;
