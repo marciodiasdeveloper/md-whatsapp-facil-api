@@ -4,7 +4,7 @@ module.exports = class DolarHoje {
 
     static async responder(message_param) {
 
-        console.log(message_param);
+        console.log(message_param.from.sender.pushname);
 
         const result = await axios.get('https://economia.awesomeapi.com.br/json/USD')
         .then(function(response){
