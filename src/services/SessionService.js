@@ -159,6 +159,8 @@ module.exports = class Sessions {
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
                         text += `*!ddt* => Frases Dias de Truta \n`;
                         text += `*!dolarhoje* => Cotação do Dolar de hoje \n`;
+                        text += `*!francohoje* => Cotação do Franco Suíço de hoje \n`;
+                        text += `*!bitcoin* => Cotação do Bitcoin de hoje \n`;
                         client.sendText(message.from, text);
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
                     // }  else if (message.body == '!ranking') {
