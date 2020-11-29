@@ -211,11 +211,11 @@ module.exports = class Sessions {
                             console.log('message from:', message);
                             let msg = await Netflix.responder(message.from);
                             client.sendText(message.from, msg.toString());
-                    } else if (message.body == '!dolarhoje' && message.chat.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!dolar' && message.chat.id === '553784171388-1520966397@g.us') {
                                 console.log('message from:', message);
                                 let msg = await DolarHoje.responder(message);
                                 client.sendText(message.from, msg.toString());
-                    } else if (message.body == '!francohoje' && message.chat.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!franco' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
                         let msg = await FrancoHoje.responder(message);
                         client.sendText(message.from, msg.toString());
