@@ -12,6 +12,7 @@ const Dicadochef = require ("./xxx/dicadochef");
 const DiasDeTruta = require ("./xxx/ddt");
 const Anota = require ("./xxx/anota");
 const Spotify = require ("./xxx/spotify");
+const Netflix = require ("./xxx/netflix");
 const DolarHoje = require ("./xxx/dolar");
 const FrancoHoje = require ("./xxx/franco");
 const BitcoinHoje = require ("./xxx/bitcoin");
@@ -155,11 +156,12 @@ module.exports = class Sessions {
                         text += `*!anota+1* => Registrar as anotações diárias. \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
                         text += `*!frase* => Ação para visualizar uma frase aleatória. \n`;
+                        text += `*!netflix* => Precisa de uma indicação Netflix? \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
                         text += `*!ddt* => Frases Dias de Truta \n`;
-                        text += `*!dolarhoje* => Cotação do Dolar de hoje \n`;
-                        text += `*!francohoje* => Cotação do Franco Suíço de hoje \n`;
+                        text += `*!dolar* => Cotação do Dolar de hoje \n`;
+                        text += `*!franco* => Cotação do Franco Suíço de hoje \n`;
                         text += `*!bitcoin* => Cotação do Bitcoin de hoje \n`;
                         client.sendText(message.from, text);
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
@@ -204,6 +206,11 @@ module.exports = class Sessions {
                         console.log('message from:', message);
                         let msg = await Spotify.responder(message.from);
                         client.sendText(message.from, msg.toString());
+                    } else if (message.body == '!netflix' && message.chat.id === '553784171388-1520966397@g.us') {
+                        // } else if (message.body == '!spotify') {
+                            console.log('message from:', message);
+                            let msg = await Netflix.responder(message.from);
+                            client.sendText(message.from, msg.toString());
                     } else if (message.body == '!dolarhoje' && message.chat.id === '553784171388-1520966397@g.us') {
                                 console.log('message from:', message);
                                 let msg = await DolarHoje.responder(message);
