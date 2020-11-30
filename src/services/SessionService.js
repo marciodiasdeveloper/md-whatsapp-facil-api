@@ -16,9 +16,7 @@ const Netflix = require ("./xxx/netflix");
 const DolarHoje = require ("./xxx/dolar");
 const FrancoHoje = require ("./xxx/franco");
 const BitcoinHoje = require ("./xxx/bitcoin");
-
-// const { Session } = require('inspector');
-// const { info } = require('console');
+const Finance = require ("./xxx/finance");
 
 module.exports = class Sessions {
 
@@ -223,6 +221,11 @@ module.exports = class Sessions {
                         console.log('message from:', message);
                         let msg = await BitcoinHoje.responder(message);
                         client.sendText(message.from, msg.toString());
+
+                    } else if (message.body.startsWith('!finance ')) {
+                      let company = message.body.split(' ')[1];
+                      let msg = await Finance.responder(message, company);
+                      client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {

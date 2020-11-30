@@ -2295,10 +2295,10 @@ vary@^1, vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
-venom-bot@^2.0.21:
-  version "2.0.21"
-  resolved "https://registry.yarnpkg.com/venom-bot/-/venom-bot-2.0.21.tgz#18c6f940b9edbc922a1e7dae08ed3305527020f1"
-  integrity sha512-qWtljeWA4dgr4OQIPGwZlnUAz5lqViByjbq9UCn/ZYR0igjvFAR9MoyREcqmfbDuUQgg9yFyT0bh0kAbSxoenQ==
+venom-bot@^2.0.26:
+  version "2.0.27"
+  resolved "https://registry.yarnpkg.com/venom-bot/-/venom-bot-2.0.27.tgz#51f7ce5f1221a40a6f4b0498096512158300cf47"
+  integrity sha512-mKyB12KrTJmZ3W+B+Xa647mvxLXakIto0cjy5JmD8gmxFsguicBPRRPk8FN/jd3LSArOAv12bjgfB3JqPx/C3w==
   dependencies:
     atob "^2.1.2"
     axios "^0.21.0"
