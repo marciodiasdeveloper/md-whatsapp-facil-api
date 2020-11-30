@@ -161,6 +161,7 @@ module.exports = class Sessions {
                         text += `*!dolar* => Cotação do Dolar de hoje \n`;
                         text += `*!franco* => Cotação do Franco Suíço de hoje \n`;
                         text += `*!bitcoin* => Cotação do Bitcoin de hoje \n`;
+                        text += `*!finance CÓDIGO* => Consultar código da ação para relatório diário. ex: !finance MGLU3  \n`;
                         client.sendText(message.from, text);
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
                     // }  else if (message.body == '!ranking') {
