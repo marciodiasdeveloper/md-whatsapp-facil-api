@@ -12,7 +12,7 @@ module.exports = class Finance {
             return error;
         });  
 
-        let company_result = result.results.${company};
+        let company_result = result.results[company];
 
         let message = `*${message_param.sender.pushname}*: Veja as informações da *${company_result.name}* hoje \n\n`;
         message +=  `Valor: R$ ${company_result.price} \n`;
