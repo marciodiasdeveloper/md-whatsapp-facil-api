@@ -4,7 +4,7 @@ module.exports = class Finance {
 
     static async responder(message_param, company) {
 
-        const result = await axios.get('https://api.hgbrasil.com/finance/stock_price?key=abeaffd4&symbol=PETR4')
+        const result = await axios.get('https://api.hgbrasil.com/finance/stock_price?key=abeaffd4&symbol='+company)
         .then(function(response){
             return response.data;
         })
@@ -12,7 +12,7 @@ module.exports = class Finance {
             return error;
         });  
 
-        let company_result = result.results.PETR4;
+        let company_result = result.results.${company};
 
         let message = `*${message_param.sender.pushname}*: Veja as informações da *${company_result.name}* hoje \n\n`;
         message +=  `Valor: R$ ${company_result.price} \n`;
