@@ -105,6 +105,8 @@ module.exports = class SqliteService {
         const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
         
         const result = await db.get('SELECT * FROM table ORDER BY RANDOM() LIMIT 1');
+
+        console.log('result', result);
         
         if(!result) {
           return "*XAAMAAAAA* não consigo sair do bar para anotar, vou pedir o @perrou bola murcha!";
@@ -112,7 +114,9 @@ module.exports = class SqliteService {
 
         await db.close();
 
-        return result.frase + '. *By ' + result.name + '*';
+        let frase = result.frase + '. *By ' + result.name + '*';
+
+        return frase;
 
       } catch (error) {
         console.log(error);
