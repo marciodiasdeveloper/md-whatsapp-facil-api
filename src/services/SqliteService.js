@@ -83,9 +83,8 @@ module.exports = class SqliteService {
 
         let frase = await db.get('SELECT * FROM frases WHERE whatsapp_id = ? AND frase = ?', [message.sender.id, frase]);
             
-        if(!votes) {
+        if(!frase) {
           await db.run('insert into frases (name, whatsapp_id, frase, hits) values (?, ?, ?)', [message.sender.pushname, message.sender.id, frase, 0]);
-          whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
         } else {
           return '*'+message.sender.pushname+'* você já adicionou essa frase antes.';
         }
