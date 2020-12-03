@@ -82,10 +82,10 @@ module.exports = class SqliteService {
       try {
 
         const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
-        
-        let frase = await db.get('SELECT * FROM frases WHERE whatsapp_id = ? AND frase = ?', [message.sender.id, frase]);
+
+        let db_frase = await db.get('SELECT * FROM frases WHERE whatsapp_id = ? AND frase = ?', [message.sender.id, frase]);
             
-        if(!frase) {
+        if(!db_frase) {
           await db.run('insert into frases (name, whatsapp_id, frase, hits) values (?, ?, ?)', [message.sender.pushname, message.sender.id, frase, 0]);
         } else {
           return '*'+message.sender.pushname+'* você já adicionou essa frase antes.';
