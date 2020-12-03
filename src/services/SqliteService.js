@@ -81,6 +81,8 @@ module.exports = class SqliteService {
 
       try {
 
+        const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
+        
         let frase = await db.get('SELECT * FROM frases WHERE whatsapp_id = ? AND frase = ?', [message.sender.id, frase]);
             
         if(!frase) {
