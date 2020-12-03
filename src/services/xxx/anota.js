@@ -3,6 +3,10 @@ const path = require('path');
 
 module.exports = class Anota {
 
+    static async addfrase(message, frase) {
+        
+    }
+
     static async responder(sessionName) {
 
         Anota.anotacoes = Anota.anotacoes || [];

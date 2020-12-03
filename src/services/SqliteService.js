@@ -11,9 +11,19 @@ module.exports = class SqliteService {
             const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
             await db.run(`create table if not exists votes (name text, whatsapp_id text, hits integer)`);        
             await db.close();
-          } catch (error) {
-            console.log(error);
-          }
+        } catch (error) {
+          console.log(error);
+        }
+    }
+
+    static async createDatabaseFrases() {
+        try {
+            const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
+            await db.run(`create table if not exists frases (name text, whatsapp_id text, frase text, hits integer)`);        
+            await db.close();
+        } catch (error) {
+          console.log(error);
+        }
     }
 
     static async registerVote(message) {
@@ -25,16 +35,12 @@ module.exports = class SqliteService {
         try {
             const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
             
-            // const rows = await db.all('select * from votes WHERE whatsapp_id = ${message.sends.id}');
             let votes = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
             
             if(!votes) {
               await db.run('insert into votes (name, whatsapp_id, hits) values (?, ?, ?)', [message.sender.pushname, message.sender.id, 0]);
               whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
             } 
-
-            console.log('vote hits old:', votes.hits);
-            console.log('vote hits new:', (votes.hits+1));
 
             let votes_hits = (votes.hits+1);
 
@@ -68,6 +74,26 @@ module.exports = class SqliteService {
         console.log(error);
       }
 
+    }
+
+    static async addFrase(message, frase) {
+      const create_table = await SqliteService.createDatabaseFrases();
+
+      try {
+
+        let frase = await db.get('SELECT * FROM frases WHERE whatsapp_id = ? AND frase = ?', [message.sender.id, frase]);
+            
+        if(!votes) {
+          await db.run('insert into frases (name, whatsapp_id, frase, hits) values (?, ?, ?)', [message.sender.pushname, message.sender.id, frase, 0]);
+          whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
+        } else {
+          return '*'+message.sender.pushname+'* você já adicionou essa frase antes.';
+        }
+        await db.close();
+        return '*'+message.sender.pushname+'*, frase adicionada!';
+      } catch (error) {
+        console.log(error);
+      }
     }
 
 }

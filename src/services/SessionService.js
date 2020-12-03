@@ -223,10 +223,14 @@ module.exports = class Sessions {
                         let msg = await BitcoinHoje.responder(message);
                         client.sendText(message.from, msg.toString());
 
-                    } else if (message.body.startsWith('!finance ')) {
+                    } else if (message.body.startsWith('!finance ') && message.chat.id === '553784171388-1520966397@g.us') {
                       let company = message.body.split(' ')[1];
                       let msg = await Finance.responder(message, company);
                       client.sendText(message.from, msg.toString());
+                    } else if (message.body.startsWith('!addfrase ') && message.chat.id === '553784171388-1520966397@g.us') {
+                        let frase = message.body.replace('!addfrase ', '');
+                        let msg = await SqliteService.addFrase(message, frase);
+                        client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {
