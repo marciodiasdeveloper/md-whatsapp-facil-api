@@ -97,4 +97,26 @@ module.exports = class SqliteService {
       }
     }
 
+    static async showFrase() {
+
+      const create_table = await SqliteService.createDatabase();
+
+      try {
+        const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
+        
+        const result = await db.get('SELECT * FROM table ORDER BY RANDOM() LIMIT 1');
+        
+        if(!result) {
+          return "*XAAMAAAAA* não consigo sair do bar para anotar, vou pedir o @perrou bola murcha!";
+        }
+
+        await db.close();
+
+        return result.frase + '. *By ' + result.name + '*';
+
+      } catch (error) {
+        console.log(error);
+      }
+
+    }
 }

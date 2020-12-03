@@ -178,35 +178,34 @@ module.exports = class Sessions {
                         }
                         client.sendText(message.from, text);
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
-                    // } else if (message.body == '!anota+1') {
+
                         await SqliteService.registerVote(message);
                         console.log('message from:', message);
-                        let msg = await Anota.responder(message.from);
-                        let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
+                        let msg = await SqliteService.showFrase();
+                        // let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
                     } else if (message.body == '!frase' && message.chat.id === '553784171388-1520966397@g.us') {
-                    // } else if (message.body == '!frase') {
+
                         console.log('message from:', message.from);
                         let msg = await Frase.responder(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
-                    // } else if (message.body == '!ddt') {
+
                         console.log('message from:', message.from);
                         let msg = await DiasDeTruta.responder(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!dicadochef' && message.chat.id === '553784171388-1520966397@g.us') {
-                    // } else if (message.body == '!dicadochef') {
+
                         console.log('message from:', message);
                         let msg = await Dicadochef.responder(message.from);
                         // let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!spotify' && message.chat.id === '553784171388-1520966397@g.us') {
-                    // } else if (message.body == '!spotify') {
+
                         console.log('message from:', message);
                         let msg = await Spotify.responder(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!netflix' && message.chat.id === '553784171388-1520966397@g.us') {
-                        // } else if (message.body == '!spotify') {
                             console.log('message from:', message);
                             let msg = await Netflix.responder(message.from);
                             client.sendText(message.from, msg.toString());
