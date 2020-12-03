@@ -104,7 +104,7 @@ module.exports = class SqliteService {
       try {
         const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
         
-        const result = await db.get('SELECT * FROM table ORDER BY RANDOM() LIMIT 1');
+        const result = await db.get('SELECT * FROM frases ORDER BY RANDOM() LIMIT 1');
 
         console.log('result', result);
         
