@@ -183,11 +183,11 @@ module.exports = class Sessions {
                         await SqliteService.registerVote(message);
                         console.log('message from:', message);
                         let msg = await SqliteService.showFrase();
-                        let message = '*'+message.sender.pushname+'*, '+msg.toString();
+                        let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
 
-                        let textFile = await GoogleTextToSpeechService.create(message.toString());
+                        let textFile = await GoogleTextToSpeechService.create(message_text.toString());
                         
-                        await client.sendFile(message.from, textFile, 'output.mp3', msg.toString())
+                        await client.sendFile(message.from, textFile, 'output.mp3', message_text.toString())
                         .then((result) => {
                           console.log('Result: ', result); //return object success
                         })
