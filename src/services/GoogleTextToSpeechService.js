@@ -36,7 +36,7 @@ module.exports = class GoogleTextToSpeechService {
             console.log('Audio content written to file: '+pathFile);
 
             return {
-                filename: filename,
+                name: filename,
                 path: pathFile
             };
         }

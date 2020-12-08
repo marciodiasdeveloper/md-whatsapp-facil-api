@@ -197,9 +197,9 @@ module.exports = class Sessions {
                         if(typeRespFinal === 2) {
 
                             let message_text = msg.toString() + ', quem enviou essa resposta para você foi '+message.sender.pushname;
-                            let pathFile = await GoogleTextToSpeechService.create(message_text.toString());
+                            let file = await GoogleTextToSpeechService.create(message_text.toString());
 
-                            await client.sendFile(message.from, pathFile, 'output.mp3', message_text.toString())
+                            await client.sendFile(message.from, file.path, file.name, message_text.toString())
                             .then((result) => {
                               console.log('Result: ', result); //return object success
                             //   fs.unlink(pathFile, (err) => {
@@ -281,18 +281,18 @@ module.exports = class Sessions {
                     } else if (message.body.startsWith('!falabot ')) {
                         let frase = message.body.replace('!falabot ', '');
                         let message_text = frase.toString();
-                        let pathFile = await GoogleTextToSpeechService.create(message_text.toString());
+                        let file = await GoogleTextToSpeechService.create(message_text.toString());
 
-                        await client.sendFile(message.from, pathFile, 'output.mp3', message_text.toString())
+                        await client.sendFile(message.from, file.path, file.name, message_text.toString())
                         .then((result) => {
                           console.log('Result: ', result); //return object success
-                            fs.unlink(pathFile, (err) => {
-                                if (err) {
-                                    console.error(err)
-                                    return
-                                }
-                                //file removed
-                            });
+                            // fs.unlink(pathFile, (err) => {
+                            //     if (err) {
+                            //         console.error(err)
+                            //         return
+                            //     }
+                            //     //file removed
+                            // });
                         })
                         .catch((erro) => {
                           console.error('Error when sending: ', erro); //return object error
