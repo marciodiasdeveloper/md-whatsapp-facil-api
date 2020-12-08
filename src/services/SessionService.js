@@ -188,15 +188,32 @@ module.exports = class Sessions {
 
                         let textFile = await GoogleTextToSpeechService.create(message_text.toString());
                         
-                        await client.sendFile(message.from, textFile, 'output.mp3', message_text.toString())
-                        .then((result) => {
-                          console.log('Result: ', result); //return object success
-                        })
-                        .catch((erro) => {
-                          console.error('Error when sending: ', erro); //return object error
-                        });
+                        function typeResp(min, max) {
+                            min = Math.ceil(min);
+                            max = Math.floor(max);
+                            return Math.floor(Math.random() * (max - min)) + min;
+                        };
 
-                        // client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
+                        let typeRespFinal = typeResp(1,3);
+
+                        if(typeRespFinal === 2) {
+                            await client.sendFile(message.from, textFile, 'output.mp3', message_text.toString())
+                            .then((result) => {
+                              console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                              console.error('Error when sending: ', erro); //return object error
+                            });
+                        } else {
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+
                     } else if (message.body == '!frase' && message.chat.id === '553784171388-1520966397@g.us') {
 
                         console.log('message from:', message.from);
