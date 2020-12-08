@@ -6,6 +6,7 @@ const { Session } = require('inspector');
 
 const WebhookService = require("./WebhookService");
 const SqliteService = require("./SqliteService");
+const GoogleTextToSpeechService = require("./GoogleTextToSpeechService");
 
 const Frase = require ("./xxx/frase");
 const Dicadochef = require ("./xxx/dicadochef");
@@ -182,8 +183,19 @@ module.exports = class Sessions {
                         await SqliteService.registerVote(message);
                         console.log('message from:', message);
                         let msg = await SqliteService.showFrase();
-                        // let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
-                        client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
+                        let message = '*'+message.sender.pushname+'*, '+msg.toString();
+
+                        let textFile = await GoogleTextToSpeechService.create(message.toString());
+                        
+                        await client.sendFile(message.from, textFile, 'output.mp3', msg.toString())
+                        .then((result) => {
+                          console.log('Result: ', result); //return object success
+                        })
+                        .catch((erro) => {
+                          console.error('Error when sending: ', erro); //return object error
+                        });
+
+                        // client.sendText(message.from, '*'+message.sender.pushname+'*, '+msg.toString());
                     } else if (message.body == '!frase' && message.chat.id === '553784171388-1520966397@g.us') {
 
                         console.log('message from:', message.from);

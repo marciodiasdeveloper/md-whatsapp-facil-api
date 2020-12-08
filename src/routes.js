@@ -9,7 +9,7 @@ const SendFileController = require('./controllers/SendFileController');
 const QrCodeController = require('./controllers/QrCodeController');
 const CloseController = require('./controllers/CloseController');
 const GroupsController = require('./controllers/GroupsController');
-const FraseAleatoriaController = require('./controllers/FraseAleatoriaController');
+const LerFrase = require('./controllers/LerFrase');
 const CheckPhoneController = require('./controllers/CheckPhoneController');
 const DeviceController = require('./controllers/DeviceController');
 
@@ -26,7 +26,7 @@ routes.get('/close', CloseController.create);
 routes.get('/groups', GroupsController.index);
 routes.get('/checkPhone', CheckPhoneController.index);
 
-routes.get('/frases', FraseAleatoriaController.index);
+routes.get('/lerfrase', LerFrase.index);
 
 // Test validations
 
