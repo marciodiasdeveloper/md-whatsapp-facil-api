@@ -152,8 +152,9 @@ module.exports = class Sessions {
                     } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
                     // } else if (message.body == '!comandos') {
                         let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
+                        text += `*!falabot TEXTO* => Vou enviar um áudio lendo sua mensagem de texto.  \n`;
                         text += `*!addfrase TEXTO* => Adicionar frase de resposta quando o comando !anota+1 for executado.  \n`;
-                        text += `*!anota+1* => Registrar as anotações diárias. \n`;
+                        text += `*!anota+1* => Registre uma anotação e receba uma resposta do bot. \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
                         text += `*!frase* => Ação para visualizar uma frase aleatória. \n`;
                         text += `*!netflix* => Precisa de uma indicação Netflix? \n`;
@@ -262,6 +263,20 @@ module.exports = class Sessions {
                         let frase = message.body.replace('!addfrase ', '');
                         let msg = await SqliteService.addFrase(message, frase);
                         client.sendText(message.from, msg.toString());
+                    // } else if (message.body.startsWith('!falabot ') && message.chat.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body.startsWith('!falabot ')) {
+                        let frase = message.body.replace('!falabot ', '');
+                        let message_text = 'Olá, sou XXX BOT: ' + frase.toString();
+                        let textFile = await GoogleTextToSpeechService.create(message_text.toString());
+
+                        await client.sendFile(message.from, textFile, 'output.mp3', message_text.toString())
+                        .then((result) => {
+                          console.log('Result: ', result); //return object success
+                        })
+                        .catch((erro) => {
+                          console.error('Error when sending: ', erro); //return object error
+                        });
+
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');
                     } else if (message.body == '!ping reply') {
