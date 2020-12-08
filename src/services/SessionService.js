@@ -230,7 +230,7 @@ module.exports = class Sessions {
 
                         if(typeRespFinal === 2) {
 
-                            let message_text = msg.toString() + ', quem enviou essa resposta para você foi '+message.sender.pushname;
+                            let message_text = msg.toString();
                             let file = await GoogleTextToSpeechService.create(message_text.toString());
 
                             await client.sendFile(message.from, file.path, file.name, message_text.toString())
@@ -254,16 +254,16 @@ module.exports = class Sessions {
                             //         //file removed
                             //     });
                             });
-                        } else {
-                            let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
-                            await client.sendText(message.from, message_text.toString())  
-                            .then((result) => {
-                                console.log('Result: ', result); //return object success
-                            })
-                            .catch((erro) => {
-                                console.error('Error when sending: ', erro); //return object error
-                            });
-                        }
+                        } 
+
+                        let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
+                        await client.sendText(message.from, message_text.toString())  
+                        .then((result) => {
+                            console.log('Result: ', result); //return object success
+                        })
+                        .catch((erro) => {
+                            console.error('Error when sending: ', erro); //return object error
+                        });
 
                     } else if (message.body == '!frase' && message.chat.id === '553784171388-1520966397@g.us') {
 
