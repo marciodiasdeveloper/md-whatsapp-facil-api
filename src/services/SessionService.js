@@ -184,9 +184,6 @@ module.exports = class Sessions {
                         await SqliteService.registerVote(message);
                         console.log('message from:', message);
                         let msg = await SqliteService.showFrase();
-                        let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
-
-                        let textFile = await GoogleTextToSpeechService.create(message_text.toString());
                         
                         function typeResp(min, max) {
                             min = Math.ceil(min);
@@ -197,6 +194,10 @@ module.exports = class Sessions {
                         let typeRespFinal = typeResp(1,3);
 
                         if(typeRespFinal === 2) {
+
+                            let message_text = msg.toString() + ', quem enviou essa resposta para você foi '+message.sender.pushname;
+                            let textFile = await GoogleTextToSpeechService.create(message_text.toString());
+
                             await client.sendFile(message.from, textFile, 'output.mp3', message_text.toString())
                             .then((result) => {
                               console.log('Result: ', result); //return object success
@@ -205,6 +206,7 @@ module.exports = class Sessions {
                               console.error('Error when sending: ', erro); //return object error
                             });
                         } else {
+                            let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
                                 console.log('Result: ', result); //return object success
