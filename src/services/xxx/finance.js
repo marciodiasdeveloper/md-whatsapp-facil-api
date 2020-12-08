@@ -17,8 +17,8 @@ module.exports = class Finance {
         let message = `*${message_param.sender.pushname}*: Veja as informações da *${company_result.name}* hoje \n\n`;
         message +=  `Valor: R$ ${company_result.price} \n`;
         message +=  `Capitalização de Mercado: R$ ${company_result.market_cap} \n`;
-        message +=  `Aberto: R$ ${company_result.market_time.open} \n`;
-        message +=  `Fechado: R$ ${company_result.market_time.close} \n`;
+        message +=  `Aberto: ${company_result.market_time.open} \n`;
+        message +=  `Fechado: ${company_result.market_time.close} \n`;
         message +=  `Atualizado em: ${company_result.updated_at}`;
 
         return message;
