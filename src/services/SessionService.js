@@ -320,7 +320,7 @@ module.exports = class Sessions {
                         await client.sendFile(message.from, file.path, file.name, message_text.toString())
                         .then((result) => {
                           console.log('Result: ', result); //return object success
-                            // fs.unlink(pathFile, (err) => {
+                            // await fs.unlink(pathFile, (err) => {
                             //     if (err) {
                             //         console.error(err)
                             //         return
