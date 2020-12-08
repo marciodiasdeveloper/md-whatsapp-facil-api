@@ -286,14 +286,13 @@ module.exports = class Sessions {
                         await client.sendFile(message.from, pathFile, 'output.mp3', message_text.toString())
                         .then((result) => {
                           console.log('Result: ', result); //return object success
-
-                            // fs.unlink(pathFile, (err) => {
-                            //     if (err) {
-                            //         console.error(err)
-                            //         return
-                            //     }
-                            //     //file removed
-                            // });
+                            fs.unlink(pathFile, (err) => {
+                                if (err) {
+                                    console.error(err)
+                                    return
+                                }
+                                //file removed
+                            });
                         })
                         .catch((erro) => {
                           console.error('Error when sending: ', erro); //return object error
