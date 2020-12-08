@@ -178,7 +178,8 @@ module.exports = class Sessions {
                             text += `Sem resultados. \n`;
                         }
                         client.sendText(message.from, text);
-                    } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
+                    } else if (message.body == '!anota+1') {
+                    // } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
 
                         await SqliteService.registerVote(message);
                         console.log('message from:', message);
