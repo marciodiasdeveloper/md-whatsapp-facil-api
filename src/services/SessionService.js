@@ -169,7 +169,7 @@ module.exports = class Sessions {
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
 
 
-                        let frase = 'Veja o ranking das anotações, este grupo é bom demais.';
+                        let frase = 'Veja o ranking das anotações, este grupo é demais!';
                         let message_text = frase.toString();
                         let file = await GoogleTextToSpeechService.create(message_text.toString());
 
