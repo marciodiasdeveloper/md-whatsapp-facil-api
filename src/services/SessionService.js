@@ -167,6 +167,40 @@ module.exports = class Sessions {
                         text += `*!finance CÓDIGO* => Consultar código da ação para relatório diário. ex: !finance MGLU3  \n`;
                         client.sendText(message.from, text);
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
+
+
+                        let frase = 'Veja o ranking das anotações, este grupo é bom demais.';
+                        let message_text = frase.toString();
+                        let file = await GoogleTextToSpeechService.create(message_text.toString());
+
+                        await client.sendFile(message.from, file.path, file.name, message_text.toString())
+                        .then((result) => {
+                          console.log('Result: ', result); //return object success
+                            // fs.unlink(pathFile, (err) => {
+                            //     if (err) {
+                            //         console.error(err)
+                            //         return
+                            //     }
+                            //     //file removed
+                            // });
+                        })
+                        .catch((erro) => {
+                          console.error('Error when sending: ', erro); //return object error
+                          
+                        //   fs.unlink(pathFile, (err) => {
+                        //         if (err) {
+                        //             console.error(err)
+                        //             return
+                        //         }
+                        //         //file removed
+                        //     });
+                        });
+
+
+
+
+
+
                         let text = `_*Olá, sou XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
                         let votes = await SqliteService.getRanking(message);
