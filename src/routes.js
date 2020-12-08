@@ -26,7 +26,7 @@ routes.get('/close', CloseController.create);
 routes.get('/groups', GroupsController.index);
 routes.get('/checkPhone', CheckPhoneController.index);
 
-routes.get('/lerfrase', LerFrase.index);
+// routes.get('/lerfrase', LerFrase.index);
 
 // Test validations
 
