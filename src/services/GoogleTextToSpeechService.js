@@ -29,14 +29,14 @@ module.exports = class GoogleTextToSpeechService {
         // Write the binary audio content to a local file
         const writeFile = util.promisify(fs.writeFile);
 
-        const filename = uuidv4() + '.mp3';
+        // const filename = uuidv4() + '.mp3';
 
-        await writeFile(path.resolve('storage', filename), response.audioContent, 'binary');
+        await writeFile(path.resolve('storage', 'output.mp3'), response.audioContent, 'binary');
             console.log('Audio content written to file: output.mp3');
         }
         quickStart();
 
-        return path.resolve('storage', filename);
+        return path.resolve('storage', 'output.mp3');
     }
 
 }
