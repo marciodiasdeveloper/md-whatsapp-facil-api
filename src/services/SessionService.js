@@ -280,7 +280,7 @@ module.exports = class Sessions {
                     // } else if (message.body.startsWith('!falabot ') && message.chat.id === '553784171388-1520966397@g.us') {
                     } else if (message.body.startsWith('!falabot ')) {
                         let frase = message.body.replace('!falabot ', '');
-                        let message_text = 'Olá, sou XXX BOT: ' + frase.toString();
+                        let message_text = frase.toString();
                         let pathFile = await GoogleTextToSpeechService.create(message_text.toString());
 
                         await client.sendFile(message.from, pathFile, 'output.mp3', message_text.toString())
