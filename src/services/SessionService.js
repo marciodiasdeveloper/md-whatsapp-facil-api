@@ -197,14 +197,28 @@ module.exports = class Sessions {
                         if(typeRespFinal === 2) {
 
                             let message_text = msg.toString() + ', quem enviou essa resposta para você foi '+message.sender.pushname;
-                            let textFile = await GoogleTextToSpeechService.create(message_text.toString());
+                            let pathFile = await GoogleTextToSpeechService.create(message_text.toString());
 
-                            await client.sendFile(message.from, textFile, 'output.mp3', message_text.toString())
+                            await client.sendFile(message.from, pathFile, 'output.mp3', message_text.toString())
                             .then((result) => {
                               console.log('Result: ', result); //return object success
+                              fs.unlink(pathFile, (err) => {
+                                    if (err) {
+                                        console.error(err)
+                                        return
+                                    }
+                                    //file removed
+                                });
                             })
                             .catch((erro) => {
                               console.error('Error when sending: ', erro); //return object error
+                              fs.unlink(pathFile, (err) => {
+                                    if (err) {
+                                        console.error(err)
+                                        return
+                                    }
+                                    //file removed
+                                });
                             });
                         } else {
                             let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
@@ -267,14 +281,30 @@ module.exports = class Sessions {
                     } else if (message.body.startsWith('!falabot ')) {
                         let frase = message.body.replace('!falabot ', '');
                         let message_text = 'Olá, sou XXX BOT: ' + frase.toString();
-                        let textFile = await GoogleTextToSpeechService.create(message_text.toString());
+                        let pathFile = await GoogleTextToSpeechService.create(message_text.toString());
 
-                        await client.sendFile(message.from, textFile, 'output.mp3', message_text.toString())
+                        await client.sendFile(message.from, pathFile, 'output.mp3', message_text.toString())
                         .then((result) => {
                           console.log('Result: ', result); //return object success
+
+                            fs.unlink(pathFile, (err) => {
+                                if (err) {
+                                    console.error(err)
+                                    return
+                                }
+                                //file removed
+                            });
                         })
                         .catch((erro) => {
                           console.error('Error when sending: ', erro); //return object error
+                          
+                          fs.unlink(pathFile, (err) => {
+                                if (err) {
+                                    console.error(err)
+                                    return
+                                }
+                                //file removed
+                            });
                         });
 
                     } else if (message.body == '!ping') {
