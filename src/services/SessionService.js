@@ -220,15 +220,15 @@ module.exports = class Sessions {
                         console.log('message from:', message);
                         let msg = await SqliteService.showFrase();
                         
-                        // function typeResp(min, max) {
-                        //     min = Math.ceil(min);
-                        //     max = Math.floor(max);
-                        //     return Math.floor(Math.random() * (max - min)) + min;
-                        // };
+                        function typeResp(min, max) {
+                            min = Math.ceil(min);
+                            max = Math.floor(max);
+                            return Math.floor(Math.random() * (max - min)) + min;
+                        };
 
-                        // let typeRespFinal = typeResp(1,3);
+                        let typeRespFinal = typeResp(1,3);
 
-                        // if(typeRespFinal === 2) {
+                        if(typeRespFinal === 2) {
 
                             let message_text = msg.toString();
                             let file = await GoogleTextToSpeechService.create(message_text.toString());
@@ -254,7 +254,7 @@ module.exports = class Sessions {
                             //         //file removed
                             //     });
                             });
-                        // } 
+                        } 
 
                         let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
                         await client.sendText(message.from, message_text.toString())  
