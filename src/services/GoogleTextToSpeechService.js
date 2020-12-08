@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const textToSpeech = require('@google-cloud/text-to-speech');
 const util = require('util');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = class GoogleTextToSpeechService {
 
@@ -33,7 +34,7 @@ module.exports = class GoogleTextToSpeechService {
         }
         quickStart();
 
-        return path.resolve('storage', 'output.mp3');
+        return path.resolve('storage', uuidv4() + '.mp3');
     }
 
 }
