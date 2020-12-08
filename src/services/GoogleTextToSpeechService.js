@@ -15,28 +15,31 @@ module.exports = class GoogleTextToSpeechService {
         
         async function quickStart() {
 
-        // Construct the request
-        const request = {
-            input: {text: text},
-            // Select the language and SSML voice gender (optional)
-            voice: {languageCode: 'pt-BR', ssmlGender: 'NEUTRAL'},
-            // select the type of audio encoding
-            audioConfig: {audioEncoding: 'MP3'},
-        };
+            // Construct the request
+            const request = {
+                input: {text: text},
+                // Select the language and SSML voice gender (optional)
+                voice: {languageCode: 'pt-BR', ssmlGender: 'NEUTRAL'},
+                // select the type of audio encoding
+                audioConfig: {audioEncoding: 'MP3'},
+            };
 
-        // Performs the text-to-speech request
-        const [response] = await client.synthesizeSpeech(request);
-        // Write the binary audio content to a local file
-        const writeFile = util.promisify(fs.writeFile);
+            // Performs the text-to-speech request
+            const [response] = await client.synthesizeSpeech(request);
+            // Write the binary audio content to a local file
+            const writeFile = util.promisify(fs.writeFile);
 
-        // const filename = uuidv4() + '.mp3';
+            let pathFile = path.resolve('storage', uuidv4() + '.mp3');
 
-        await writeFile(path.resolve('storage', 'output.mp3'), response.audioContent, 'binary');
-            console.log('Audio content written to file: output.mp3');
+            const resultFinal = await writeFile(pathFile, response.audioContent, 'binary');
+            console.log('Audio content written to file: '+pathFile);
+
+            return pathFile;
         }
-        quickStart();
 
-        return path.resolve('storage', 'output.mp3');
+        const result = quickStart();
+
+        return result;
     }
 
 }
