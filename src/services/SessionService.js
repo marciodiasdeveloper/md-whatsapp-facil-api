@@ -152,7 +152,7 @@ module.exports = class Sessions {
                     } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
                     // } else if (message.body == '!comandos') {
                         let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
-                        text += `*!falabot TEXTO* => Vou enviar um áudio lendo sua mensagem de texto.  \n`;
+                        // text += `*!falabot TEXTO* => Vou enviar um áudio lendo sua mensagem de texto.  \n`;
                         text += `*!addfrase TEXTO* => Adicionar frase de resposta quando o comando !anota+1 for executado.  \n`;
                         text += `*!anota+1* => Registre uma anotação e receba uma resposta do bot. \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
@@ -169,37 +169,32 @@ module.exports = class Sessions {
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
 
 
-                        let frase = 'Veja o ranking das anotações!';
-                        let message_text = frase.toString();
-                        let file = await GoogleTextToSpeechService.create(message_text.toString());
+                        // let frase = 'Veja o ranking das anotações!';
+                        // let message_text = frase.toString();
+                        // let file = await GoogleTextToSpeechService.create(message_text.toString());
 
-                        await client.sendFile(message.from, file.path, file.name, message_text.toString())
-                        .then((result) => {
-                          console.log('Result: ', result); //return object success
-                            // fs.unlink(pathFile, (err) => {
-                            //     if (err) {
-                            //         console.error(err)
-                            //         return
-                            //     }
-                            //     //file removed
-                            // });
-                        })
-                        .catch((erro) => {
-                          console.error('Error when sending: ', erro); //return object error
+                        // await client.sendFile(message.from, file.path, file.name, message_text.toString())
+                        // .then((result) => {
+                        //   console.log('Result: ', result); //return object success
+                        //     // fs.unlink(pathFile, (err) => {
+                        //     //     if (err) {
+                        //     //         console.error(err)
+                        //     //         return
+                        //     //     }
+                        //     //     //file removed
+                        //     // });
+                        // })
+                        // .catch((erro) => {
+                        //   console.error('Error when sending: ', erro); //return object error
                           
-                        //   fs.unlink(pathFile, (err) => {
-                        //         if (err) {
-                        //             console.error(err)
-                        //             return
-                        //         }
-                        //         //file removed
-                        //     });
-                        });
-
-
-
-
-
+                        // //   fs.unlink(pathFile, (err) => {
+                        // //         if (err) {
+                        // //             console.error(err)
+                        // //             return
+                        // //         }
+                        // //         //file removed
+                        // //     });
+                        // });
 
                         let text = `_*Olá, sou XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
@@ -220,41 +215,41 @@ module.exports = class Sessions {
                         console.log('message from:', message);
                         let msg = await SqliteService.showFrase();
                         
-                        function typeResp(min, max) {
-                            min = Math.ceil(min);
-                            max = Math.floor(max);
-                            return Math.floor(Math.random() * (max - min)) + min;
-                        };
+                        // function typeResp(min, max) {
+                        //     min = Math.ceil(min);
+                        //     max = Math.floor(max);
+                        //     return Math.floor(Math.random() * (max - min)) + min;
+                        // };
 
-                        let typeRespFinal = typeResp(1,3);
+                        // let typeRespFinal = typeResp(1,3);
 
-                        if(typeRespFinal === 2) {
+                        // if(typeRespFinal === 2) {
 
-                            let message_text = msg.toString();
-                            let file = await GoogleTextToSpeechService.create(message_text.toString());
+                        //     let message_text = msg.toString();
+                        //     let file = await GoogleTextToSpeechService.create(message_text.toString());
 
-                            await client.sendFile(message.from, file.path, file.name, message_text.toString())
-                            .then((result) => {
-                              console.log('Result: ', result); //return object success
-                            //   fs.unlink(pathFile, (err) => {
-                            //         if (err) {
-                            //             console.error(err)
-                            //             return
-                            //         }
-                            //         //file removed
-                            //     });
-                            })
-                            .catch((erro) => {
-                              console.error('Error when sending: ', erro); //return object error
-                            //   fs.unlink(pathFile, (err) => {
-                            //         if (err) {
-                            //             console.error(err)
-                            //             return
-                            //         }
-                            //         //file removed
-                            //     });
-                            });
-                        } 
+                        //     await client.sendFile(message.from, file.path, file.name, message_text.toString())
+                        //     .then((result) => {
+                        //       console.log('Result: ', result); //return object success
+                        //     //   fs.unlink(pathFile, (err) => {
+                        //     //         if (err) {
+                        //     //             console.error(err)
+                        //     //             return
+                        //     //         }
+                        //     //         //file removed
+                        //     //     });
+                        //     })
+                        //     .catch((erro) => {
+                        //       console.error('Error when sending: ', erro); //return object error
+                        //     //   fs.unlink(pathFile, (err) => {
+                        //     //         if (err) {
+                        //     //             console.error(err)
+                        //     //             return
+                        //     //         }
+                        //     //         //file removed
+                        //     //     });
+                        //     });
+                        // } 
 
                         let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
                         await client.sendText(message.from, message_text.toString())  
