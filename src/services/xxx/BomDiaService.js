@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3');
 const sqlite = require('sqlite');
 const WebhookService = require("../WebhookService");
-const Session = require("../SessionService");
+const SessionService = require("../SessionService");
 // const formatRelative = require('date-fns/formatRelative')
 require('dotenv/config');
 
@@ -50,76 +50,19 @@ module.exports = class BomDiaService {
         console.log('result', result);
         
         if(!result) {
-          return BomDiaService.sendText(sessionName, '553784171388-1520966397@g.us', "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!");
+          return SessionService.sendText(sessionName, '553784171388-1520966397@g.us', "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!");
         }
 
         await db.close();
 
         let frase = result.frase + '. *By ' + result.name + '*';
 
-        return BomDiaService.sendText(sessionName, '553784171388-1520966397@g.us', frase);
+        return SessionService.sendText(sessionName, '553784171388-1520966397@g.us', frase);
 
       } catch (error) {
         console.log(error);
       }
 
     }
-
-    static async sendText(sessionName, phone, text) {
-
-      let session = Session.getSession(sessionName);
-
-      if (session) {
-          WebhookService.notifyApiSessionUpdate(session);
-          if (session.state == "CONNECTED") {
-              let resultSendText = await session.client.then(async client => {
-
-                  console.log('phone_number entrada:', phone);
-
-                  let phone_validation = await Session.checkPhone(sessionName, phone);
-                  
-                  if(phone_validation && phone_validation.data.numberExists) {
-                      return await client
-                      .sendText(phone_validation.data.id._serialized, text)
-                      .then((result) => {
-                          WebhookService.notifyApiSessionUpdate(session);
-                          return result;
-                      })
-                      .catch((erro) => {
-                          console.error('Error when sending: ', erro); //return object error
-                          return erro;
-                      });
-
-                      return send_message;
-
-                  } else {
-
-                      console.log('phone sendText else', '55'+phone+'@c.us');
-
-                      let send_message = await client
-                      .sendText('55'+phone+'@c.us', text)
-                      .then((result) => {
-                          WebhookService.notifyApiSessionUpdate(session);
-                          console.log('Result: ', result); //return object success
-                          return result;
-                      })
-                      .catch((erro) => {
-                          console.error('Error when sending: ', erro); //return object error
-                          return erro;
-                      });
-
-                      return send_message;
-                  }
-              })
-              .catch(error => console.log('error', error));
-              return { result: "success", data: resultSendText };
-          } else {
-              return { result: "error", message: session.state };
-          }
-      } else {
-          return { result: "error", message: "NOTFOUND" };
-      }
-    }//message
-
 
 }
