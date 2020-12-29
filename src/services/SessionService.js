@@ -488,6 +488,38 @@ module.exports = class Sessions {
         }
     }//message
 
+    static async sendTextGroup(sessionName, phone, text) {
+
+        let session = Sessions.getSession(sessionName);
+
+        if (session) {
+            WebhookService.notifyApiSessionUpdate(session);
+            if (session.state == "CONNECTED") {
+                let resultSendText = await session.client.then(async client => {
+                    let send_message = await client
+                    .sendText(phone, text)
+                    .then((result) => {
+                        WebhookService.notifyApiSessionUpdate(session);
+                        console.log('Result: ', result); //return object success
+                        return result;
+                    })
+                    .catch((erro) => {
+                        console.error('Error when sending: ', erro); //return object error
+                        return erro;
+                    });
+
+                    return send_message;
+                })
+                .catch(error => console.log('error', error));
+                return { result: "success", data: resultSendText };
+            } else {
+                return { result: "error", message: session.state };
+            }
+        } else {
+            return { result: "error", message: "NOTFOUND" };
+        }
+    }//message
+
     static async sendFile(sessionName, number, base64Data, fileName, caption) {
         let session = Sessions.getSession(sessionName);
         if (session) {
