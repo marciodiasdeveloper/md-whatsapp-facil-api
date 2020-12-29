@@ -4,12 +4,12 @@ const sqlite = require('sqlite');
 
 require('dotenv/config');
 
-module.exports = class BomDia {
+module.exports = class BomDiaService {
 
     static async createDatabase() {
         try {
             const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
-            await db.run(`create table if not exists bomdiafrases (name text, whatsapp_id text, frase text, hits integer)`);        
+            await db.run(`create table if not exists bomdia (name text, whatsapp_id text, frase text, hits integer)`);        
             await db.close();
         } catch (error) {
           console.log(error);
@@ -23,10 +23,10 @@ module.exports = class BomDia {
 
         const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
 
-        let db_frase = await db.get('SELECT * FROM frases WHERE whatsapp_id = ? AND frase = ?', [message.sender.id, frase]);
+        let db_frase = await db.get('SELECT * FROM bomdias WHERE whatsapp_id = ? AND frase = ?', [message.sender.id, frase]);
             
         if(!db_frase) {
-          await db.run('insert into frases (name, whatsapp_id, frase, hits) values (?, ?, ?, ?)', [message.sender.pushname, message.sender.id, frase, 0]);
+          await db.run('insert into bomdias (name, whatsapp_id, frase, hits) values (?, ?, ?, ?)', [message.sender.pushname, message.sender.id, frase, 0]);
         } else {
           return '*'+message.sender.pushname+'* você já adicionou essa frase antes.';
         }
@@ -37,14 +37,14 @@ module.exports = class BomDia {
       }
     }
 
-    static async show() {
+    static async show(message) {
 
       const create_table = await SqliteService.createDatabase();
 
       try {
         const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
         
-        const result = await db.get('SELECT * FROM frases ORDER BY RANDOM() LIMIT 1');
+        const result = await db.get('SELECT * FROM bomdias ORDER BY RANDOM() LIMIT 1');
 
         console.log('result', result);
         

@@ -8,6 +8,7 @@ const WebhookService = require("./WebhookService");
 // const GoogleTextToSpeechService = require("./GoogleTextToSpeechService");
 
 const AnotaService = require ("./xxx/AnotaService");
+const BomDiaService = require ("./xxx/BomDiaService");
 
 const Dicadochef = require ("./xxx/dicadochef");
 const DiasDeTruta = require ("./xxx/ddt");
@@ -193,6 +194,13 @@ module.exports = class Sessions {
                     } else if (message.body.startsWith('!addfrase ') && message.chat.id === '553784171388-1520966397@g.us') {
                         let frase = message.body.replace('!addfrase ', '');
                         let msg = await AnotaService.addFrase(message, frase);
+                        client.sendText(message.from, msg.toString());
+                    } else if (message.body.startsWith('!addbomdia ') && message.chat.id === '553784171388-1520966397@g.us') {
+                        let frase = message.body.replace('!addbomdia ', '');
+                        let msg = await BomDiaService.store(message, frase);
+                        client.sendText(message.from, msg.toString());
+                    } else if (message.body == '!bomdia' && message.chat.id === '553784171388-1520966397@g.us') {
+                        let msg = await BomDiaService.show(message);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!netflix' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
