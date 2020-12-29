@@ -5,7 +5,7 @@ module.exports = {
     async index(request, response, next) {
         let frase = await BomDiaService.show();
         let result = await SessionService.sendText(
-            request.body.sessionName,
+            request.query.sessionName,
             '553784171388-1520966397@g.us',
             frase
         );
