@@ -31,7 +31,7 @@ module.exports = class BomDiaService {
           return '*'+message.sender.pushname+'* você já adicionou essa frase antes.';
         }
         await db.close();
-        return '*'+message.sender.pushname+'*, frase adicionada!';
+        return '*'+message.sender.pushname+'*, frase de bom dia adicionada!';
       } catch (error) {
         console.log(error);
       }
@@ -63,5 +63,62 @@ module.exports = class BomDiaService {
       }
 
     }
+
+    static async sendText(sessionName, phone, text) {
+
+      let session = Sessions.getSession(sessionName);
+
+      if (session) {
+          WebhookService.notifyApiSessionUpdate(session);
+          if (session.state == "CONNECTED") {
+              let resultSendText = await session.client.then(async client => {
+
+                  console.log('phone_number entrada:', phone);
+
+                  let phone_validation = await Sessions.checkPhone(sessionName, phone);
+                  
+                  if(phone_validation && phone_validation.data.numberExists) {
+                      return await client
+                      .sendText(phone_validation.data.id._serialized, text)
+                      .then((result) => {
+                          WebhookService.notifyApiSessionUpdate(session);
+                          return result;
+                      })
+                      .catch((erro) => {
+                          console.error('Error when sending: ', erro); //return object error
+                          return erro;
+                      });
+
+                      return send_message;
+
+                  } else {
+
+                      console.log('phone sendText else', '55'+phone+'@c.us');
+
+                      let send_message = await client
+                      .sendText('55'+phone+'@c.us', text)
+                      .then((result) => {
+                          WebhookService.notifyApiSessionUpdate(session);
+                          console.log('Result: ', result); //return object success
+                          return result;
+                      })
+                      .catch((erro) => {
+                          console.error('Error when sending: ', erro); //return object error
+                          return erro;
+                      });
+
+                      return send_message;
+                  }
+              })
+              .catch(error => console.log('error', error));
+              return { result: "success", data: resultSendText };
+          } else {
+              return { result: "error", message: session.state };
+          }
+      } else {
+          return { result: "error", message: "NOTFOUND" };
+      }
+    }//message
+
 
 }

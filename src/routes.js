@@ -9,9 +9,10 @@ const SendFileController = require('./controllers/SendFileController');
 const QrCodeController = require('./controllers/QrCodeController');
 const CloseController = require('./controllers/CloseController');
 const GroupsController = require('./controllers/GroupsController');
-const LerFrase = require('./controllers/LerFrase');
 const CheckPhoneController = require('./controllers/CheckPhoneController');
 const DeviceController = require('./controllers/DeviceController');
+
+const BomDiaController = require('./controllers/BomDiaController');
 
 const routes = express.Router();
 
@@ -26,7 +27,7 @@ routes.get('/close', CloseController.create);
 routes.get('/groups', GroupsController.index);
 routes.get('/checkPhone', CheckPhoneController.index);
 
-routes.get('/lerfrase', LerFrase.index);
+routes.get('/bomdia', BomDiaController.index);
 
 // Test validations
 
