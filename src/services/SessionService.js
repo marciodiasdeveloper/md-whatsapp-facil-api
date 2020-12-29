@@ -154,6 +154,9 @@ module.exports = class Sessions {
                         text += `*!addfrase TEXTO* => Adicionar frase para resposta quando o comando !anota+1 for executado.  \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
                         
+                        text += `*!addbomdia* => Adicione uma frase de bom dia para o bot!. \n`;
+                        text += `*!bomdia* => Exibir uma frase de bom dia!. \n`;
+                        
                         text += `*!netflix* => Precisa de uma indicação Netflix? \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;

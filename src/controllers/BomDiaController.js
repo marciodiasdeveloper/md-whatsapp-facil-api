@@ -1,4 +1,4 @@
-const BomDiaService = require("../services/BomDiaService");
+const BomDiaService = require("../services/xxx/BomDiaService");
 
 module.exports = {
     async index(request, response, next) {
