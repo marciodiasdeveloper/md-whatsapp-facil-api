@@ -1,6 +1,5 @@
 const sqlite3 = require('sqlite3');
 const sqlite = require('sqlite');
-const WebhookService = require("../WebhookService");
 const SessionService = require("../SessionService");
 // const formatRelative = require('date-fns/formatRelative')
 require('dotenv/config');
@@ -50,14 +49,14 @@ module.exports = class BomDiaService {
         console.log('result', result);
         
         if(!result) {
-          return SessionService.sendText(sessionName, '553784171388-1520966397@g.us', "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!");
+          return await SessionService.sendText(sessionName, '553784171388-1520966397@g.us', "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!");
         }
 
         await db.close();
 
         let frase = result.frase + '. *By ' + result.name + '*';
 
-        return SessionService.sendText(sessionName, '553784171388-1520966397@g.us', frase);
+        return await SessionService.sendText(sessionName, '553784171388-1520966397@g.us', frase);
 
       } catch (error) {
         console.log(error);
