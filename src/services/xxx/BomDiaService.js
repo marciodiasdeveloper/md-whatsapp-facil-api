@@ -1,7 +1,8 @@
 const sqlite3 = require('sqlite3');
 const sqlite = require('sqlite');
+const WebhookService = require("../WebhookService");
+const SessionService = require("../SessionService");
 // const formatRelative = require('date-fns/formatRelative')
-
 require('dotenv/config');
 
 module.exports = class BomDiaService {
@@ -37,7 +38,7 @@ module.exports = class BomDiaService {
       }
     }
 
-    static async show(message) {
+    static async show(sessionName) {
 
       const create_table = await BomDiaService.createDatabase();
 
@@ -49,14 +50,14 @@ module.exports = class BomDiaService {
         console.log('result', result);
         
         if(!result) {
-          return "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!";
+          return BomDiaService.sendText(sessionName, '553784171388-1520966397@g.us', "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!");
         }
 
         await db.close();
 
         let frase = result.frase + '. *By ' + result.name + '*';
 
-        return frase;
+        return BomDiaService.sendText(sessionName, '553784171388-1520966397@g.us', frase);
 
       } catch (error) {
         console.log(error);
@@ -66,7 +67,7 @@ module.exports = class BomDiaService {
 
     static async sendText(sessionName, phone, text) {
 
-      let session = Sessions.getSession(sessionName);
+      let session = SessionService.getSession(sessionName);
 
       if (session) {
           WebhookService.notifyApiSessionUpdate(session);
@@ -75,7 +76,7 @@ module.exports = class BomDiaService {
 
                   console.log('phone_number entrada:', phone);
 
-                  let phone_validation = await Sessions.checkPhone(sessionName, phone);
+                  let phone_validation = await SessionService.checkPhone(sessionName, phone);
                   
                   if(phone_validation && phone_validation.data.numberExists) {
                       return await client

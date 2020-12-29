@@ -150,6 +150,7 @@ module.exports = class Sessions {
                     } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
                         let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
                         // text += `*!falabot TEXTO* => Vou enviar um áudio lendo sua mensagem de texto.  \n`;
+                        text += `*!ping* => Verificar se o bot está online. \n`;
                         text += `*!anota+1* => Registre uma anotação e receba uma resposta do bot. \n`;
                         text += `*!addfrase TEXTO* => Adicionar frase para resposta quando o comando !anota+1 for executado.  \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
