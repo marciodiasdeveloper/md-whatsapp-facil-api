@@ -5,13 +5,12 @@ const venom = require('venom-bot');
 const { Session } = require('inspector');
 
 const WebhookService = require("./WebhookService");
-const SqliteService = require("./SqliteService");
-const GoogleTextToSpeechService = require("./GoogleTextToSpeechService");
+// const GoogleTextToSpeechService = require("./GoogleTextToSpeechService");
 
-const Frase = require ("./xxx/frase");
+const AnotaService = require ("./xxx/AnotaService");
+
 const Dicadochef = require ("./xxx/dicadochef");
 const DiasDeTruta = require ("./xxx/ddt");
-const Anota = require ("./xxx/anota");
 const Spotify = require ("./xxx/spotify");
 const Netflix = require ("./xxx/netflix");
 const DolarHoje = require ("./xxx/dolar");
@@ -147,16 +146,13 @@ module.exports = class Sessions {
                 try {
                     if (message.body === 'hi') {
                         client.sendText(message.from, 'Hello\nfriend!');
-
-
                     } else if (message.body == '!comandos' && message.chat.id === '553784171388-1520966397@g.us') {
-                    // } else if (message.body == '!comandos') {
                         let text = `_*Olá, sou XXX BOT, confira a lista de comandos ativos*_\n\n`;
                         // text += `*!falabot TEXTO* => Vou enviar um áudio lendo sua mensagem de texto.  \n`;
-                        text += `*!addfrase TEXTO* => Adicionar frase de resposta quando o comando !anota+1 for executado.  \n`;
                         text += `*!anota+1* => Registre uma anotação e receba uma resposta do bot. \n`;
+                        text += `*!addfrase TEXTO* => Adicionar frase para resposta quando o comando !anota+1 for executado.  \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
-                        text += `*!frase* => Ação para visualizar uma frase aleatória. \n`;
+                        
                         text += `*!netflix* => Precisa de uma indicação Netflix? \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
@@ -166,39 +162,12 @@ module.exports = class Sessions {
                         text += `*!bitcoin* => Cotação do Bitcoin de hoje \n`;
                         text += `*!finance CÓDIGO* => Consultar código da ação para relatório diário. ex: !finance MGLU3  \n`;
                         client.sendText(message.from, text);
+
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
-
-
-                        // let frase = 'Veja o ranking das anotações!';
-                        // let message_text = frase.toString();
-                        // let file = await GoogleTextToSpeechService.create(message_text.toString());
-
-                        // await client.sendFile(message.from, file.path, file.name, message_text.toString())
-                        // .then((result) => {
-                        //   console.log('Result: ', result); //return object success
-                        //     // fs.unlink(pathFile, (err) => {
-                        //     //     if (err) {
-                        //     //         console.error(err)
-                        //     //         return
-                        //     //     }
-                        //     //     //file removed
-                        //     // });
-                        // })
-                        // .catch((erro) => {
-                        //   console.error('Error when sending: ', erro); //return object error
-                          
-                        // //   fs.unlink(pathFile, (err) => {
-                        // //         if (err) {
-                        // //             console.error(err)
-                        // //             return
-                        // //         }
-                        // //         //file removed
-                        // //     });
-                        // });
 
                         let text = `_*Olá, sou XXX BOT, confira a o ranking de anotações*_\n\n`;
                         text += `---------------------------------------------- \n`;
-                        let votes = await SqliteService.getRanking(message);
+                        let votes = await AnotaService.getRanking(message);
                         console.log('votes', votes);
                         if(votes) {
                             votes.forEach(function(vote, i) {
@@ -210,47 +179,9 @@ module.exports = class Sessions {
                         client.sendText(message.from, text);
 
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
-
-                        await SqliteService.registerVote(message);
+                        await AnotaService.registerVote(message);
                         console.log('message from:', message);
-                        let msg = await SqliteService.showFrase();
-                        
-                        // function typeResp(min, max) {
-                        //     min = Math.ceil(min);
-                        //     max = Math.floor(max);
-                        //     return Math.floor(Math.random() * (max - min)) + min;
-                        // };
-
-                        // let typeRespFinal = typeResp(1,3);
-
-                        // if(typeRespFinal === 2) {
-
-                        //     let message_text = msg.toString();
-                        //     let file = await GoogleTextToSpeechService.create(message_text.toString());
-
-                        //     await client.sendFile(message.from, file.path, file.name, message_text.toString())
-                        //     .then((result) => {
-                        //       console.log('Result: ', result); //return object success
-                        //     //   fs.unlink(pathFile, (err) => {
-                        //     //         if (err) {
-                        //     //             console.error(err)
-                        //     //             return
-                        //     //         }
-                        //     //         //file removed
-                        //     //     });
-                        //     })
-                        //     .catch((erro) => {
-                        //       console.error('Error when sending: ', erro); //return object error
-                        //     //   fs.unlink(pathFile, (err) => {
-                        //     //         if (err) {
-                        //     //             console.error(err)
-                        //     //             return
-                        //     //         }
-                        //     //         //file removed
-                        //     //     });
-                        //     });
-                        // } 
-
+                        let msg = await AnotaService.showFrase();
                         let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
                         await client.sendText(message.from, message_text.toString())  
                         .then((result) => {
@@ -259,11 +190,13 @@ module.exports = class Sessions {
                         .catch((erro) => {
                             console.error('Error when sending: ', erro); //return object error
                         });
-
-                    } else if (message.body == '!frase' && message.chat.id === '553784171388-1520966397@g.us') {
-
-                        console.log('message from:', message.from);
-                        let msg = await Frase.responder(message.from);
+                    } else if (message.body.startsWith('!addfrase ') && message.chat.id === '553784171388-1520966397@g.us') {
+                        let frase = message.body.replace('!addfrase ', '');
+                        let msg = await AnotaService.addFrase(message, frase);
+                        client.sendText(message.from, msg.toString());
+                    } else if (message.body == '!netflix' && message.chat.id === '553784171388-1520966397@g.us') {
+                        console.log('message from:', message);
+                        let msg = await Netflix.responder(message.from);
                         client.sendText(message.from, msg.toString());
                     } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
 
@@ -281,14 +214,10 @@ module.exports = class Sessions {
                         console.log('message from:', message);
                         let msg = await Spotify.responder(message.from);
                         client.sendText(message.from, msg.toString());
-                    } else if (message.body == '!netflix' && message.chat.id === '553784171388-1520966397@g.us') {
-                            console.log('message from:', message);
-                            let msg = await Netflix.responder(message.from);
-                            client.sendText(message.from, msg.toString());
                     } else if (message.body == '!dolar' && message.chat.id === '553784171388-1520966397@g.us') {
-                                console.log('message from:', message);
-                                let msg = await DolarHoje.responder(message);
-                                client.sendText(message.from, msg.toString());
+                        console.log('message from:', message);
+                        let msg = await DolarHoje.responder(message);
+                        client.sendText(message.from, msg.toString());
                     } else if (message.body == '!franco' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
                         let msg = await FrancoHoje.responder(message);
@@ -297,43 +226,39 @@ module.exports = class Sessions {
                         console.log('message from:', message);
                         let msg = await BitcoinHoje.responder(message);
                         client.sendText(message.from, msg.toString());
-
                     } else if (message.body.startsWith('!finance ') && message.chat.id === '553784171388-1520966397@g.us') {
                       let company = message.body.split(' ')[1];
                       let msg = await Finance.responder(message, company);
                       client.sendText(message.from, msg.toString());
-                    } else if (message.body.startsWith('!addfrase ') && message.chat.id === '553784171388-1520966397@g.us') {
-                        let frase = message.body.replace('!addfrase ', '');
-                        let msg = await SqliteService.addFrase(message, frase);
-                        client.sendText(message.from, msg.toString());
-                    // } else if (message.body.startsWith('!falabot ') && message.chat.id === '553784171388-1520966397@g.us') {
-                    } else if (message.body.startsWith('!falabot ')) {
-                        let frase = message.body.replace('!falabot ', '');
-                        let message_text = frase.toString();
-                        let file = await GoogleTextToSpeechService.create(message_text.toString());
 
-                        await client.sendFile(message.from, file.path, file.name, message_text.toString())
-                        .then((result) => {
-                          console.log('Result: ', result); //return object success
-                            // await fs.unlink(pathFile, (err) => {
-                            //     if (err) {
-                            //         console.error(err)
-                            //         return
-                            //     }
-                            //     //file removed
-                            // });
-                        })
-                        .catch((erro) => {
-                          console.error('Error when sending: ', erro); //return object error
+                      // } else if (message.body.startsWith('!falabot ') && message.chat.id === '553784171388-1520966397@g.us') {
+                    // } else if (message.body.startsWith('!falabot ')) {
+                    //     let frase = message.body.replace('!falabot ', '');
+                    //     let message_text = frase.toString();
+                    //     let file = await GoogleTextToSpeechService.create(message_text.toString());
+
+                    //     await client.sendFile(message.from, file.path, file.name, message_text.toString())
+                    //     .then((result) => {
+                    //       console.log('Result: ', result); //return object success
+                    //         // await fs.unlink(pathFile, (err) => {
+                    //         //     if (err) {
+                    //         //         console.error(err)
+                    //         //         return
+                    //         //     }
+                    //         //     //file removed
+                    //         // });
+                    //     })
+                    //     .catch((erro) => {
+                    //       console.error('Error when sending: ', erro); //return object error
                           
-                        //   fs.unlink(pathFile, (err) => {
-                        //         if (err) {
-                        //             console.error(err)
-                        //             return
-                        //         }
-                        //         //file removed
-                        //     });
-                        });
+                    //     //   fs.unlink(pathFile, (err) => {
+                    //     //         if (err) {
+                    //     //             console.error(err)
+                    //     //             return
+                    //     //         }
+                    //     //         //file removed
+                    //     //     });
+                    //     });
 
                     } else if (message.body == '!ping') {
                       client.sendText(message.from, 'pong');

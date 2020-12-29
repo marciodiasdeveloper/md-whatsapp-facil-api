@@ -1,10 +1,12 @@
+const fs = require('fs');
+const path = require('path');
+
 const sqlite3 = require('sqlite3');
 const sqlite = require('sqlite');
-// const formatRelative = require('date-fns/formatRelative')
 
 require('dotenv/config');
 
-module.exports = class SqliteService {
+module.exports = class AnotaService {
 
     static async createDatabase() {
         try {
@@ -15,6 +17,7 @@ module.exports = class SqliteService {
           console.log(error);
         }
     }
+
 
     static async createDatabaseFrases() {
         try {
@@ -123,4 +126,5 @@ module.exports = class SqliteService {
       }
 
     }
+
 }
