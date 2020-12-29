@@ -4,7 +4,7 @@ const SessionService = require("../services/SessionService");
 module.exports = {
     async index(request, response, next) {
         let frase = await BomDiaService.show();
-        let result = await SessionService.sendText(
+        let result = await SessionService.sendTextGroup(
             request.query.sessionName,
             '553784171388-1520966397@g.us',
             frase
