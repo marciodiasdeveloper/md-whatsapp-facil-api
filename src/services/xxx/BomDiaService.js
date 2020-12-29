@@ -41,7 +41,7 @@ module.exports = class BomDiaService {
 
       const create_table = await BomDiaService.createDatabase();
 
-      let session = await SessionService.getSession(request.query.sessionName);
+      let session = await SessionService.getSession(sessionName);
     
       if (session != false) {
 
@@ -53,22 +53,21 @@ module.exports = class BomDiaService {
           console.log('result', result);
           
           if(!result) {
-            let frase_send = await SessionService.sendText(sessionName, '553784171388-1520966397@g.us', "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!");
+            return await session.sendText(sessionName, '553784171388-1520966397@g.us', "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!");
           }
   
           await db.close();
   
           let frase = result.frase + '. *By ' + result.name + '*';
   
-          let frase_send = await SessionService.sendText(sessionName, '553784171388-1520966397@g.us', frase);
+          return await session.sendText(sessionName, '553784171388-1520966397@g.us', frase);
   
         } catch (error) {
           console.log(error);
         }
 
-          response.status(200).json({ result: "success" });  
       } else {
-          response.status(200).json({ result: "error", message: "NOTFOUND" });
+          return false;
       }
 
     }
