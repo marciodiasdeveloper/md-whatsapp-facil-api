@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3');
 const sqlite = require('sqlite');
 const WebhookService = require("../WebhookService");
-const SessionService = require("../SessionService");
+const Session = require("../SessionService");
 // const formatRelative = require('date-fns/formatRelative')
 require('dotenv/config');
 
@@ -67,7 +67,7 @@ module.exports = class BomDiaService {
 
     static async sendText(sessionName, phone, text) {
 
-      let session = SessionService.getSession(sessionName);
+      let session = Session.getSession(sessionName);
 
       if (session) {
           WebhookService.notifyApiSessionUpdate(session);
@@ -76,7 +76,7 @@ module.exports = class BomDiaService {
 
                   console.log('phone_number entrada:', phone);
 
-                  let phone_validation = await SessionService.checkPhone(sessionName, phone);
+                  let phone_validation = await Session.checkPhone(sessionName, phone);
                   
                   if(phone_validation && phone_validation.data.numberExists) {
                       return await client
