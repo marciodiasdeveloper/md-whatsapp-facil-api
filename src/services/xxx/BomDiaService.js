@@ -37,7 +37,7 @@ module.exports = class BomDiaService {
       }
     }
 
-    static async show(sessionName) {
+    static async show() {
 
       const create_table = await BomDiaService.createDatabase();
 
@@ -49,14 +49,14 @@ module.exports = class BomDiaService {
         console.log('result', result);
         
         if(!result) {
-          return await SessionService.sendText(sessionName, '553784171388-1520966397@g.us', "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!");
+          return "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!";
         }
 
         await db.close();
 
         let frase = result.frase + '. *By ' + result.name + '*';
 
-        return await SessionService.sendText(sessionName, '553784171388-1520966397@g.us', frase);
+        return frase;
 
       } catch (error) {
         console.log(error);
