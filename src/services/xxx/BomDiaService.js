@@ -17,7 +17,7 @@ module.exports = class BomDiaService {
     }
 
     static async store(message, frase) {
-      const create_table = await SqliteService.createDatabase();
+      const create_table = await BomDiaService.createDatabase();
 
       try {
 
@@ -39,7 +39,7 @@ module.exports = class BomDiaService {
 
     static async show(message) {
 
-      const create_table = await SqliteService.createDatabase();
+      const create_table = await BomDiaService.createDatabase();
 
       try {
         const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });

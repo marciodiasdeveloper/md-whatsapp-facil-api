@@ -33,7 +33,7 @@ module.exports = class AnotaService {
 
         // console.log('register vote date',formatRelative(new Date(), new Date()));
 
-        const create_table = await SqliteService.createDatabase();
+        const create_table = await BomDiaService.createDatabase();
 
         try {
             const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
@@ -63,7 +63,7 @@ module.exports = class AnotaService {
 
     static async getRanking(message) {
 
-      const create_table = await SqliteService.createDatabase();
+      const create_table = await BomDiaService.createDatabase();
 
       try {
         const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
@@ -80,7 +80,7 @@ module.exports = class AnotaService {
     }
 
     static async addFrase(message, frase) {
-      const create_table = await SqliteService.createDatabaseFrases();
+      const create_table = await BomDiaService.createDatabaseFrases();
 
       try {
 
@@ -102,7 +102,7 @@ module.exports = class AnotaService {
 
     static async showFrase() {
 
-      const create_table = await SqliteService.createDatabase();
+      const create_table = await BomDiaService.createDatabase();
 
       try {
         const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
