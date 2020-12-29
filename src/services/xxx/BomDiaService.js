@@ -8,8 +8,8 @@ module.exports = class BomDiaService {
 
     static async createDatabase() {
         try {
-            const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
-            await db.run(`create table if not exists bomdia (name text, whatsapp_id text, frase text, hits integer)`);        
+            const db = await sqlite.open({ filename: './bomdia.sqlite', driver: sqlite3.Database });
+            await db.run(`create table if not exists frases (name text, whatsapp_id text, frase text, hits integer)`);        
             await db.close();
         } catch (error) {
           console.log(error);
@@ -21,12 +21,12 @@ module.exports = class BomDiaService {
 
       try {
 
-        const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
+        const db = await sqlite.open({ filename: './bomdia.sqlite', driver: sqlite3.Database });
 
-        let db_frase = await db.get('SELECT * FROM bomdias WHERE whatsapp_id = ? AND frase = ?', [message.sender.id, frase]);
+        let db_frase = await db.get('SELECT * FROM frases WHERE whatsapp_id = ? AND frase = ?', [message.sender.id, frase]);
             
         if(!db_frase) {
-          await db.run('insert into bomdias (name, whatsapp_id, frase, hits) values (?, ?, ?, ?)', [message.sender.pushname, message.sender.id, frase, 0]);
+          await db.run('insert into frases (name, whatsapp_id, frase, hits) values (?, ?, ?, ?)', [message.sender.pushname, message.sender.id, frase, 0]);
         } else {
           return '*'+message.sender.pushname+'* você já adicionou essa frase antes.';
         }
@@ -42,14 +42,14 @@ module.exports = class BomDiaService {
       const create_table = await BomDiaService.createDatabase();
 
       try {
-        const db = await sqlite.open({ filename: './database.sqlite', driver: sqlite3.Database });
+        const db = await sqlite.open({ filename: './bomdia.sqlite', driver: sqlite3.Database });
         
-        const result = await db.get('SELECT * FROM bomdias ORDER BY RANDOM() LIMIT 1');
+        const result = await db.get('SELECT * FROM frases ORDER BY RANDOM() LIMIT 1');
 
         console.log('result', result);
         
         if(!result) {
-          return "*XAAMAAAAA* não consigo sair do bar para anotar, vou pedir o @perrou bola murcha!";
+          return "*não vou dar bom dia para ninguém hoje*, vou pedir o @perrou bola murcha!";
         }
 
         await db.close();
