@@ -292,6 +292,18 @@ module.exports = class Sessions {
                             });
                         }
 
+                        if(votes_hits > 151 && votes_hits <= 200) {
+                            let message_text = `${votes_hits} anotações, já estou cansando de anotar.`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+
                     } else if (message.body.startsWith('!addfrase ') && message.chat.id === '553784171388-1520966397@g.us') {
                         let frase = message.body.replace('!addfrase ', '');
                         let msg = await AnotaService.addFrase(message, frase);
