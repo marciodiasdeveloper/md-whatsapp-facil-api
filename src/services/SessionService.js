@@ -154,10 +154,8 @@ module.exports = class Sessions {
                         text += `*!anota+1* => Registre uma anotação e receba uma resposta do bot. \n`;
                         text += `*!addfrase TEXTO* => Adicionar frase para resposta quando o comando !anota+1 for executado.  \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
-                        
                         text += `*!addbomdia* => Adicione uma frase de bom dia para o bot!. \n`;
                         text += `*!bomdia* => Exibir uma frase de bom dia!. \n`;
-                        
                         text += `*!netflix* => Precisa de uma indicação Netflix? \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
@@ -167,7 +165,6 @@ module.exports = class Sessions {
                         text += `*!bitcoin* => Cotação do Bitcoin de hoje \n`;
                         text += `*!finance CÓDIGO* => Consultar código da ação para relatório diário. ex: !finance MGLU3  \n`;
                         client.sendText(message.from, text);
-
                     }  else if (message.body == '!ranking' && message.chat.id === '553784171388-1520966397@g.us') {
 
                         let text = `_*Olá, sou XXX BOT, confira a o ranking de anotações*_\n\n`;
