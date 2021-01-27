@@ -209,7 +209,7 @@ module.exports = class Sessions {
                         }
 
                         if(anota_usuario.votes > 10 && anota_usuario.votes <= 20) {
-                            let message_text = `${anota_usuario.votes} anotações, seu nível de anotação é: já anda de sk8 e da um rolê com os malandros.`;
+                            let message_text = `${anota_usuario.votes} anotações, *Nível*: já anda de sk8 e da um rolê com os malandros.`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
@@ -221,7 +221,7 @@ module.exports = class Sessions {
                         }
 
                         if(anota_usuario.votes > 30 && anota_usuario.votes <= 50) {
-                            let message_text = `Nível de anotação: entre 30 e 50 já deu voltinha com chula, karacas, sandrão e marcinho.`;
+                            let message_text = `${anota_usuario.votes} anotações, *Nível*: entre 30 e 50 já deu voltinha com chula, karacas, sandrão e marcinho.`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
@@ -232,7 +232,7 @@ module.exports = class Sessions {
                             });
                         }
                         if(anota_usuario.votes > 50 && anota_usuario.votes <= 60) {
-                            let message_text = `${anota_usuario.votes} anotações, seu nível de anotações está entre 50 e 60, tenho certeza que você já rodou.`;
+                            let message_text = `${anota_usuario.votes} anotações, seu nível está entre 50 e 60, tenho certeza que você já rodou.`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
@@ -243,7 +243,7 @@ module.exports = class Sessions {
                             });
                         }
                         if(anota_usuario.votes > 60 && anota_usuario.votes <= 70) {
-                            let message_text = `Quase 70 anotações, até que você é um bom garoto`;
+                            let message_text = `${anota_usuario.votes} anotações para você, xamnaaaaaaaa Quase 70 anotações, até que você é um bom garoto, como diria um amigo nosso, quente pelando.`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
