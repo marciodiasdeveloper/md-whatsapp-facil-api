@@ -184,7 +184,7 @@ module.exports = class Sessions {
                         client.sendText(message.from, text);
 
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
-                        await anota_usuario = AnotaService.registerVote(message);
+                        anota_usuario = awaitAnotaService.registerVote(message);
                         console.log('message from:', message);
                         let msg = await AnotaService.showFrase();
                         let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
