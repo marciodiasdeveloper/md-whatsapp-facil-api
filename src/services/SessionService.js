@@ -184,7 +184,7 @@ module.exports = class Sessions {
                         client.sendText(message.from, text);
 
                     } else if (message.body == '!anota+1' && message.chat.id === '553784171388-1520966397@g.us') {
-                        await AnotaService.registerVote(message);
+                        await anota_usuario = AnotaService.registerVote(message);
                         console.log('message from:', message);
                         let msg = await AnotaService.showFrase();
                         let message_text = '*'+message.sender.pushname+'*, '+msg.toString();
@@ -195,6 +195,75 @@ module.exports = class Sessions {
                         .catch((erro) => {
                             console.error('Error when sending: ', erro); //return object error
                         });
+
+                        if(anota_usuario.votes > 0 && anota_usuario.votes <= 10) {
+                            let message_text = `Feedback do bot: Você está no nível aprende com os tios`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+
+                        if(anota_usuario.votes > 10 && anota_usuario.votes <= 20) {
+                            let message_text = `Nível de anotação: já anda de sk8 e da um rolê com os malandros.`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+
+                        if(anota_usuario.votes > 30 && anota_usuario.votes <= 50) {
+                            let message_text = `Nível de anotação: entre 30 e 50 já deu voltinha com chula, karacas, sandrão e marcinho.`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+                        if(anota_usuario.votes > 50 && anota_usuario.votes <= 60) {
+                            let message_text = `Nível de anotação: entre 50 e 60 é certeza que já rodou até legalizar.`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+                        if(anota_usuario.votes > 60 && anota_usuario.votes <= 70) {
+                            let message_text = `Quase 70 anotações, até que você é um bom garoto`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+                        if(anota_usuario.votes > 100 && anota_usuario.votes <= 110) {
+                            let message_text = `Passou de 100 marra atrás do Dudu Gordo (Edvaldo).`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
                     } else if (message.body.startsWith('!addfrase ') && message.chat.id === '553784171388-1520966397@g.us') {
                         let frase = message.body.replace('!addfrase ', '');
                         let msg = await AnotaService.addFrase(message, frase);
