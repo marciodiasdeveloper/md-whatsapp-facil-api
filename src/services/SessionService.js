@@ -197,7 +197,7 @@ module.exports = class Sessions {
                         });
 
                         if(anota_usuario.votes > 0 && anota_usuario.votes <= 10) {
-                            let message_text = `Feedback do bot: Você está no nível aprende com os tios`;
+                            let message_text = `${anota_usuario.votes} Feedback do bot: Você está no nível aprende com os tios, pede o amigo para salvar.`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
@@ -209,7 +209,7 @@ module.exports = class Sessions {
                         }
 
                         if(anota_usuario.votes > 10 && anota_usuario.votes <= 20) {
-                            let message_text = `Nível de anotação: já anda de sk8 e da um rolê com os malandros.`;
+                            let message_text = `${anota_usuario.votes} anotações, seu nível de anotação é: já anda de sk8 e da um rolê com os malandros.`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
@@ -232,7 +232,7 @@ module.exports = class Sessions {
                             });
                         }
                         if(anota_usuario.votes > 50 && anota_usuario.votes <= 60) {
-                            let message_text = `Nível de anotação: entre 50 e 60 é certeza que já rodou até legalizar.`;
+                            let message_text = `${anota_usuario.votes} anotações, seu nível de anotações está entre 50 e 60, tenho certeza que você já rodou.`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
@@ -244,6 +244,17 @@ module.exports = class Sessions {
                         }
                         if(anota_usuario.votes > 60 && anota_usuario.votes <= 70) {
                             let message_text = `Quase 70 anotações, até que você é um bom garoto`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+                        if(anota_usuario.votes > 70 && anota_usuario.votes <= 99) {
+                            let message_text = `${anota_usuario.votes} anotações para você garoto, rumo aos 100.`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
