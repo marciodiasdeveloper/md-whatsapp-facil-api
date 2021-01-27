@@ -234,6 +234,7 @@ module.exports = class Sessions {
                                 console.error('Error when sending: ', erro); //return object error
                             });
                         }
+                        
                         if(anota_usuario.hits > 50 && anota_usuario.hits <= 60) {
                             let message_text = `${anota_usuario.hits} anotações, seu nível está entre 50 e 60, tenho certeza que você já rodou.`;
 
@@ -245,6 +246,7 @@ module.exports = class Sessions {
                                 console.error('Error when sending: ', erro); //return object error
                             });
                         }
+
                         if(anota_usuario.hits > 60 && anota_usuario.hits <= 70) {
                             let message_text = `${anota_usuario.hits} anotações para você, xamnaaaaaaaa Quase 70 anotações, até que você é um bom garoto, como diria um amigo nosso, quente pelando.`;
 
@@ -256,6 +258,7 @@ module.exports = class Sessions {
                                 console.error('Error when sending: ', erro); //return object error
                             });
                         }
+
                         if(anota_usuario.hits > 70 && anota_usuario.hits <= 99) {
                             let message_text = `${anota_usuario.hits} anotações para você garoto, rumo aos 100.`;
 
@@ -267,6 +270,7 @@ module.exports = class Sessions {
                                 console.error('Error when sending: ', erro); //return object error
                             });
                         }
+
                         if(anota_usuario.hits > 100 && anota_usuario.hits <= 110) {
                             let message_text = `Passou de 100 marra atrás do Dudu Gordo (Edvaldo).`;
 

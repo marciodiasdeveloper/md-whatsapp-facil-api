@@ -54,6 +54,8 @@ module.exports = class AnotaService {
             const result = await db.run('UPDATE votes SET hits = ? WHERE whatsapp_id = ?', votes_hits, votes.whatsapp_id);
             await db.close();
 
+            console.log('retorna resposta do voto registrado', result);
+
             return result;
           } catch (error) {
             console.log(error);
