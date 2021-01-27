@@ -48,7 +48,7 @@ module.exports = class AnotaService {
             let votes_hits = (votes.hits+1);
 
             if(!votes_hits) {
-              votes_hits = (votes.hits+1);
+              votes_hits = 1;
             }
             
             const result = await db.run('UPDATE votes SET hits = ? WHERE whatsapp_id = ?', votes_hits, votes.whatsapp_id);
