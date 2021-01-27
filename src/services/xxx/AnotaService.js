@@ -42,7 +42,7 @@ module.exports = class AnotaService {
             
             if(!votes) {
               await db.run('insert into votes (name, whatsapp_id, hits) values (?, ?, ?)', [message.sender.pushname, message.sender.id, 0]);
-              whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
+              let whatsapp_id = await db.get('SELECT * FROM votes WHERE whatsapp_id = ?', [message.sender.id]);
             } 
 
             let votes_hits = (votes.hits+1);
@@ -56,7 +56,7 @@ module.exports = class AnotaService {
 
             console.log('retorna resposta do voto registrado', result);
 
-            return result;
+            return votes_hits;
           } catch (error) {
             console.log(error);
           }
