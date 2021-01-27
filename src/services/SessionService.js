@@ -272,7 +272,7 @@ module.exports = class Sessions {
                         }
 
                         if(votes_hits > 100 && votes_hits <= 110) {
-                            let message_text = `Passou de 100 marra atrás do Dudu Gordo (Edvaldo).`;
+                            let message_text = `${votes_hits} anotações, caraleeooooooo xamaaaaa, você é quase um .`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
@@ -282,6 +282,19 @@ module.exports = class Sessions {
                                 console.error('Error when sending: ', erro); //return object error
                             });
                         }
+
+                        if(votes_hits > 111 && votes_hits <= 150) {
+                            let message_text = `${votes_hits} anotações, caraleeooooooo xamaaaaa, você é quase o mestre dos magos.`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+
                     } else if (message.body.startsWith('!addfrase ') && message.chat.id === '553784171388-1520966397@g.us') {
                         let frase = message.body.replace('!addfrase ', '');
                         let msg = await AnotaService.addFrase(message, frase);
