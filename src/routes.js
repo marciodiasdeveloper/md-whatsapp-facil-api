@@ -13,6 +13,7 @@ const CheckPhoneController = require('./controllers/CheckPhoneController');
 const DeviceController = require('./controllers/DeviceController');
 
 const BomDiaController = require('./controllers/BomDiaController');
+const QuatroI20Controller = require('./controllers/QuatroI20Controller');
 
 const routes = express.Router();
 
@@ -28,6 +29,7 @@ routes.get('/groups', GroupsController.index);
 routes.get('/checkPhone', CheckPhoneController.index);
 
 routes.get('/bomdia', BomDiaController.index);
+routes.get('/4i20', QuatroI20Controller.index);
 
 // Test validations
 
