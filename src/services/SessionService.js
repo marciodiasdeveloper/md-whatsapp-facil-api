@@ -157,7 +157,6 @@ module.exports = class Sessions {
                         text += `*!addnetflix* => Registre sua indicação Netflix \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
                         text += `*!addspotify* => Registre sua indicação Spotify \n`;
-                        text += `*!dicadochef* => by Dudu Jaber? \n`;
                         text += `*!dolar* => Cotação do Dolar de hoje \n`;
                         text += `*!franco* => Cotação do Franco Suíço de hoje \n`;
                         text += `*!bitcoin* => Cotação do Bitcoin de hoje \n`;
