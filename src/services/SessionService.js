@@ -10,6 +10,7 @@ const WebhookService = require("./WebhookService");
 const AnotaService = require ("./xxx/AnotaService");
 const NetflixService = require ("./xxx/NetflixService");
 const SpotifyService = require ("./xxx/SpotifyService");
+const QuatroI20Service = require ("./xxx/QuatroI20Service");
 const BomDiaService = require ("./xxx/BomDiaService");
 const DolarHoje = require ("./xxx/dolar");
 const FrancoHoje = require ("./xxx/franco");
@@ -153,6 +154,8 @@ module.exports = class Sessions {
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
                         text += `*!addbomdia* => Adicione uma frase de bom dia para o bot!. \n`;
                         text += `*!bomdia* => Exibir uma frase de bom dia!. \n`;
+                        text += `*!add4i20* => Adicione uma frase que vou enviar às 16:20!. \n`;
+                        text += `*!4i20* => Exibir uma frase 4i20!. \n`;
                         text += `*!netflix* => Precisa de uma indicação Netflix? \n`;
                         text += `*!addnetflix* => Registre sua indicação Netflix \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
@@ -316,6 +319,17 @@ module.exports = class Sessions {
                     } else if (message.body == '!bomdia' && message.chat.id === '553784171388-1520966397@g.us') {
 
                         let msg = await BomDiaService.show(message);
+                        client.sendText(message.from, msg.toString());
+
+                    } else if (message.body.startsWith('!add4i20 ') && message.chat.id === '553784171388-1520966397@g.us') {
+                        
+                        let frase = message.body.replace('!add4i20 ', '');
+                        let msg = await QuatroI20Service.store(message, frase);
+                        client.sendText(message.from, msg.toString());
+
+                    } else if (message.body == '!4i20' && message.chat.id === '553784171388-1520966397@g.us') {
+
+                        let msg = await QuatroI20Service.show(message);
                         client.sendText(message.from, msg.toString());
 
                     } else if (message.body.startsWith('!addnetflix ') && message.chat.id === '553784171388-1520966397@g.us') {
