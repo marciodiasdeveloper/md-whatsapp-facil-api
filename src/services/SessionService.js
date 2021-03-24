@@ -8,12 +8,9 @@ const WebhookService = require("./WebhookService");
 // const GoogleTextToSpeechService = require("./GoogleTextToSpeechService");
 
 const AnotaService = require ("./xxx/AnotaService");
+const NetflixService = require ("./xxx/NetflixService");
+const SpotifyService = require ("./xxx/SpotifyService");
 const BomDiaService = require ("./xxx/BomDiaService");
-
-const Dicadochef = require ("./xxx/dicadochef");
-const DiasDeTruta = require ("./xxx/ddt");
-const Spotify = require ("./xxx/spotify");
-const Netflix = require ("./xxx/netflix");
 const DolarHoje = require ("./xxx/dolar");
 const FrancoHoje = require ("./xxx/franco");
 const BitcoinHoje = require ("./xxx/bitcoin");
@@ -157,9 +154,10 @@ module.exports = class Sessions {
                         text += `*!addbomdia* => Adicione uma frase de bom dia para o bot!. \n`;
                         text += `*!bomdia* => Exibir uma frase de bom dia!. \n`;
                         text += `*!netflix* => Precisa de uma indicação Netflix? \n`;
+                        text += `*!addnetflix* => Registre sua indicação Netflix \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
+                        text += `*!addspotify* => Registre sua indicação Spotify \n`;
                         text += `*!dicadochef* => by Dudu Jaber? \n`;
-                        text += `*!ddt* => Frases Dias de Truta \n`;
                         text += `*!dolar* => Cotação do Dolar de hoje \n`;
                         text += `*!franco* => Cotação do Franco Suíço de hoje \n`;
                         text += `*!bitcoin* => Cotação do Bitcoin de hoje \n`;
@@ -305,36 +303,44 @@ module.exports = class Sessions {
                         }
 
                     } else if (message.body.startsWith('!addfrase ') && message.chat.id === '553784171388-1520966397@g.us') {
+                        
                         let frase = message.body.replace('!addfrase ', '');
                         let msg = await AnotaService.addFrase(message, frase);
                         client.sendText(message.from, msg.toString());
+
                     } else if (message.body.startsWith('!addbomdia ') && message.chat.id === '553784171388-1520966397@g.us') {
+                        
                         let frase = message.body.replace('!addbomdia ', '');
                         let msg = await BomDiaService.store(message, frase);
                         client.sendText(message.from, msg.toString());
+
                     } else if (message.body == '!bomdia' && message.chat.id === '553784171388-1520966397@g.us') {
+
                         let msg = await BomDiaService.show(message);
                         client.sendText(message.from, msg.toString());
+
+                    } else if (message.body.startsWith('!addnetflix ') && message.chat.id === '553784171388-1520966397@g.us') {
+                        
+                        let frase = message.body.replace('!addnetflix ', '');
+                        let msg = await NetflixService.store(message, frase);
+                        client.sendText(message.from, msg.toString());
+
                     } else if (message.body == '!netflix' && message.chat.id === '553784171388-1520966397@g.us') {
-                        console.log('message from:', message);
-                        let msg = await Netflix.responder(message.from);
+                        
+                        let msg = await NetflixService.show(message);
                         client.sendText(message.from, msg.toString());
-                    } else if (message.body == '!ddt' && message.chat.id === '553784171388-1520966397@g.us') {
 
-                        console.log('message from:', message.from);
-                        let msg = await DiasDeTruta.responder(message.from);
+                    } else if (message.body.startsWith('!addspotify ') && message.chat.id === '553784171388-1520966397@g.us') {
+                        
+                        let frase = message.body.replace('!addspotify ', '');
+                        let msg = await SpotifyService.store(message, frase);
                         client.sendText(message.from, msg.toString());
-                    } else if (message.body == '!dicadochef' && message.chat.id === '553784171388-1520966397@g.us') {
 
-                        console.log('message from:', message);
-                        let msg = await Dicadochef.responder(message.from);
-                        // let phone_from = String(message.from).replace('@g.us', '').replace('@c.us', '');
-                        client.sendText(message.from, msg.toString());
                     } else if (message.body == '!spotify' && message.chat.id === '553784171388-1520966397@g.us') {
-
-                        console.log('message from:', message);
-                        let msg = await Spotify.responder(message.from);
+                        
+                        let msg = await SpotifyService.show(message);
                         client.sendText(message.from, msg.toString());
+
                     } else if (message.body == '!dolar' && message.chat.id === '553784171388-1520966397@g.us') {
                         console.log('message from:', message);
                         let msg = await DolarHoje.responder(message);
