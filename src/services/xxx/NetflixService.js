@@ -35,7 +35,7 @@ module.exports = class NetflixService {
     }
 
     static async show() {
-      const create_table = await BomDiaService.createDatabase();
+      const create_table = await NetflixService.createDatabase();
       try {
         const db = await sqlite.open({ filename: './netflix.sqlite', driver: sqlite3.Database });
         const result = await db.get('SELECT * FROM netflix ORDER BY RANDOM() LIMIT 1');        

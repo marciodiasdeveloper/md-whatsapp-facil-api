@@ -35,7 +35,7 @@ module.exports = class SpotifyService {
     }
 
     static async show() {
-      const create_table = await BomDiaService.createDatabase();
+      const create_table = await SpotifyService.createDatabase();
       try {
         const db = await sqlite.open({ filename: './spotify.sqlite', driver: sqlite3.Database });
         const result = await db.get('SELECT * FROM spotify ORDER BY RANDOM() LIMIT 1');        
