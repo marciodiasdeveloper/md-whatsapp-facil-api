@@ -269,7 +269,7 @@ module.exports = class Sessions {
                         }
 
                         if(votes_hits > 100 && votes_hits <= 110) {
-                            let message_text = `${votes_hits} anotações, caraleeooooooo xamaaaaa, você é quase um .`;
+                            let message_text = `${votes_hits} anotações, caraleeooooooo xamaaaaa, você é quase um Bob Marley.`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
@@ -293,7 +293,19 @@ module.exports = class Sessions {
                         }
 
                         if(votes_hits > 151 && votes_hits <= 200) {
-                            let message_text = `${votes_hits} anotações, já estou cansando de anotar.`;
+                            let message_text = `${votes_hits} anotações.`;
+
+                            await client.sendText(message.from, message_text.toString())  
+                            .then((result) => {
+                                console.log('Result: ', result); //return object success
+                            })
+                            .catch((erro) => {
+                                console.error('Error when sending: ', erro); //return object error
+                            });
+                        }
+
+                        if(votes_hits > 200 && votes_hits <= 250) {
+                            let message_text = `${votes_hits} anotações, seu nível está entre 200 e 250..`;
 
                             await client.sendText(message.from, message_text.toString())  
                             .then((result) => {
