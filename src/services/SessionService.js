@@ -152,14 +152,14 @@ module.exports = class Sessions {
                         text += `*!anota+1* => Registre uma anotação e receba uma resposta do bot. \n`;
                         text += `*!addfrase TEXTO* => Adicionar frase para resposta quando o comando !anota+1 for executado.  \n`;
                         text += `*!ranking* => Ranking das anotações XXX diárias. \n`;
-                        text += `*!addbomdia* => Adicione uma frase de bom dia para o bot!. \n`;
+                        text += `*!addbomdia TEXTO* => Adicione uma frase de bom dia para o bot!. \n`;
                         text += `*!bomdia* => Exibir uma frase de bom dia!. \n`;
-                        text += `*!add4i20* => Adicione uma frase que vou enviar às 16:20!. \n`;
+                        text += `*!add4i20 TEXTO* => Adicione uma frase que vou enviar às 16:20!. \n`;
                         text += `*!4i20* => Exibir uma frase 4i20!. \n`;
                         text += `*!netflix* => Precisa de uma indicação Netflix? \n`;
-                        text += `*!addnetflix* => Registre sua indicação Netflix \n`;
+                        text += `*!addnetflix TEXTO* => Registre sua indicação Netflix \n`;
                         text += `*!spotify* => Precisa de uma lista de músicas para ouvir no Spotify? \n`;
-                        text += `*!addspotify* => Registre sua indicação Spotify \n`;
+                        text += `*!addspotify TEXTO* => Registre sua indicação Spotify \n`;
                         text += `*!dolar* => Cotação do Dolar de hoje \n`;
                         text += `*!franco* => Cotação do Franco Suíço de hoje \n`;
                         text += `*!bitcoin* => Cotação do Bitcoin de hoje \n`;
